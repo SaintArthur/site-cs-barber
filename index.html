@@ -141,6 +141,12 @@ h1,h2,h3{line-height:1.05;letter-spacing:-.01em}
 .btn-line:hover{border-color:var(--gold-l);background:rgba(226,202,151,.06)}
 :focus-visible{outline:2px solid var(--gold-l);outline-offset:3px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* Primeiro elemento focavel da pagina: leva direto ao conteudo, sem
+   passar pelos cinco itens do menu a cada carregamento. Fica fora da
+   tela ate receber foco. */
+.skip{position:fixed;left:16px;top:-70px;z-index:100;background:var(--gold-l);color:var(--navy);font-weight:600;font-size:14px;padding:13px 20px;border-radius:8px;transition:top .22s var(--ease)}
+.skip:focus{top:16px}
+main:focus{outline:none}
 
 /* WhatsApp discreto: presente em toda dobra que o briefing pede, sem
    competir com o CTA primário, que sempre aponta para o formulário.
@@ -350,7 +356,7 @@ section{padding:var(--s) 0;position:relative}
 .pc blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.3vw,27px);line-height:1.28;color:#fff;margin:16px 0 22px}
 .pc ul{list-style:none;display:grid;gap:12px;flex:1;align-content:start}
 .pc li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:#b7bccb;font-weight:300;line-height:1.5}
-.pc li svg{width:18px;height:18px;flex:none;margin-top:2px;color:#5a6278}
+.pc li svg{width:18px;height:18px;flex:none;margin-top:2px;color:#6b7591}
 .pc .fix{margin-top:24px;padding-top:20px;border-top:1px solid var(--line);display:flex;gap:11px;align-items:flex-start;font-size:14.5px;color:#f3f0e8}
 .pc .fix svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--gold-l)}
 .pc .fix b{color:var(--gold-l);font-weight:600}
@@ -614,7 +620,7 @@ section{padding:var(--s) 0;position:relative}
 .f label{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
 .f input,.f select{width:100%;border:1px solid var(--line);border-radius:8px;padding:13px 14px;font:inherit;font-size:15px;background:var(--black);color:#fff}
 .f select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%23c9a56a' stroke-width='1.6' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
-.f input::placeholder{color:#5a6278}
+.f input::placeholder{color:#767f99}
 .f input:focus,.f select:focus{border-color:var(--gold);outline:none;box-shadow:0 0 0 3px rgba(226,202,151,.14)}
 .f input[aria-invalid="true"]{border-color:#c8323a}
 .f .err{font-size:12px;color:#e8737a;display:none}
@@ -669,7 +675,7 @@ footer .cs svg{width:16px;height:16px;color:#6f7790}
 .dock-txt{flex:1;min-width:0;line-height:1.22}
 .dock-txt b{display:block;font-size:14px;font-weight:600;color:#fff;letter-spacing:-.01em}
 .dock-txt span{display:block;font-size:11px;color:var(--muted);margin-top:2px}
-.dock-wa{flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:#25D366;color:#fff;transition:transform .2s var(--ease)}
+.dock-wa{flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:#128c7e;color:#fff;transition:transform .2s var(--ease)}
 .dock-wa:active{transform:scale(.94)}
 .dock-wa svg{width:22px;height:22px}
 .dock .btn{padding:13px 18px;font-size:14px;white-space:nowrap;border-radius:6px}
@@ -716,6 +722,8 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
 <noscript><style>.rv,.rv-g>*{opacity:1!important;transform:none!important}</style></noscript>
 </head>
 <body>
+
+<a class="skip" href="#top">Pular para o conteúdo</a>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="hex" viewBox="170 420 365 360"><path fill="currentColor" d="M 254.67 549.29 Q 254.66 549.26 239.79 523.58 Q 238.71 521.71 239.43 518.93 A 0.93 0.91 -8.8 0 1 239.86 518.35 L 344.95 457.68 A 0.94 0.93 44.5 0 1 345.90 457.68 L 360.17 466.02 A 0.58 0.58 0.0 0 0 360.96 465.81 L 377.39 437.69 A 1.06 1.05 7.8 0 1 378.03 437.21 Q 380.04 436.73 381.03 437.30 Q 452.98 478.82 485.71 497.69 A 1.21 1.20 15.2 0 1 486.31 498.73 L 486.31 515.73 A 0.58 0.57 -90.0 0 0 486.88 516.31 L 520.87 516.31 A 0.55 0.55 0.0 0 1 521.42 516.86 L 521.42 640.56 A 1.20 1.18 75.5 0 1 520.82 641.60 L 506.19 650.05 A 0.41 0.40 -30.6 0 0 506.04 650.61 Q 515.34 666.47 521.11 676.66 Q 522.15 678.50 521.48 681.08 A 1.19 1.15 -8.4 0 1 520.92 681.81 L 415.97 742.41 A 1.03 1.01 -44.5 0 1 414.94 742.41 L 400.67 734.07 A 0.53 0.53 0.0 0 0 399.94 734.26 L 383.48 762.43 A 0.99 0.98 -81.6 0 1 382.87 762.89 Q 380.83 763.38 379.94 762.87 Q 303.46 718.73 275.39 702.55 A 1.66 1.64 15.4 0 1 274.57 701.13 L 274.57 684.38 A 0.58 0.57 -0.0 0 0 273.99 683.81 L 240.02 683.81 A 0.56 0.56 0.0 0 1 239.46 683.25 L 239.46 559.74 A 1.61 1.59 75.2 0 1 240.26 558.35 L 254.45 550.24 A 0.67 0.66 58.4 0 0 254.67 549.29 Z M 451.18 627.44 L 474.63 613.86 A 0.83 0.82 75.2 0 0 475.04 613.15 L 475.34 504.96 A 0.87 0.85 -75.4 0 0 474.91 504.20 L 382.79 451.26 A 0.43 0.43 0.0 0 0 382.20 451.42 L 370.64 471.50 A 0.53 0.53 0.0 0 0 370.82 472.22 L 449.96 518.12 A 1.37 1.37 0.0 0 1 450.64 519.31 L 450.78 627.21 A 0.27 0.27 0.0 0 0 451.18 627.44 Z M 439.66 552.74 L 439.69 525.64 A 0.83 0.82 15.4 0 0 439.28 524.93 L 345.85 470.36 A 0.87 0.85 44.8 0 0 344.98 470.35 L 252.95 523.45 A 0.43 0.43 0.0 0 0 252.79 524.04 L 264.35 544.12 A 0.53 0.53 0.0 0 0 265.07 544.32 L 344.50 498.91 A 1.37 1.37 0.0 0 1 345.87 498.92 L 439.26 552.97 A 0.27 0.27 0.0 0 0 439.66 552.74 Z M 368.94 525.09 L 345.47 511.54 A 0.83 0.82 -44.7 0 0 344.65 511.54 L 250.74 565.28 A 0.87 0.85 -15.3 0 0 250.30 566.02 L 250.39 672.27 A 0.43 0.43 0.0 0 0 250.82 672.71 L 273.99 672.71 A 0.53 0.53 0.0 0 0 274.52 672.18 L 274.81 580.69 A 1.37 1.37 0.0 0 1 275.50 579.51 L 368.94 525.55 A 0.27 0.27 0.0 0 0 368.94 525.09 Z M 391.61 675.13 L 415.13 688.72 A 0.83 0.82 -44.7 0 0 415.95 688.72 L 510.13 634.92 A 0.88 0.85 -15.3 0 0 510.57 634.17 L 510.55 527.66 A 0.43 0.43 0.0 0 0 510.12 527.23 L 486.89 527.21 A 0.53 0.53 0.0 0 0 486.36 527.74 L 486.01 619.45 A 1.38 1.37 75.5 0 1 485.31 620.63 L 391.61 674.67 A 0.27 0.27 0.0 0 0 391.61 675.13 Z M 350.72 548.79 Q 321.41 565.73 321.25 565.99 Q 321.10 566.26 321.11 600.11 Q 321.13 633.97 321.28 634.23 Q 321.44 634.50 350.76 651.41 Q 380.09 668.33 380.40 668.33 Q 380.70 668.33 410.01 651.39 Q 439.33 634.45 439.48 634.18 Q 439.63 633.91 439.62 600.06 Q 439.60 566.21 439.45 565.94 Q 439.29 565.67 409.97 548.76 Q 380.64 531.85 380.33 531.85 Q 380.03 531.85 350.72 548.79 Z M 309.71 572.59 L 286.25 586.15 A 0.83 0.82 75.3 0 0 285.84 586.86 L 285.49 695.07 A 0.87 0.85 -75.3 0 0 285.92 695.83 L 378.02 748.82 A 0.43 0.43 0.0 0 0 378.61 748.66 L 390.18 728.59 A 0.53 0.53 0.0 0 0 389.99 727.86 L 310.87 681.92 A 1.37 1.37 0.0 0 1 310.19 680.73 L 310.11 572.82 A 0.27 0.27 0.0 0 0 309.71 572.59 Z M 415.81 701.86 A 0.34 0.34 0.0 0 1 415.47 701.86 L 321.63 647.05 A 0.34 0.34 0.0 0 0 321.12 647.34 L 321.12 674.87 A 0.34 0.34 0.0 0 0 321.29 675.17 L 415.28 730.07 A 0.34 0.34 0.0 0 0 415.62 730.07 L 508.04 676.72 A 0.34 0.34 0.0 0 0 508.16 676.26 L 496.33 655.76 A 0.34 0.34 0.0 0 0 495.87 655.64 L 415.81 701.86 Z"/></symbol>
@@ -854,7 +862,7 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
   <nav id="mnav" class="mnav" aria-label="Menu"><a href="#dores">Dores</a><!--<a href="#sistema">O sistema</a>--><a href="#modulos">Módulos</a><a href="#como">Como funciona</a><a href="#faq">Dúvidas</a><a class="btn mcta" href="#testar">Testar 15 dias grátis</a></nav>
 </header>
 
-<main id="top">
+<main id="top" tabindex="-1">
 
 <!-- ================= DOBRA 1 · HERO ================= -->
 <section class="hero">
@@ -1368,10 +1376,10 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
       <form id="lead" novalidate>
         <input type="text" name="site" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
         <div class="fgrid">
-          <div class="f"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" placeholder="Como prefere ser chamado"><span class="err">Escreve o seu nome.</span></div>
-          <div class="f"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" placeholder="voce@suabarbearia.com"><span class="err">Confere o e-mail.</span></div>
-          <div class="f"><label for="f-wpp">WhatsApp</label><input id="f-wpp" name="wpp" inputmode="tel" autocomplete="tel" placeholder="(27) 9 0000-0000"><span class="err">Confere o número, faltou dígito.</span></div>
-          <div class="f"><label for="f-barb">Nome da barbearia</label><input id="f-barb" name="barbearia" autocomplete="organization" placeholder="Como o cliente conhece"><span class="err">Escreve o nome da barbearia.</span></div>
+          <div class="f"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" required aria-describedby="e-nome" placeholder="Como prefere ser chamado"><span class="err" id="e-nome">Escreve o seu nome.</span></div>
+          <div class="f"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email" placeholder="voce@suabarbearia.com"><span class="err" id="e-email">Confere o e-mail.</span></div>
+          <div class="f"><label for="f-wpp">WhatsApp</label><input id="f-wpp" name="wpp" inputmode="tel" autocomplete="tel" required aria-describedby="e-wpp" placeholder="(27) 9 0000-0000"><span class="err" id="e-wpp">Confere o número, faltou dígito.</span></div>
+          <div class="f"><label for="f-barb">Nome da barbearia</label><input id="f-barb" name="barbearia" autocomplete="organization" required aria-describedby="e-barb" placeholder="Como o cliente conhece"><span class="err" id="e-barb">Escreve o nome da barbearia.</span></div>
           <div class="f"><label for="f-uni">Quantas unidades</label>
             <select id="f-uni" name="unidades"><option>1</option><option>2</option><option>3 ou mais</option></select></div>
           <div class="f"><label for="f-time">Quantos barbeiros</label>
