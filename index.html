@@ -644,6 +644,8 @@ section{padding:var(--s) 0;position:relative}
 .lead-form .btn{width:100%;margin-top:20px;justify-content:center;font-size:16px;padding:18px 26px}
 .lead-form .escape{display:flex;justify-content:center;margin-top:6px}
 .lead-form small{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:10px;font-weight:300}
+.lead-form .nojs{margin-top:18px;padding:16px 18px;border:1px solid rgba(226,202,151,.34);border-radius:10px;background:rgba(226,202,151,.06);font-size:14px;color:#cfd3de;font-weight:300;line-height:1.5}
+.lead-form .nojs a{color:var(--gold-l);text-decoration:underline;text-underline-offset:3px}
 /* pós-envio: confirma que o contato chega pelo WhatsApp */
 .thanks{display:none;text-align:center;padding:clamp(30px,5vw,54px) 10px}
 .thanks svg{width:56px;height:56px;color:var(--gold-l);margin:0 auto 22px}
@@ -719,7 +721,12 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
 {"@type":"Question","name":"Minha barbearia tem um jeito próprio de trabalhar. O sistema se adapta?","acceptedAnswer":{"@type":"Answer","text":"Se adapta. O sistema é modular e a tecnologia é da própria Conecta: se a sua operação precisa de algo que ainda não existe, a equipe desenvolve o módulo sob demanda."}},
 {"@type":"Question","name":"Qual o horário do suporte?","acceptedAnswer":{"@type":"Answer","text":"De segunda a sábado, das 8h às 18h, com atendimento direto da equipe que construiu o sistema."}}
 ]}</script>
-<noscript><style>.rv,.rv-g>*{opacity:1!important;transform:none!important}</style></noscript>
+<noscript><style>.rv,.rv-g>*{opacity:1!important;transform:none!important}
+/* Sem JavaScript o formulario nao tem para onde enviar: o <form> nao tem
+   action, a mensagem do WhatsApp e montada no script e o submit so
+   recarregaria a pagina, perdendo o lead em silencio. Esconde o botao que
+   nao envia e deixa no lugar dele o link direto para o WhatsApp. */
+#lead button[type="submit"]{display:none}</style></noscript>
 </head>
 <body>
 
@@ -1416,6 +1423,7 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
         </div>
         <button class="btn btn-gold" type="submit">Começar meu teste grátis <svg><use href="#arrow"/></svg></button>
         <a class="wa-link escape" href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20prefiro%20conversar%20antes%20de%20preencher%20o%20formul%C3%A1rio" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Prefere conversar primeiro? <u>Chama no WhatsApp.</u></span></a>
+        <noscript><p class="nojs">Este formulário precisa de JavaScript para montar a sua mensagem. <a href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20quero%20testar%20o%20CS%20Barber%20por%2015%20dias." target="_blank" rel="noopener">Fale direto no WhatsApp</a> e a gente monta o seu teste por lá.</p></noscript>
         <small>Atendimento de segunda a sábado, das 8h às 18h.</small>
       </form>
       <div class="thanks" role="status" aria-live="polite">
@@ -1715,7 +1723,18 @@ if(RM.matches){
       `Interesses: ${interesses.length?interesses.join(', '):'ainda não sei'}`,
       `Já usa sistema: ${usa?usa:'não informado'}${usa==='Sim'&&qual?' ('+qual+')':''}`
     ];
-    window.open('https://wa.me/5527999941710?text='+encodeURIComponent(linhas.join('\n')),'_blank','noopener');
+    const url='https://wa.me/5527999941710?text='+encodeURIComponent(linhas.join('\n'));
+    /* Enquanto nao existe webhook, o WhatsApp e o unico destino do lead.
+       Se o bloqueador de pop-up barrar a aba nova, o "Recebido!" seria
+       mentira: ninguem receberia nada e o contato se perderia sem sinal
+       nenhum na tela. Entao a aba nova e uma tentativa, nao uma certeza:
+       barrada, a propria aba vai para o WhatsApp, que entrega igual.
+       O noopener saiu das features de proposito. Com ele o window.open
+       devolve null por especificacao, e nao daria para distinguir aba
+       aberta de aba barrada; a protecao volta no opener=null abaixo. */
+    const aba=window.open(url,'_blank');
+    if(!aba){location.href=url;return}
+    try{aba.opener=null}catch(e){}
     box.classList.add('sent');
     box.scrollIntoView({block:'center',behavior:RM.matches?'auto':'smooth'});
   });
