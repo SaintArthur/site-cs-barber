@@ -89,9 +89,12 @@
      CTA do cabeçalho, do menu mobile, do hero, da dobra 2 e do dock, os
      dois selos de confiança, o passo 3 da dobra 5, três respostas do FAQ,
      as mesmas três no FAQPage do JSON-LD, o título da dobra 9 e a
-     mensagem que o formulário monta para o WhatsApp.
+     mensagem que o formulário monta para o WhatsApp. O vigésimo é o link
+     do aviso sem JavaScript, que ficou de fora da primeira correção porque
+     leva o prazo codificado na URL, com %20 no lugar dos espaços, e escapa
+     da busca por texto.
      O prazo está escrito à mão em cada um deles: ao mexer de novo, mexer
-     nos 19 de uma vez, porque meia correção deixa a página se
+     nos 20 de uma vez, porque meia correção deixa a página se
      contradizendo sozinha.
      Os prazos desta nota vão por extenso de propósito, para que uma troca
      de "7 dias" por outro número não apague o histórico junto.
@@ -169,15 +172,12 @@ main:focus{outline:none}
 /* WhatsApp discreto: presente em toda dobra que o briefing pede, sem
    competir com o CTA primário, que sempre aponta para o formulário.
 
-   NÚMERO DE WHATSAPP · TEMPORÁRIO DO MATHEUS
-   Está no ar o número temporário do Matheus: 5527999941710.
-   TROCAR PELO COMERCIAL DEFINITIVO ANTES DE ESCALAR VERBA. Com verba de
-   teste ele segura. Com verba escalada, toda lead cai no WhatsApp pessoal
-   de uma pessoa só, e o que passar do volume que ela dá conta se perde
-   sem ninguém ver.
+   NÚMERO DE WHATSAPP · COMERCIAL DA CONECTA
+   O número é o comercial da Conecta, 5527999073651 — o mesmo do site
+   institucional, por decisão do dono. Substituiu o temporário do Matheus.
 
-   COMO TROCAR: busque 5527999941710 neste arquivo e substitua nas 7
-   ocorrências (6 no HTML e 1 montado pelo JavaScript no envio do formulário). Nenhum outro lugar carrega o número.
+   COMO TROCAR: busque 5527999073651 neste arquivo e substitua nas 8
+   ocorrências (7 no HTML e 1 montado pelo JavaScript no envio do formulário). Nenhum outro lugar carrega o número.
 
    Os textos de ?text= ficam como estão, por decisão do cliente. */
 .wa-link{display:inline-flex;align-items:center;gap:9px;font-size:14.5px;color:#b7bccb;font-weight:300;padding:12px 2px;transition:color .2s}
@@ -636,7 +636,9 @@ section{padding:var(--s) 0;position:relative}
 .f{display:flex;flex-direction:column;gap:7px}
 .f.full{grid-column:1/-1}
 .f label{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
-.f input,.f select{width:100%;border:1px solid var(--line);border-radius:8px;padding:13px 14px;font:inherit;font-size:15px;background:var(--black);color:#fff}
+/* 16px e não 15: abaixo disso o Safari do iOS dá zoom ao focar o campo, e o
+   dono de barbearia preenche pelo celular. */
+.f input,.f select{width:100%;border:1px solid var(--line);border-radius:8px;padding:13px 14px;font:inherit;font-size:16px;background:var(--black);color:#fff}
 .f select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%23c9a56a' stroke-width='1.6' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
 .f input::placeholder{color:#767f99}
 .f input:focus,.f select:focus{border-color:var(--gold);outline:none;box-shadow:0 0 0 3px rgba(226,202,151,.14)}
@@ -679,7 +681,7 @@ section{padding:var(--s) 0;position:relative}
 .lead-form small{display:block;text-align:center;font-size:12px;color:var(--muted);margin-top:10px;font-weight:300}
 .lead-form .nojs{margin-top:18px;padding:16px 18px;border:1px solid rgba(226,202,151,.34);border-radius:10px;background:rgba(226,202,151,.06);font-size:14px;color:#cfd3de;font-weight:300;line-height:1.5}
 .lead-form .nojs a{color:var(--gold-l);text-decoration:underline;text-underline-offset:3px}
-/* pós-envio: confirma que o contato chega pelo WhatsApp */
+/* pós-envio: avisa que ainda falta tocar em Enviar no WhatsApp */
 .thanks{display:none;text-align:center;padding:clamp(30px,5vw,54px) 10px}
 .thanks>svg{width:56px;height:56px;color:var(--gold-l);margin:0 auto 22px}
 .thanks h3{font-family:var(--serif);font-size:clamp(24px,3vw,32px);color:#fff;font-weight:400;margin-bottom:14px;line-height:1.2}
@@ -757,8 +759,11 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
 <noscript><style>.rv,.rv-g>*{opacity:1!important;transform:none!important}
 /* Sem JavaScript o formulario nao tem para onde enviar: o <form> nao tem
    action, a mensagem do WhatsApp e montada no script e o submit so
-   recarregaria a pagina, perdendo o lead em silencio. Esconde o botao que
-   nao envia e deixa no lugar dele o link direto para o WhatsApp. */
+   recarregaria a pagina, perdendo o lead em silencio. Quem trava o envio e
+   o disabled do botao no HTML, que o script tira: so esconder nao bastava,
+   o Enter num campo submetia pelo botao oculto e punha nome, e-mail e
+   telefone na URL. Aqui some o botao que nao envia e fica no lugar dele o
+   link direto para o WhatsApp. */
 #lead button[type="submit"]{display:none}</style></noscript>
 </head>
 <body>
@@ -913,7 +918,7 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
       <p class="lead">Agenda, clientes, equipe e pagamentos em <b>um único lugar</b>. Montado do jeito da sua operação, e testado por 7 dias antes de você decidir.</p>
       <div class="hero-cta">
         <a class="btn btn-gold" href="#testar">Quero testar 7 dias grátis <svg><use href="#arrow"/></svg></a>
-        <a class="wa-link" href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CS%20Barber" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Prefere falar antes? <u>Chame no WhatsApp</u></span></a>
+        <a class="wa-link" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CS%20Barber" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Prefere falar antes? <u>Chame no WhatsApp</u></span></a>
       </div>
 <!-- SELO DE CONFIANCA: dois itens, decidido. Teste de 7 dias e
        implementacao assistida — e nada alem disso. Sobre cartao a pagina
@@ -1219,7 +1224,7 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
     </div>
 
     <div class="mods-foot rv">
-      <p class="ask"><b>Precisa de algo específico da sua operação? Nós desenvolvemos.</b><span>A tecnologia é da própria Conecta, então módulo sob demanda é rotina, não exceção.</span> <a class="wa-link" href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20preciso%20de%20um%20m%C3%B3dulo%20espec%C3%ADfico%20pra%20minha%20barbearia" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><u>Falar sobre o meu caso</u></a></p>
+      <p class="ask"><b>Precisa de algo específico da sua operação? Nós desenvolvemos.</b><span>A tecnologia é da própria Conecta, então módulo sob demanda é rotina, não exceção.</span> <a class="wa-link" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20preciso%20de%20um%20m%C3%B3dulo%20espec%C3%ADfico%20pra%20minha%20barbearia" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><u>Falar sobre o meu caso</u></a></p>
       <button class="btn btn-line" type="button" id="open-mods">Ver todos os módulos <svg><use href="#arrow"/></svg></button>
     </div>
   </div>
@@ -1274,7 +1279,7 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
   </div>
   <div class="mdl-foot">
     <span>Faltou algo que a sua barbearia precisa? A Conecta desenvolve.</span>
-    <a class="wa-link" href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20m%C3%B3dulo%20espec%C3%ADfico" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><u>Falar com a equipe</u></a>
+    <a class="wa-link" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20quero%20falar%20sobre%20um%20m%C3%B3dulo%20espec%C3%ADfico" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><u>Falar com a equipe</u></a>
   </div>
 </dialog>
 
@@ -1414,16 +1419,16 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
     <div class="lead-form rv" id="leadbox">
       <p class="fh">Comece o seu teste</p>
       <form id="lead" novalidate>
-        <input type="text" name="site" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
+        <input type="text" name="site" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;font-size:16px" aria-hidden="true">
         <div class="fgrid">
-          <div class="f"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" required aria-describedby="e-nome" placeholder="Nome e sobrenome"><span class="err" id="e-nome">Informe o seu nome.</span></div>
-          <div class="f"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email" placeholder="voce@suabarbearia.com"><span class="err" id="e-email">Informe um e-mail válido.</span></div>
-          <div class="f"><label for="f-wpp">WhatsApp</label><input id="f-wpp" name="wpp" inputmode="tel" autocomplete="tel" required aria-describedby="e-wpp" placeholder="(27) 90000-0000"><span class="err" id="e-wpp">Informe o WhatsApp com DDD.</span></div>
-          <div class="f"><label for="f-barb">Nome da barbearia</label><input id="f-barb" name="barbearia" autocomplete="organization" required aria-describedby="e-barb" placeholder="Ex.: Barbearia do Léo"><span class="err" id="e-barb">Informe o nome da barbearia.</span></div>
+          <div class="f"><label for="f-nome">Seu nome</label><input id="f-nome" name="nome" autocomplete="name" required placeholder="Nome e sobrenome"><span class="err" id="e-nome">Informe o seu nome.</span></div>
+          <div class="f"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email" required placeholder="voce@suabarbearia.com"><span class="err" id="e-email">Informe um e-mail válido.</span></div>
+          <div class="f"><label for="f-wpp">WhatsApp</label><input id="f-wpp" name="wpp" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="(27) 90000-0000"><span class="err" id="e-wpp">Informe um celular ou fixo com DDD. De fora do Brasil, comece com + e o código do país.</span></div>
+          <div class="f"><label for="f-barb">Nome da barbearia</label><input id="f-barb" name="barbearia" autocomplete="organization" required placeholder="Ex.: Barbearia do Léo"><span class="err" id="e-barb">Informe o nome da barbearia.</span></div>
           <div class="f"><label for="f-uni">Quantas unidades</label>
-            <select id="f-uni" name="unidades"><option>1</option><option>2</option><option>3 ou mais</option></select></div>
+            <select id="f-uni" name="unidades"><option value="" selected>Selecione</option><option>1</option><option>2</option><option>3 ou mais</option></select></div>
           <div class="f"><label for="f-time">Quantos barbeiros</label>
-            <select id="f-time" name="barbeiros"><option>Só eu</option><option>2 a 4</option><option>5 a 9</option><option>10 ou mais</option></select></div>
+            <select id="f-time" name="barbeiros"><option value="" selected>Selecione</option><option>Só eu</option><option>2 a 4</option><option>5 a 9</option><option>10 ou mais</option></select></div>
 
           <fieldset class="fset">
             <legend>O que mais te interessa</legend>
@@ -1454,16 +1459,21 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
             </div>
           </fieldset>
         </div>
-        <button class="btn btn-gold" type="submit">Começar meu teste grátis <svg><use href="#arrow"/></svg></button>
-        <a class="wa-link escape" href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20prefiro%20conversar%20antes%20de%20preencher%20o%20formul%C3%A1rio" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Prefere conversar primeiro? <u>Chama no WhatsApp.</u></span></a>
-        <noscript><p class="nojs">Este formulário precisa de JavaScript para montar a sua mensagem. <a href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20quero%20testar%20o%20CS%20Barber%20por%2015%20dias." target="_blank" rel="noopener">Fale direto no WhatsApp</a> e a gente monta o seu teste por lá.</p></noscript>
+        <button class="btn btn-gold" type="submit" disabled aria-describedby="aviso-dados">Começar meu teste grátis <svg><use href="#arrow"/></svg></button>
+        <!-- Aviso de dados (LGPD): descreve o fluxo que existe de verdade. Nada
+             vai para servidor; a mensagem só sai quando a pessoa envia no
+             WhatsApp. Quando entrar o webhook, este texto tem que mudar junto. -->
+        <small id="aviso-dados">Ao enviar, abrimos o WhatsApp (serviço da Meta) com uma mensagem pronta com estes dados. Ela só chega à Conecta Soluções quando você tocar em Enviar lá. O site não guarda esses dados, e o contato é usado só para falar deste pedido, como prevê a LGPD.</small>
+        <a class="wa-link escape" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20prefiro%20conversar%20antes%20de%20preencher%20o%20formul%C3%A1rio" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Prefere conversar primeiro? <u>Chama no WhatsApp.</u></span></a>
+        <noscript><p class="nojs">Este formulário precisa de JavaScript para montar a sua mensagem. <a href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20quero%20testar%20o%20CS%20Barber%20por%207%20dias." target="_blank" rel="noopener">Fale direto no WhatsApp</a> e a gente monta o seu teste por lá.</p></noscript>
         <small>Atendimento de segunda a sábado.</small>
       </form>
       <div class="thanks" role="status" aria-live="polite">
         <svg><use href="#check"/></svg>
-        <h3>Recebido!</h3>
-        <p>Nosso time te chama no WhatsApp pra montar o seu teste. O contato chega em horário comercial, de segunda a sábado.</p>
-        <a class="wa-link" href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20acabei%20de%20preencher%20o%20formul%C3%A1rio%20do%20CS%20Barber" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><u>Falar agora no WhatsApp</u></a>
+        <h3>Falta só enviar!</h3>
+        <p>A mensagem já está pronta no seu WhatsApp. Toque em <b>Enviar</b> lá pra ela chegar ao nosso time, que monta o seu teste em horário comercial, de segunda a sábado.</p>
+        <!-- O href daqui é trocado no envio pela mesma URL que o formulário montou. -->
+        <a class="wa-link" id="wa-denovo" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20acabei%20de%20preencher%20o%20formul%C3%A1rio%20do%20CS%20Barber" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><u>Abrir o WhatsApp de novo</u></a>
       </div>
     </div>
   </div>
@@ -1482,13 +1492,13 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
       <li><a href="https://www.instagram.com/__csbarber" target="_blank" rel="noopener">Instagram</a></li>
     </ul>
     <a class="cs" href="https://www.conectasolucoes.ia.br/"><svg><use href="#hex"/></svg>Um produto Conecta Soluções</a>
-    <div class="fleg"><span>CONECTA SOLUÇÕES E SERVIÇOS LTDA</span> <span>CNPJ 66.965.509/0001-87</span></div>
+    <div class="fleg"><span>CONECTA SOLUÇÕES E SERVIÇOS LTDA</span></div>
 </div>
 </footer>
 
 <div class="dock" role="complementary" aria-label="Ação rápida">
   <div class="dock-txt"><b>Teste 7 dias</b><span>Implementação assistida</span></div>
-  <a class="dock-wa" href="https://wa.me/5527999941710?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CS%20Barber" target="_blank" rel="noopener" aria-label="Tirar dúvida no WhatsApp"><svg><use href="#wa"/></svg></a>
+  <a class="dock-wa" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CS%20Barber" target="_blank" rel="noopener" aria-label="Tirar dúvida no WhatsApp"><svg><use href="#wa"/></svg></a>
   <a class="btn btn-gold" href="#testar">Quero testar</a>
 </div>
 
@@ -1694,18 +1704,59 @@ if(RM.matches){
    Valida, aplica máscara, abre e fecha os campos condicionais e, enquanto
    o webhook não existe, entrega o lead no WhatsApp do comercial com o
    contexto já montado. QUANDO HOUVER WEBHOOK/n8n: trocar o window.open
-   por um fetch aqui dentro, mantendo o estado de "Recebido!". */
+   por um fetch aqui dentro; só aí a confirmação pode dizer "Recebido!".
+   Hoje o wa.me só deixa a mensagem pronta, e nada chega até a pessoa
+   tocar em Enviar. */
 (()=>{
   const box=document.getElementById('leadbox'),form=document.getElementById('lead');
   if(!form)return;
   const tel=document.getElementById('f-wpp');
-  /* O separador só entra quando há dígito depois dele. Com ">6" o hífen voltava
+  /* DDD de 11 a 99; celular é 9 mais 8 dígitos e fixo começa de 2 a 8. Fica
+     aqui em cima porque a normalização logo abaixo também usa. */
+  const RE_TEL=/^[1-9]{2}(9\d{8}|[2-8]\d{7})$/;
+  /* Normaliza antes de mascarar e de validar. Colado ou autopreenchido, o
+     número vem com +55 (autocomplete="tel" é o número internacional) ou com
+     o 0 de longa distância, e o slice(0,11) direto cortava "+55 27 99999-0000"
+     em "(55) 27999-9900": outro número, aceito como válido.
+     Só que 55 também é o DDD do Rio Grande do Sul, e "tirar o 55 de todo
+     número de 12 ou 13 dígitos" trocava "(55) 98765-4321" mais um 0 digitado
+     por "(98) 7654-3210", outro número válido. Por isso, na ordem:
+     1. Quem continua digitando depois de um número completo e válido não
+        reescreve o número: o que passa de 11 é ignorado, como em qualquer
+        DDD. "anterior" é o que o campo tinha antes desta digitação.
+     2. Com 12 ou 13 dígitos começando por 55, o 55 só sai quando o valor
+        bruto começa com +55, ou quando só a leitura sem ele é um número
+        válido. Se só a leitura com ele vale, fica o do RS.
+     3. Se as duas leituras valem, ou nenhuma, não adivinha: devolve os
+        dígitos todos, a pessoa vê o que chegou e a validação recusa.
+     4. Um 0 na frente de DDD (027...) é o de longa distância e sai. "00"
+        fica, para que "(00) 99999-0000" apareça como foi digitado e seja
+        recusado, em vez de virar "(99) 9990-000" na tela. */
+  const soDigitos=(v,anterior='')=>{
+    let d=v.replace(/\D/g,'');
+    if(anterior.length===11&&RE_TEL.test(anterior)&&d.length>11&&d.startsWith(anterior))return anterior;
+    if((d.length===12||d.length===13)&&d.startsWith('55')){
+      const com55=RE_TEL.test(d.slice(0,11)),sem55=RE_TEL.test(d.slice(2));
+      if(/^\D*\+\D*55/.test(v)||(sem55&&!com55))d=d.slice(2);
+      else if(com55===sem55)return d;
+    }
+    return d.replace(/^0(?=[1-9])/,'').slice(0,11);
+  };
+  /* Celular (11) sai (27) 99999-0000 e fixo (10) sai (27) 3333-4444. O
+     separador só entra quando há dígito depois dele: sem isso o hífen voltava
      assim que era apagado, e o backspace travava em "(27) 99994-". */
-  tel.addEventListener('input',()=>{
-    const v=tel.value.replace(/\D/g,'').slice(0,11);
-    tel.value=v.length>7?`(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`
-             :v.length>2?`(${v.slice(0,2)}) ${v.slice(2)}`:v;
-  });
+  const mascara=d=>d.length>10?`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`
+                  :d.length>6?`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`
+                  :d.length>2?`(${d.slice(0,2)}) ${d.slice(2)}`:d;
+  /* Número com DDI ("+..."): o "+" fica à vista enquanto a pessoa digita — a
+     máscara brasileira o apagava na primeira tecla, e "+55 91 9..." digitado
+     virava um número do RS. Com +55 e o resto já formando um número brasileiro
+     completo, vira a máscara de sempre. Qualquer outro país (a Conecta tem
+     clientes em Portugal) fica como digitado, de 8 a 15 dígitos (E.164). */
+  const comDDI=v=>{if(!/^\s*\+/.test(v))return null;const d=v.replace(/\D/g,'').slice(0,15);if(d.startsWith('55')){const b=d.slice(2).replace(/^0+/,'');if(RE_TEL.test(b))return{br:b}}return{intl:d}};
+  const intlOk=d=>!d.startsWith('55')&&d.length>=8&&d.length<=15&&d[0]!=='0';
+  let digitos='';
+  tel.addEventListener('input',()=>{const c=comDDI(tel.value);if(c){digitos=c.br||'';tel.value=c.br?mascara(c.br):'+'+c.intl;return}digitos=soDigitos(tel.value,digitos);tel.value=mascara(digitos)});
 
   /* Nome não leva número nem símbolo: filtra na digitação e na colagem, sem
      perder a posição do cursor. A faixa cobre o acento do português. */
@@ -1732,27 +1783,55 @@ if(RM.matches){
     if(sim)document.getElementById('f-qual').focus();
   }));
 
+  /* Na ordem da tela, para o foco cair no primeiro campo errado que a pessoa
+     vê, e não no primeiro que o código testava. */
+  const RE_EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const regras=[
+    [form.nome,()=>form.nome.value.trim().length>=2],
+    [form.email,()=>RE_EMAIL.test(form.email.value.trim())],
+    [tel,()=>{const c=comDDI(tel.value);return c?(c.br?true:intlOk(c.intl)):RE_TEL.test(soDigitos(tel.value))}],
+    [form.barbearia,()=>form.barbearia.value.trim().length>=2]
+  ];
+  /* O texto de erro só fica ligado ao campo enquanto o erro existe: fixo no
+     HTML, o leitor de tela lia "Informe o seu nome." num campo válido. */
   const bad=(el,cond)=>{
     el.setAttribute('aria-invalid',cond?'true':'false');
+    if(cond)el.setAttribute('aria-describedby',el.id.replace('f-','e-'));
+    else el.removeAttribute('aria-describedby');
     return cond;
   };
+  /* Corrigiu, o erro some na hora, sem esperar outro envio. Só olha campo já
+     acusado, para não reclamar enquanto a pessoa ainda digita. O "change"
+     cobre o autopreenchimento que não dispara "input". */
+  const revalida=e=>{
+    const r=regras.find(([el])=>el===e.target);
+    if(r&&r[0].getAttribute('aria-invalid')==='true'&&r[1]())bad(r[0],false);
+  };
+  form.addEventListener('input',revalida);
+  form.addEventListener('change',revalida);
   form.addEventListener('submit',e=>{
     e.preventDefault();
     if(form.site.value)return;                       /* honeypot */
+    /* De novo aqui: nem todo navegador dispara "input" no autopreenchimento,
+       e o número iria para a mensagem sem normalizar. Sem "anterior": aqui não
+       há digitação em curso para proteger. */
+    {const c=comDDI(tel.value);if(c){digitos=c.br||'';tel.value=c.br?mascara(c.br):'+'+c.intl}else{digitos=soDigitos(tel.value);tel.value=mascara(digitos)}}
+    let erro=null;
+    regras.forEach(([el,ok])=>{if(bad(el,!ok())&&!erro)erro=el});
+    if(erro){erro.focus();return}
     const nome=form.nome.value.trim(),
-          wpp=tel.value.replace(/\D/g,''),
           email=form.email.value.trim(),
           barb=form.barbearia.value.trim();
-    let erro=null;
-    if(bad(form.nome,nome.length<2))erro=erro||form.nome;
-    if(bad(tel,wpp.length<10))erro=erro||tel;
-    if(bad(form.email,!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)))erro=erro||form.email;
-    if(bad(form.barbearia,barb.length<2))erro=erro||form.barbearia;
-    if(erro){erro.focus();return}
 
-    const interesses=[...form.querySelectorAll('input[name="interesse"]:checked')].map(i=>i.value);
-    const outro=form.outro.value.trim();
-    if(outro)interesses.push('Outro: '+outro);
+    /* "Outro" entra uma vez só, já com o texto ("Outro: comissão"), e não mais
+       "Outro, Outro: comissão". Desmarcado, o texto que ficou no campo
+       escondido não vai: é um interesse que a pessoa retirou. */
+    const interesses=[...form.querySelectorAll('input[name="interesse"]:checked')]
+      .map(i=>i.value).filter(v=>v!=='Outro');
+    if(chkOutro.checked){
+      const outro=form.outro.value.trim();
+      interesses.push(outro?'Outro: '+outro:'Outro');
+    }
     /* sem opcao pre-marcada: pode nao haver nenhum radio escolhido */
     const marcado=form.querySelector('input[name="usa"]:checked');
     const usa=marcado?marcado.value:'';
@@ -1760,7 +1839,9 @@ if(RM.matches){
 
     /* O asterisco é a marcação de negrito do WhatsApp: o rótulo fica destacado e
        a mensagem vira uma ficha legível de relance. Campo sem resposta não vira
-       linha: "não informado" só ocupa espaço e parece falha de preenchimento. */
+       linha: "não informado" só ocupa espaço e parece falha de preenchimento.
+       Os selects abrem em "Selecione", de valor vazio, pelo mesmo motivo: antes
+       "Unidades: 1" e "Barbeiros: Só eu" saíam sem a pessoa ter escolhido. */
     const campo=(rotulo,valor)=>valor?`*${rotulo}:* ${valor}`:null;
     const linhas=[
       `Olá! Quero testar o CS Barber por 7 dias.`,
@@ -1774,21 +1855,30 @@ if(RM.matches){
       campo('Interesse',interesses.join(', ')),
       campo('Sistema atual',usa==='Sim'?(qual||'sim, não informou qual'):usa==='Não'?'nenhum':'')
     ].filter(l=>l!==null);
-    const url='https://wa.me/5527999941710?text='+encodeURIComponent(linhas.join('\n'));
+    const url='https://wa.me/5527999073651?text='+encodeURIComponent(linhas.join('\n'));
+    /* A confirmação reabre a MESMA mensagem: quem fechou o WhatsApp sem enviar
+       não precisa preencher tudo de novo nem cai num texto sem os dados. */
+    document.getElementById('wa-denovo').href=url;
     /* Enquanto nao existe webhook, o WhatsApp e o unico destino do lead.
-       Se o bloqueador de pop-up barrar a aba nova, o "Recebido!" seria
-       mentira: ninguem receberia nada e o contato se perderia sem sinal
-       nenhum na tela. Entao a aba nova e uma tentativa, nao uma certeza:
-       barrada, a propria aba vai para o WhatsApp, que entrega igual.
+       Se o bloqueador de pop-up barrar a aba nova, ninguem receberia nada e
+       o contato se perderia sem sinal nenhum na tela. Entao a aba nova e uma
+       tentativa, nao uma certeza: barrada, a propria aba vai para o WhatsApp,
+       que entrega igual.
        O noopener saiu das features de proposito. Com ele o window.open
        devolve null por especificacao, e nao daria para distinguir aba
-       aberta de aba barrada; a protecao volta no opener=null abaixo. */
+       aberta de aba barrada; a protecao volta no opener=null abaixo.
+       A confirmacao entra nos dois casos, porque "falta so enviar" e verdade
+       nos dois: quem volta do WhatsApp sem ter enviado encontra o link. */
     const aba=window.open(url,'_blank');
-    if(!aba){location.href=url;return}
-    try{aba.opener=null}catch(e){}
+    if(aba){try{aba.opener=null}catch(e){}}
+    else location.href=url;
     box.classList.add('sent');
     box.scrollIntoView({block:'center',behavior:RM.matches?'auto':'smooth'});
   });
+  /* O botão nasce disabled no HTML: sem este script, o Enter num campo
+     submetia por GET e punha nome, e-mail e telefone na URL. Com o handler
+     ligado, o envio passa a ser só o de cima. */
+  form.querySelector('button[type="submit"]').disabled=false;
 })();
 
 /* menu mobile */
