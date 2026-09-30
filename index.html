@@ -1455,6 +1455,16 @@ html.filme #abertura{padding-bottom:7.75rem}
   #testar .rodape{padding-top:.875rem}
   #testar .faixa{gap:1rem}
 }
+
+/* ato 2 e 3 sem imagem; a composicao das tres vive no ato 4 */
+#modulos .faixa{display:flex;flex-direction:column;justify-content:center;gap:2rem}
+@media(min-width:1024px){#modulos .passos{display:grid;grid-template-columns:1fr 1fr;
+  column-gap:3.5rem;row-gap:0}}
+
+#diferenciais .hero-art{margin:0 auto;max-width:34rem}
+#diferenciais .hero-art .hero-photo{box-shadow:0 2rem 4.5rem -1.75rem rgba(0,0,0,.85)}
+@media(max-width:1023px){#diferenciais .hero-art{max-width:30rem}}
+@media(max-width:640px){#diferenciais .hero-art{max-width:100%}}
 /* piso de 11px em texto funcional */
 .cartao .tag{font-size:.6875rem}
 .trilho a{font-size:.6875rem}
@@ -1691,8 +1701,7 @@ html.filme.compacto .trilho a{font-size:0}
 
 <section class="ato" id="modulos" aria-label="Módulos">
   <div class="wrap faixa">
-    <div>
-      <div class="cabeca">
+    <div class="cabeca">
         <p class="cap b" data-d="0"><b>02</b><span>Módulos</span></p>
         <h2 class="d2" data-sp="l" data-d="78">Comece completo. Cresça por módulos.</h2>
         <p class="corpo" data-sp="p" data-d="406">Todo CS Barber já nasce com agenda, clientes, equipe e relatórios. O resto entra quando a operação pedir.</p>
@@ -1703,16 +1712,6 @@ html.filme.compacto .trilho a{font-size:0}
         <li class="b" data-d="671"><div><h3>Gestão de barbeiros</h3><p>Perfil, agenda individual e acesso próprio pra cada barbeiro da equipe.</p></div></li>
         <li class="b" data-d="733"><div><h3>Relatórios</h3><p>Resumo do dia, top serviços e total de atendimentos, sem fechar planilha na mão.</p></div></li>
       </ol>
-    </div>
-    <div class="b" data-d="484">
-      <figure class="placa placa-foto">
-        <picture>
-          <source type="image/webp" srcset="assets/cs_barber_hero.webp 800w, assets/cs_barber_hero@2x.webp 1600w" sizes="(max-width:1023px) 90vw, 30rem">
-          <img src="assets/cs_barber_hero.jpg" srcset="assets/cs_barber_hero.jpg 800w, assets/cs_barber_hero@2x.jpg 1600w" sizes="(max-width:1023px) 90vw, 30rem" width="800" height="620" alt="Poste de barbeiro girando ao lado da marca da Conecta" decoding="async">
-        </picture>
-      </figure>
-      <p class="legenda">Módulo sob medida é rotina, não exceção</p>
-    </div>
   </div>
 </section>
 
@@ -1722,23 +1721,11 @@ html.filme.compacto .trilho a{font-size:0}
       <p class="cap b" data-d="0"><b>03</b><span>Como funciona</span></p>
       <h2 class="d2" data-sp="l" data-d="78">Da conversa à operação rodando, sem parar a sua barbearia.</h2>
     </div>
-    <div class="par">
-      <div class="lista">
+    <div class="lista">
         <div class="it b" data-d="484"><b>01</b><h3>Você mostra como funciona</h3><p>A agenda, a equipe, a comissão e o que trava o seu dia.</p></div>
         <div class="it b" data-d="546"><b>02</b><h3>A equipe monta e migra</h3><p>Serviços, barbeiros, clientes e histórico trazidos pra dentro.</p></div>
         <div class="it b" data-d="608"><b>03</b><h3>7 dias na operação real</h3><p>Com a equipe da Conecta ao lado pra ajustar o que não encaixou.</p></div>
         <div class="it b" data-d="671"><b>04</b><h3>Rodando, com suporte</h3><p>Segunda a sábado, e módulos novos quando o negócio pedir.</p></div>
-      </div>
-      <div class="b" data-d="546">
-        <figure class="placa placa-tela">
-          <div class="cromo" aria-hidden="true"><i></i><i></i><i></i><span>csbarber.conectasolucoes.ia.br</span></div>
-          <picture>
-            <source type="image/webp" srcset="assets/painel-desktop.webp 520w, assets/painel-desktop@2x.webp 1040w" sizes="(max-width:1023px) 90vw, 30rem">
-            <img src="assets/painel-desktop.jpg" srcset="assets/painel-desktop.jpg 520w, assets/painel-desktop@2x.jpg 1040w" sizes="(max-width:1023px) 90vw, 30rem" width="1869" height="1002" alt="Painel do CS Barber com agendamentos do dia, receita e barbeiros em destaque" loading="lazy" decoding="async">
-          </picture>
-        </figure>
-        <p class="legenda">O painel no fim da implantação</p>
-      </div>
     </div>
     <p class="rotulo b" data-d="760">Você continua atendendo · A gente cuida da virada</p>
   </div>
@@ -1758,13 +1745,27 @@ html.filme.compacto .trilho a{font-size:0}
         <div class="it b" data-d="671"><b>04</b><h3>Tecnologia proprietária</h3><p>Precisou de função nova? A equipe desenvolve.</p></div>
       </div>
       <div class="b" data-d="546">
-        <figure class="placa placa-fone">
-          <picture>
-            <source type="image/webp" srcset="assets/painel-mobile.webp 210w, assets/painel-mobile@2x.webp 415w" sizes="(max-width:1023px) 44vw, 14rem">
-            <img src="assets/painel-mobile.jpg" srcset="assets/painel-mobile.jpg 210w, assets/painel-mobile@2x.jpg 415w" sizes="(max-width:1023px) 44vw, 14rem" width="415" height="900" alt="CS Barber no celular, com os módulos ativos da barbearia" loading="lazy" decoding="async">
-          </picture>
-        </figure>
-        <p class="legenda" style="text-align:center">O mesmo sistema no bolso</p>
+        <div class="hero-art" role="img" aria-label="O CS Barber no computador e no celular, com a marca da barbearia ao fundo">
+          <div class="hero-photo">
+            <picture>
+              <source type="image/webp" srcset="assets/cs_barber_hero.webp 800w, assets/cs_barber_hero@2x.webp 1600w" sizes="(max-width:1023px) 86vw, 34rem">
+              <img src="assets/cs_barber_hero.jpg" srcset="assets/cs_barber_hero.jpg 800w, assets/cs_barber_hero@2x.jpg 1600w" sizes="(max-width:1023px) 86vw, 34rem" width="800" height="620" alt="" decoding="async">
+            </picture>
+          </div>
+          <div class="frame hero-mock">
+            <div class="bar"><i></i><i></i><i></i><span>csbarber.conectasolucoes.ia.br</span></div>
+            <picture>
+              <source type="image/webp" srcset="assets/painel-desktop.webp 520w, assets/painel-desktop@2x.webp 1040w" sizes="(max-width:1023px) 71vw, 28rem">
+              <img class="shot" src="assets/painel-desktop.jpg" srcset="assets/painel-desktop.jpg 520w, assets/painel-desktop@2x.jpg 1040w" sizes="(max-width:1023px) 71vw, 28rem" width="1869" height="842" alt="" loading="lazy" decoding="async">
+            </picture>
+          </div>
+          <div class="frame phone hero-phone">
+            <picture>
+              <source type="image/webp" srcset="assets/painel-mobile.webp 210w, assets/painel-mobile@2x.webp 415w" sizes="(max-width:1023px) 18vw, 7rem">
+              <img class="shot" src="assets/painel-mobile.jpg" srcset="assets/painel-mobile.jpg 210w, assets/painel-mobile@2x.jpg 415w" sizes="(max-width:1023px) 18vw, 7rem" width="415" height="772" alt="" loading="lazy" decoding="async">
+            </picture>
+          </div>
+        </div>
       </div>
     </div>
   </div>
