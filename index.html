@@ -779,6 +779,51 @@ html.filme.compacto .legenda{font-size:.625rem}
 #como .par .lista .it,#diferenciais .par .lista .it{
   grid-template-columns:auto 1fr;gap:.3125rem 1rem;padding:1.0625rem 0}
 #como .par .lista .it p,#diferenciais .par .lista .it p{grid-column:2;max-width:34ch}
+
+html.filme .nav.topo{position:fixed;top:0;left:0;right:0;z-index:60;height:var(--topo-h);
+  display:flex;align-items:center;gap:0;padding:0 var(--gutter);
+  background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:0;box-shadow:none}
+html.filme .nav.topo::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(226,202,151,.14) 20%,rgba(226,202,151,.14) 80%,transparent)}
+html.filme .nav.topo .prog{position:absolute;bottom:0;left:0;right:0;height:1px;width:auto;
+  background:var(--gold);transform:scaleX(var(--lido,0));transform-origin:left;opacity:.9;
+  z-index:3;transition:none}
+html.filme .nav.topo .centro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  display:flex;align-items:center;gap:1.125rem;white-space:nowrap}
+html.filme .nav.topo .marca{display:flex;align-items:center;gap:.625rem;flex:none;color:var(--cream)}
+html.filme .nav.topo .marca .lg-sym{height:1.625rem;width:auto;color:var(--gold);opacity:.85;
+  transition:transform .7s var(--mola),opacity .4s var(--e-io)}
+html.filme .nav.topo .marca:hover .lg-sym{transform:rotate(60deg);opacity:1}
+html.filme .nav.topo .marca .lg-word{height:.9375rem;width:auto;font-size:1rem;line-height:1}
+html.filme .nav.topo .regua{flex:none;width:2.25rem;height:1px;margin:0;
+  background:linear-gradient(90deg,rgba(226,202,151,.36),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--mola) .5s}
+body.entrou .nav.topo .regua{transform:none}
+html.filme .nav.topo .lema{font-family:var(--font-d);font-size:.625rem;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;color:#cdc0a8;white-space:nowrap;
+  opacity:0;transition:opacity .8s var(--e-io) .7s}
+body.entrou .nav.topo .lema{opacity:1}
+html.filme .nav.topo .fala{position:relative;margin-left:auto;flex:none;z-index:1;
+  display:inline-flex;align-items:center;gap:.5rem;padding:.4375rem 0;
+  font-family:var(--font-d);font-size:.6875rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cream);transition:color .35s var(--e-io)}
+html.filme .nav.topo .fala svg{width:.75rem;height:.75rem;transition:transform .45s var(--mola)}
+html.filme .nav.topo .fala::after{content:"";position:absolute;left:0;right:0;bottom:.1875rem;height:1px;
+  background:var(--gold-l);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--e-io)}
+html.filme .nav.topo .fala:hover{color:var(--gold-l)}
+html.filme .nav.topo .fala:hover::after{transform:scaleX(1);transform-origin:left}
+html.filme .nav.topo .fala:hover svg{transform:translateX(.25rem)}
+html.filme .nav.topo .burger{margin-left:1.5rem;display:none}
+html.filme .nav.topo .mnav{position:absolute;top:100%;left:0;right:0;z-index:55;
+  max-height:calc(100dvh - var(--topo-h));overflow-y:auto;overscroll-behavior:contain;
+  box-shadow:0 1.5rem 3rem -1rem rgba(0,0,0,.5)}
+@media(max-width:1160px){html.filme .nav.topo .burger{display:flex}
+  html.filme .nav.topo .fala{display:none}}
+@media(max-width:767px){html.filme .nav.topo .centro{position:static;transform:none;margin-right:auto}
+  html.filme .nav.topo .regua,html.filme .nav.topo .lema{display:none}
+  html.filme .nav.topo .burger{margin-left:auto}}
+html.filme .dock{display:none}
+@media(max-width:1023px){html.filme .dock{display:flex}}
 .perguntas{display:grid;gap:0;border-top:1px solid var(--line)}
 .perguntas details{border-bottom:1px solid var(--line)}
 .perguntas summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:1rem;
@@ -1095,69 +1140,6 @@ html.filme #abertura{padding-bottom:7.75rem}
 
   .hamb{margin-left:auto}
 }
-
-#mnav{position:absolute;inset:0;z-index:50;overflow:hidden;
-  background:radial-gradient(125% 85% at 6% -8%,#0b1734 0%,var(--solid) 58%);
-
-  display:flex;flex-direction:column;justify-content:center;
-  padding:calc(var(--topo-h) + 1.5rem) var(--gut) 1.75rem;
-  opacity:0;visibility:hidden;transition:opacity .5s var(--e-io),visibility .5s}
-#mnav.aberto{opacity:1;visibility:visible}
-
-#mnav .mn-marca{position:absolute;right:-32%;top:50%;margin-top:-52%;width:104%;aspect-ratio:365/360;
-  color:var(--sig);opacity:0;pointer-events:none;transform:rotate(-11deg) scale(.85);
-  transition:transform 1.5s var(--mola) .1s,opacity 1.2s var(--e-io) .1s}
-#mnav.aberto .mn-marca{opacity:.075;transform:none}
-
-#mnav .mn-olho{position:relative;margin-bottom:1.625rem;display:flex;align-items:center;gap:.875rem;
-  font-family:var(--font-d);font-size:.5625rem;font-weight:500;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--ink-3);
-  opacity:0;transition:opacity .6s var(--e-io) .15s}
-#mnav .mn-olho::after{content:"";flex:1;height:1px;background:var(--line);
-  transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--mola) .25s}
-#mnav.aberto .mn-olho{opacity:1}
-#mnav.aberto .mn-olho::after{transform:none}
-
-#mnav .mn-lista{position:relative;display:flex;flex-direction:column}
-#mnav .mn-item{display:block;padding:.6875rem 0;color:var(--ink)}
-
-#mnav .mn-mask{display:flex;align-items:baseline;gap:1rem;overflow:hidden;padding-bottom:.12em}
-#mnav .mn-mask>*{display:block;transform:translateY(130%);
-  transition:transform 1s var(--mola),color .35s var(--e-io),opacity .35s var(--e-io)}
-#mnav.aberto .mn-mask>*{transform:none;transition-delay:calc(.14s + var(--i)*70ms)}
-#mnav .mn-item i{flex:none;width:1.5rem;font-style:normal;font-family:var(--font-d);
-  font-size:.625rem;font-weight:500;letter-spacing:.14em;color:var(--sig);opacity:.55}
-#mnav .mn-item b{font-family:var(--font-d);font-weight:300;letter-spacing:-.025em;
-  font-size:clamp(1.75rem,8.4vw,2.5rem);line-height:1.08}
-
-#mnav .mn-item.on i{opacity:1}
-#mnav .mn-item.on b{color:var(--sig-2)}
-
-#mnav .mn-pe{position:relative;margin-top:2.25rem}
-
-#mnav .mn-fala{display:flex;align-items:center;justify-content:space-between;gap:1rem;
-  padding:1.125rem 1.375rem;border:1px solid var(--edge);border-radius:.25rem;
-  background:linear-gradient(100deg,rgba(92,151,242,.15),rgba(92,151,242,.04));
-  font-family:var(--font-d);font-size:.8125rem;font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ink);
-  opacity:0;transform:translateY(1rem);
-  transition:opacity .6s var(--e-io) .5s,transform .85s var(--mola) .5s}
-#mnav.aberto .mn-fala{opacity:1;transform:none}
-#mnav .mn-fala svg{width:1rem;height:1rem;flex:none}
-
-#mnav .mn-zap{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.125rem;
-  font-family:var(--font-d);font-size:.6875rem;font-weight:500;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--ink-2);
-  opacity:0;transition:opacity .6s var(--e-io) .6s}
-#mnav.aberto .mn-zap{opacity:1}
-#mnav .mn-zap svg{width:.875rem;height:.875rem;flex:none;color:var(--viva);opacity:.85}
-#mnav .mn-nota{margin-top:1.5rem;padding-top:1.125rem;border-top:1px solid var(--line);
-  font-family:var(--font-d);font-size:.5625rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--ink-3);line-height:1.7;
-
-  text-wrap:balance;
-  opacity:0;transition:opacity .6s var(--e-io) .68s}
-#mnav.aberto .mn-nota{opacity:1}
 
 #abertura .faixa{display:flex;flex-direction:column;flex:1;min-height:0;justify-content:space-between;gap:1.5rem}
 #abertura h1{max-width:22ch}
@@ -1501,23 +1483,18 @@ html.filme #abertura{padding-bottom:7.75rem}
 </svg>
 
 
-<header class="nav">
-  <div class="wrap">
-    <a class="brand" href="#top" aria-label="CS Barber — início">
-      <svg class="lg-sym" viewBox="440 100 855 970" aria-hidden="true"><use href="#logo"/></svg>
-      <svg class="lg-word" viewBox="30 1205 1660 235" role="img" aria-label="CS Barber"><use href="#logo"/></svg>
+<header class="nav topo">
+  <i class="prog" aria-hidden="true"></i>
+  <div class="centro">
+    <a class="marca" href="#abertura" aria-label="CS Barber — início">
+        <svg class="lg-sym" viewBox="440 100 855 970" aria-hidden="true"><use href="#logo"/></svg>
+        <svg class="lg-word" viewBox="30 1205 1660 235" role="img" aria-label="CS Barber"><use href="#logo"/></svg>
     </a>
-    <ul>
-      <li><a href="#dores">Dores</a></li>
-      <!--<li><a href="#sistema">O sistema</a></li>--><!-- dobra 3 oculta -->
-      <li><a href="#modulos">Módulos</a></li>
-      <li><a href="#como">Como funciona</a></li>
-      <li><a href="#faq">Dúvidas</a></li>
-    </ul>
-    <a class="btn btn-gold" href="#testar">Testar 7 dias grátis</a>
-    <button class="burger" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+    <i class="regua" aria-hidden="true"></i>
+    <p class="lema">Sistema de gestão para barbearia</p>
   </div>
-  <span class="prog" aria-hidden="true"></span>
+  <a class="fala" href="#testar">Testar 7 dias grátis <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+  <button class="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mnav"><span></span><span></span></button>
   <nav id="mnav" class="mnav" aria-label="Menu"><a href="#dores">Dores</a><!--<a href="#sistema">O sistema</a>--><a href="#modulos">Módulos</a><a href="#como">Como funciona</a><a href="#faq">Dúvidas</a><a class="btn mcta" href="#testar">Testar 7 dias grátis</a></nav>
 </header>
 
