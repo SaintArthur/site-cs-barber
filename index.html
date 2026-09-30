@@ -30,7 +30,6 @@
      o navegador continua baixando so o que a pagina realmente usa.
      Para trocar uma familia: baixe o WOFF2, jogue em assets/fonts/ e ajuste
      o @font-face e a variavel correspondente na paleta. -->
-<link rel="preload" as="image" href="assets/cs_barber_hero.webp" type="image/webp">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/libre-caslon-text-400-latin.woff2" crossorigin>
 <noscript><style>
@@ -776,9 +775,7 @@ html.filme.compacto .placa-fone{max-width:11rem}
 html.filme.compacto .placa-foto{aspect-ratio:16/10}
 html.filme.compacto .legenda{font-size:.625rem}
 
-#abertura .par{grid-template-columns:1.24fr .76fr;align-items:center}
-@media(min-width:1024px){#abertura .d1{font-size:3.4rem}}
-@media(min-width:1500px){#abertura .d1{font-size:3.9rem}}
+
 #como .par .lista .it,#diferenciais .par .lista .it{
   grid-template-columns:auto 1fr;gap:.3125rem 1rem;padding:1.0625rem 0}
 #como .par .lista .it p,#diferenciais .par .lista .it p{grid-column:2;max-width:34ch}
@@ -998,7 +995,7 @@ html.filme.compacto #abertura .regua{margin:.25rem 0}
 
 html.filme.compacto #dores blockquote{font-size:clamp(25px,7vw,44px);line-height:1.14}
 
-html.filme.compacto #modulos .faixa{grid-template-columns:1fr;gap:1.375rem;align-content:center}
+html.filme.compacto #modulos .faixa{grid-template-columns:1fr;gap:1.375rem;align-content:center;align-items:center}
 html.filme.compacto .painel{padding:1.125rem}
 html.filme.compacto .celas{gap:.5rem}
 html.filme.compacto .cel{padding:.625rem .5rem;font-size:clamp(12px,3.1vw,15px);border-radius:.5rem}
@@ -1184,7 +1181,7 @@ html.filme #abertura{padding-bottom:7.75rem}
 #dores cite{font-style:normal}
 @media(max-width:768px){#dores blockquote{font-size:2rem}}
 
-#modulos .faixa{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;flex:1;min-height:0;align-content:center}
+#modulos .faixa{display:grid;grid-template-columns:1.06fr .94fr;gap:3.5rem;flex:1;min-height:0;align-content:center}
 #modulos .cabeca{display:flex;flex-direction:column;gap:1.25rem;margin-bottom:1.5rem}
 .passos{list-style:none;counter-reset:s}
 .passos li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;
@@ -1534,17 +1531,9 @@ html.filme #abertura{padding-bottom:7.75rem}
 <section class="ato" id="abertura" aria-label="Abertura">
   <div class="wrap faixa">
     <p class="rotulo" data-sp="p" data-d="47">Sistema de gestão para barbearia</p>
-    <div class="par">
-      <div>
-        <h1 class="d1" data-sp="l" data-d="156">Sua barbearia inteira<br>em um sistema só.</h1>
-        <p class="corpo" style="margin-top:1.5rem" data-sp="p" data-d="702">Agenda, clientes, equipe e pagamentos em <b>um único lugar</b>. Montado do jeito da sua operação, e testado por 7 dias antes de você decidir.</p>
-      </div>
-      <figure class="placa placa-foto b" data-d="560">
-        <picture>
-          <source type="image/webp" srcset="assets/cs_barber_hero.webp 800w, assets/cs_barber_hero@2x.webp 1600w" sizes="(max-width:1023px) 90vw, 32rem">
-          <img src="assets/cs_barber_hero.jpg" srcset="assets/cs_barber_hero.jpg 800w, assets/cs_barber_hero@2x.jpg 1600w" sizes="(max-width:1023px) 90vw, 32rem" width="800" height="620" alt="Poste de barbeiro girando ao lado da marca da Conecta" fetchpriority="high" decoding="async">
-        </picture>
-      </figure>
+    <div>
+      <h1 class="d1" data-sp="l" data-d="156">Sua barbearia inteira<br>em um sistema só.</h1>
+      <p class="corpo" style="margin-top:1.5rem;max-width:36rem" data-sp="p" data-d="702">Agenda, clientes, equipe e pagamentos em <b>um único lugar</b>. Montado do jeito da sua operação, e testado por 7 dias antes de você decidir.</p>
     </div>
     <div>
       <div class="regua b" data-d="897"></div>
@@ -1607,23 +1596,14 @@ html.filme #abertura{padding-bottom:7.75rem}
         <li class="b" data-d="733"><div><h3>Relatórios</h3><p>Resumo do dia, top serviços e total de atendimentos, sem fechar planilha na mão.</p></div></li>
       </ol>
     </div>
-    <div class="painel b" data-d="484">
-      <div class="painel-topo">
-        <h3>Monte o seu sistema</h3>
-        <span class="conta"><b id="mconta">4</b> de 9 ativos</span>
-      </div>
-      <div class="celas" role="group" aria-label="Simulador de módulos">
-        <div class="cel on">Agenda</div>
-        <div class="cel on">Clientes</div>
-        <div class="cel on">Barbeiros</div>
-        <div class="cel on">Relatórios</div>
-        <div class="cel off">Pagamento online</div>
-        <div class="cel off">Fidelidade</div>
-        <div class="cel off">Avaliações</div>
-        <div class="cel off">Cupons</div>
-        <div class="cel off">Multi-unidade</div>
-      </div>
-      <p class="painel-pe"><b>Toque nos módulos</b> para ativar ou desativar. Precisa de algo que ainda não existe? A tecnologia é da própria Conecta, então módulo sob medida é rotina, não exceção.</p>
+    <div class="b" data-d="484">
+      <figure class="placa placa-foto">
+        <picture>
+          <source type="image/webp" srcset="assets/cs_barber_hero.webp 800w, assets/cs_barber_hero@2x.webp 1600w" sizes="(max-width:1023px) 90vw, 30rem">
+          <img src="assets/cs_barber_hero.jpg" srcset="assets/cs_barber_hero.jpg 800w, assets/cs_barber_hero@2x.jpg 1600w" sizes="(max-width:1023px) 90vw, 30rem" width="800" height="620" alt="Poste de barbeiro girando ao lado da marca da Conecta" decoding="async">
+        </picture>
+      </figure>
+      <p class="legenda">Módulo sob medida é rotina, não exceção</p>
     </div>
   </div>
 </section>
