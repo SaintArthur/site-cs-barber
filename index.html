@@ -1390,27 +1390,34 @@ html.filme #abertura{padding-bottom:7.75rem}
 
 /* formulario: gramatica da referencia, altura cortada pela metade */
 .lead-form{background:var(--glass);border:1px solid var(--edge);border-radius:1.25rem;
-  padding:1.375rem 1.375rem 1.25rem;box-shadow:none;
+  padding:1.125rem 1.25rem 1rem;box-shadow:none;
   backdrop-filter:blur(1rem);-webkit-backdrop-filter:blur(1rem)}
 .lead-form .fh{font-family:var(--font-d);font-size:.625rem;font-weight:500;letter-spacing:.2em;
   text-transform:uppercase;margin-bottom:.75rem;color:var(--muted)}
-.lead-form .fgrid{gap:.625rem}
+.lead-form .fgrid{gap:.5rem}
 .lead-form .f label{display:block;font-family:var(--font-d);font-size:.6875rem;font-weight:500;
   letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .lead-form .f input,.lead-form .f select{margin-top:.3125rem;padding:.5625rem .6875rem;
   border-radius:.5rem;font-size:16px;line-height:1.2;border:1px solid var(--line);
   background:rgba(10,13,20,.5);color:var(--ink)}
-.lead-form .fset{margin:.25rem 0 0}
+.lead-form .fset{margin:.5rem 0 0;padding-top:.625rem;border-top:1px solid var(--line)}
 .lead-form .fset legend{font-family:var(--font-d);font-size:.6875rem;font-weight:500;
   letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4375rem;color:var(--muted)}
 
 .lead-form .chips{display:flex;flex-wrap:wrap;gap:.375rem;align-items:flex-start}
-.lead-form .chips label{display:inline-flex;align-items:center;gap:0;min-height:0;
-  padding:.375rem .6875rem;border-radius:2rem;border:1px solid var(--line);
+.lead-form .chips label{display:inline-flex;align-items:center;gap:.4375rem;min-height:0;
+  padding:.375rem .75rem .375rem .5rem;border-radius:2rem;border:1px solid var(--line);
   background:var(--glass);font-size:.8125rem;line-height:1.25;color:var(--ink-2);
   justify-content:flex-start;white-space:nowrap;
   transition:border-color .3s var(--e-io),color .3s var(--e-io),background .3s var(--e-io)}
-.lead-form .chips label i{display:none}
+.lead-form .chips label i{display:block;flex:none;position:relative;width:.875rem;height:.875rem;
+  border-radius:50%;border:1px solid var(--edge);
+  transition:border-color .3s var(--e-io),background .3s var(--e-io)}
+.lead-form .chips label i::after{content:"";position:absolute;inset:0;margin:auto;
+  width:.375rem;height:.375rem;border-radius:50%;background:var(--sig);
+  transform:scale(0);transition:transform .28s var(--mola)}
+.lead-form .chips label:has(input:checked) i{border-color:var(--sig)}
+.lead-form .chips label:has(input:checked) i::after{transform:scale(1)}
 .lead-form .chips label:has(input:checked){border-color:var(--edge);color:var(--ink);
   background:rgba(226,202,151,.13)}
 .lead-form .chips label:has(input:focus-visible){outline:2px solid var(--sig-2);outline-offset:2px}
@@ -1422,10 +1429,32 @@ html.filme #abertura{padding-bottom:7.75rem}
 .lead-form .radios label:has(input:checked){border-color:var(--edge);color:var(--ink);
   background:rgba(226,202,151,.13)}
 
-.lead-form .btn{margin-top:.625rem;padding:.8125rem 1.5rem;font-size:.9375rem}
+.lead-form .btn{margin-top:.5rem;padding:.75rem 1.5rem;font-size:.9375rem}
 .lead-form .escape{margin-top:.4375rem}
 .lead-form small{display:block;margin-top:.5rem;font-size:.6875rem;line-height:1.45}
 .lead-form .f.full{margin-top:.5rem}
+
+/* telas baixas: formulario e rodape dividem uma tela so */
+@media(pointer:fine) and (max-height:900px){
+  .lead-form{padding:.9375rem 1.125rem .875rem}
+  .lead-form .f input,.lead-form .f select{margin-top:.25rem;padding:.4375rem .625rem}
+  .lead-form .f label,.lead-form .fset legend,.lead-form .fh{font-size:.625rem}
+  .lead-form .fgrid{gap:.4375rem}
+  .lead-form .fset{margin-top:.375rem;padding-top:.5rem}
+  .lead-form .chips{gap:.3125rem}
+  .lead-form .chips label,.lead-form .radios label{padding-block:.3125rem;font-size:.78125rem}
+  .lead-form .btn{margin-top:.375rem;padding:.625rem 1.25rem}
+  .lead-form small{margin-top:.375rem;font-size:.625rem}
+}
+@media(max-height:900px){
+  #testar .saidas{grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+  #testar .saida{padding:.5rem .6875rem;border-radius:.1875rem}
+  #testar .saida .mk{width:1.125rem;height:1.125rem}
+  #testar .saida b{font-size:.8125rem}
+  #testar .saida i{font-size:.625rem}
+  #testar .rodape{padding-top:.875rem}
+  #testar .faixa{gap:1rem}
+}
 /* piso de 11px em texto funcional */
 .cartao .tag{font-size:.6875rem}
 .trilho a{font-size:.6875rem}
