@@ -2912,7 +2912,7 @@ if(matchMedia('(prefers-reduced-motion: reduce)').matches){
       new THREE.SphereGeometry(400,32,32),
       new THREE.ShaderMaterial({
         side:THREE.BackSide, depthWrite:false, fog:false,
-        uniforms:{topo:{value:new THREE.Color('#14294d')}, base:{value:new THREE.Color('#050d1c')},
+        uniforms:{topo:{value:new THREE.Color('#1c263f')}, base:{value:new THREE.Color('#0a0d14')},
                   escala:{value:110}},
         vertexShader:`varying vec3 vW; void main(){ vec4 w = modelMatrix*vec4(position,1.0);
           vW = w.xyz; gl_Position = projectionMatrix*viewMatrix*w; }`,
