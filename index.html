@@ -30,6 +30,7 @@
      o navegador continua baixando so o que a pagina realmente usa.
      Para trocar uma familia: baixe o WOFF2, jogue em assets/fonts/ e ajuste
      o @font-face e a variavel correspondente na paleta. -->
+<link rel="preload" as="image" href="assets/cs_barber_hero.webp" type="image/webp">
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/poppins-400-latin.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="assets/fonts/libre-caslon-text-400-latin.woff2" crossorigin>
 <noscript><style>
@@ -748,6 +749,39 @@ input,select,textarea{transition:border-color .22s ease,box-shadow .22s ease,bac
 }
 
 
+
+.par{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,4vw,4rem);align-items:center}
+.placa{position:relative;border:1px solid var(--line);border-radius:.25rem;overflow:hidden;
+  background:linear-gradient(180deg,rgba(28,38,63,.34),rgba(10,13,20,.18));
+  transition:border-color .6s var(--e-io),transform .8s var(--mola)}
+.placa img{display:block;width:100%;height:auto}
+.placa::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 58%,rgba(10,13,20,.42) 100%)}
+.placa-foto{aspect-ratio:800/620}
+.placa-foto img{height:100%;object-fit:cover}
+.placa-tela .cromo{display:flex;align-items:center;gap:.375rem;padding:.5rem .75rem;
+  border-bottom:1px solid var(--line);background:rgba(10,13,20,.55)}
+.placa-tela .cromo i{width:.4375rem;height:.4375rem;border-radius:50%;background:var(--line)}
+.placa-tela .cromo span{margin-left:.5rem;font-family:var(--font-d);font-size:.625rem;
+  letter-spacing:.06em;color:var(--ink-3)}
+.placa-fone{max-width:15rem;margin-inline:auto;border-radius:1.25rem;padding:.5rem;
+  background:linear-gradient(180deg,rgba(28,38,63,.6),rgba(10,13,20,.4))}
+.placa-fone img{border-radius:.875rem}
+.placa-fone::after{border-radius:1.25rem}
+.legenda{margin-top:.875rem;font-family:var(--font-d);font-size:.6875rem;font-weight:500;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+#como .faixa,#diferenciais .faixa{justify-content:center}
+html.filme.compacto .par{grid-template-columns:1fr;gap:1.25rem}
+html.filme.compacto .placa-fone{max-width:11rem}
+html.filme.compacto .placa-foto{aspect-ratio:16/10}
+html.filme.compacto .legenda{font-size:.625rem}
+
+#abertura .par{grid-template-columns:1.24fr .76fr;align-items:center}
+@media(min-width:1024px){#abertura .d1{font-size:3.4rem}}
+@media(min-width:1500px){#abertura .d1{font-size:3.9rem}}
+#como .par .lista .it,#diferenciais .par .lista .it{
+  grid-template-columns:auto 1fr;gap:.3125rem 1rem;padding:1.0625rem 0}
+#como .par .lista .it p,#diferenciais .par .lista .it p{grid-column:2;max-width:34ch}
 .perguntas{display:grid;gap:0;border-top:1px solid var(--line)}
 .perguntas details{border-bottom:1px solid var(--line)}
 .perguntas summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:1rem;
@@ -1500,9 +1534,17 @@ html.filme #abertura{padding-bottom:7.75rem}
 <section class="ato" id="abertura" aria-label="Abertura">
   <div class="wrap faixa">
     <p class="rotulo" data-sp="p" data-d="47">Sistema de gestão para barbearia</p>
-    <div>
-      <h1 class="d1" data-sp="l" data-d="156">Sua barbearia inteira<br>em um sistema só.</h1>
-      <p class="corpo" style="margin-top:1.5rem;max-width:36rem" data-sp="p" data-d="702">Agenda, clientes, equipe e pagamentos em <b>um único lugar</b>. Montado do jeito da sua operação, e testado por 7 dias antes de você decidir.</p>
+    <div class="par">
+      <div>
+        <h1 class="d1" data-sp="l" data-d="156">Sua barbearia inteira<br>em um sistema só.</h1>
+        <p class="corpo" style="margin-top:1.5rem" data-sp="p" data-d="702">Agenda, clientes, equipe e pagamentos em <b>um único lugar</b>. Montado do jeito da sua operação, e testado por 7 dias antes de você decidir.</p>
+      </div>
+      <figure class="placa placa-foto b" data-d="560">
+        <picture>
+          <source type="image/webp" srcset="assets/cs_barber_hero.webp 800w, assets/cs_barber_hero@2x.webp 1600w" sizes="(max-width:1023px) 90vw, 32rem">
+          <img src="assets/cs_barber_hero.jpg" srcset="assets/cs_barber_hero.jpg 800w, assets/cs_barber_hero@2x.jpg 1600w" sizes="(max-width:1023px) 90vw, 32rem" width="800" height="620" alt="Poste de barbeiro girando ao lado da marca da Conecta" fetchpriority="high" decoding="async">
+        </picture>
+      </figure>
     </div>
     <div>
       <div class="regua b" data-d="897"></div>
@@ -1536,7 +1578,6 @@ html.filme #abertura{padding-bottom:7.75rem}
         <span class="tag">Já usa sistema</span>
         <h3>Três ferramentas pra fechar o mês</h3>
         <p>Uma cuida da agenda, outra do caixa, outra da comissão. Nenhuma conversa com a outra, e sobra pra você juntar tudo na mão.</p>
-        <ul><li>Três mensalidades</li><li>Nenhuma tela única</li><li>Você é que se adapta</li></ul>
         <span class="lnk">Unificação e personalização <svg aria-hidden="true"><use href="#arrow"/></svg></span>
       </div>
       <div class="cartao c-geral b" data-d="655">
@@ -1545,7 +1586,6 @@ html.filme #abertura{padding-bottom:7.75rem}
         <span class="tag">Ainda sem sistema</span>
         <h3>A agenda é o caderno e o WhatsApp</h3>
         <p>O horário é combinado na conversa e anotado depois, quando alguém lembra. No fim do dia ninguém sabe quanto entrou nem quanto é de cada um.</p>
-        <ul><li>Furos e esquecimentos</li><li>Caixa no escuro</li><li>Cliente some sem histórico</li></ul>
         <span class="lnk">Controle pra você, experiência pro cliente <svg aria-hidden="true"><use href="#arrow"/></svg></span>
       </div>
     </div>
@@ -1594,11 +1634,23 @@ html.filme #abertura{padding-bottom:7.75rem}
       <p class="cap b" data-d="0"><b>03</b><span>Como funciona</span></p>
       <h2 class="d2" data-sp="l" data-d="78">Da conversa à operação rodando, sem parar a sua barbearia.</h2>
     </div>
-    <div class="lista">
-      <div class="it b" data-d="484"><b>01</b><h3>Você mostra como a barbearia funciona</h3><p>Como é a agenda, quantos barbeiros, como fecha a comissão e o que hoje trava o seu dia.</p></div>
-      <div class="it b" data-d="546"><b>02</b><h3>A equipe monta o sistema e migra seus dados</h3><p>Módulos certos pra sua operação, serviços e barbeiros cadastrados, clientes e histórico trazidos pra dentro.</p></div>
-      <div class="it b" data-d="608"><b>03</b><h3>7 dias de teste com acompanhamento próximo</h3><p>Uso na operação real, com a equipe da Conecta ao lado pra ajustar o que não encaixou de primeira.</p></div>
-      <div class="it b" data-d="671"><b>04</b><h3>Operação rodando, suporte contínuo</h3><p>A barbearia segue no sistema, com suporte de segunda a sábado e módulos novos entrando quando o negócio pedir.</p></div>
+    <div class="par">
+      <div class="lista">
+        <div class="it b" data-d="484"><b>01</b><h3>Você mostra como funciona</h3><p>A agenda, a equipe, a comissão e o que trava o seu dia.</p></div>
+        <div class="it b" data-d="546"><b>02</b><h3>A equipe monta e migra</h3><p>Serviços, barbeiros, clientes e histórico trazidos pra dentro.</p></div>
+        <div class="it b" data-d="608"><b>03</b><h3>7 dias na operação real</h3><p>Com a equipe da Conecta ao lado pra ajustar o que não encaixou.</p></div>
+        <div class="it b" data-d="671"><b>04</b><h3>Rodando, com suporte</h3><p>Segunda a sábado, e módulos novos quando o negócio pedir.</p></div>
+      </div>
+      <div class="b" data-d="546">
+        <figure class="placa placa-tela">
+          <div class="cromo" aria-hidden="true"><i></i><i></i><i></i><span>csbarber.conectasolucoes.ia.br</span></div>
+          <picture>
+            <source type="image/webp" srcset="assets/painel-desktop.webp 520w, assets/painel-desktop@2x.webp 1040w" sizes="(max-width:1023px) 90vw, 30rem">
+            <img src="assets/painel-desktop.jpg" srcset="assets/painel-desktop.jpg 520w, assets/painel-desktop@2x.jpg 1040w" sizes="(max-width:1023px) 90vw, 30rem" width="1869" height="1002" alt="Painel do CS Barber com agendamentos do dia, receita e barbeiros em destaque" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <p class="legenda">O painel no fim da implantação</p>
+      </div>
     </div>
     <p class="rotulo b" data-d="760">Você continua atendendo · A gente cuida da virada</p>
   </div>
@@ -1610,11 +1662,22 @@ html.filme #abertura{padding-bottom:7.75rem}
       <p class="cap b" data-d="0"><b>04</b><span>Diferenciais</span></p>
       <h2 class="d2" data-sp="l" data-d="78" style="margin-top:1.25rem">Por que o CS Barber e não um genérico.</h2>
     </div>
-    <div class="lista">
-      <div class="it b" data-d="484"><b>01</b><h3>Montado pra sua operação</h3><p>O sistema se molda ao seu jeito de trabalhar, não o contrário.</p></div>
-      <div class="it b" data-d="546"><b>02</b><h3>Feito pra barbearia</h3><p>Linguagem e fluxos de barbearia, não um genérico adaptado às pressas.</p></div>
-      <div class="it b" data-d="608"><b>03</b><h3>Atendimento próximo</h3><p>Você fala com quem construiu o sistema, de segunda a sábado.</p></div>
-      <div class="it b" data-d="671"><b>04</b><h3>Tecnologia proprietária</h3><p>Precisou de função nova? A equipe desenvolve, sem depender de terceiros.</p></div>
+    <div class="par">
+      <div class="lista">
+        <div class="it b" data-d="484"><b>01</b><h3>Montado pra sua operação</h3><p>O sistema se molda ao seu jeito, não o contrário.</p></div>
+        <div class="it b" data-d="546"><b>02</b><h3>Feito pra barbearia</h3><p>Linguagem e fluxos de barbearia, não genérico adaptado.</p></div>
+        <div class="it b" data-d="608"><b>03</b><h3>Atendimento próximo</h3><p>Você fala com quem construiu, de segunda a sábado.</p></div>
+        <div class="it b" data-d="671"><b>04</b><h3>Tecnologia proprietária</h3><p>Precisou de função nova? A equipe desenvolve.</p></div>
+      </div>
+      <div class="b" data-d="546">
+        <figure class="placa placa-fone">
+          <picture>
+            <source type="image/webp" srcset="assets/painel-mobile.webp 210w, assets/painel-mobile@2x.webp 415w" sizes="(max-width:1023px) 44vw, 14rem">
+            <img src="assets/painel-mobile.jpg" srcset="assets/painel-mobile.jpg 210w, assets/painel-mobile@2x.jpg 415w" sizes="(max-width:1023px) 44vw, 14rem" width="415" height="900" alt="CS Barber no celular, com os módulos ativos da barbearia" loading="lazy" decoding="async">
+          </picture>
+        </figure>
+        <p class="legenda" style="text-align:center">O mesmo sistema no bolso</p>
+      </div>
     </div>
   </div>
 </section>
