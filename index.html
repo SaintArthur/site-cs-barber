@@ -785,7 +785,7 @@ html.filme .nav.topo{position:fixed;top:0;left:0;right:0;z-index:60;height:var(-
   background:none;backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:0;box-shadow:none}
 html.filme .nav.topo::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,rgba(226,202,151,.14) 20%,rgba(226,202,151,.14) 80%,transparent)}
-html.filme .nav.topo .prog{position:absolute;bottom:0;left:0;right:0;height:1px;width:auto;
+html.filme .nav.topo .prog{position:absolute;bottom:0;left:0;right:0;height:1px;width:auto;opacity:.9;
   background:var(--gold);transform:scaleX(var(--lido,0));transform-origin:left;opacity:.9;
   z-index:3;transition:none}
 html.filme .nav.topo .centro{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -1410,14 +1410,18 @@ html.filme #abertura{padding-bottom:7.75rem}
   background:var(--glass);font-size:.8125rem;line-height:1.25;color:var(--ink-2);
   justify-content:flex-start;white-space:nowrap;
   transition:border-color .3s var(--e-io),color .3s var(--e-io),background .3s var(--e-io)}
-.lead-form .chips label i{display:block;flex:none;position:relative;width:.875rem;height:.875rem;
-  border-radius:50%;border:1px solid var(--edge);
-  transition:border-color .3s var(--e-io),background .3s var(--e-io)}
-.lead-form .chips label i::after{content:"";position:absolute;inset:0;margin:auto;
-  width:.375rem;height:.375rem;border-radius:50%;background:var(--sig);
-  transform:scale(0);transition:transform .28s var(--mola)}
-.lead-form .chips label:has(input:checked) i{border-color:var(--sig)}
-.lead-form .chips label:has(input:checked) i::after{transform:scale(1)}
+.lead-form .chips{display:grid;grid-template-columns:1fr 1fr;gap:.375rem}
+.lead-form .chips label{justify-content:space-between;white-space:normal;
+  padding:.3125rem .4375rem .3125rem .6875rem}
+.lead-form .chips label:last-child{grid-column:1/-1}
+.lead-form .chips label i{display:block;flex:none;order:1;position:relative;
+  width:1.875rem;height:1.0625rem;border-radius:999px;border:1px solid var(--line);
+  background:rgba(128,128,128,.14);transition:background .3s var(--e-io),border-color .3s var(--e-io)}
+.lead-form .chips label i::after{content:"";position:absolute;top:1px;left:1px;
+  width:.8125rem;height:.8125rem;border-radius:50%;background:var(--ink-3);
+  transition:transform .28s var(--mola),background .28s var(--e-io)}
+.lead-form .chips label:has(input:checked) i{border-color:var(--edge)}
+.lead-form .chips label:has(input:checked) i::after{transform:translateX(.8125rem);background:var(--sig)}
 .lead-form .chips label:has(input:checked){border-color:var(--edge);color:var(--ink);
   background:rgba(226,202,151,.13)}
 .lead-form .chips label:has(input:focus-visible){outline:2px solid var(--sig-2);outline-offset:2px}
@@ -1435,15 +1439,15 @@ html.filme #abertura{padding-bottom:7.75rem}
 .lead-form .f.full{margin-top:.5rem}
 
 /* telas baixas: formulario e rodape dividem uma tela so */
-@media(pointer:fine) and (max-height:900px){
-  .lead-form{padding:.9375rem 1.125rem .875rem}
-  .lead-form .f input,.lead-form .f select{margin-top:.25rem;padding:.4375rem .625rem}
+@media(pointer:fine){
+  .lead-form{padding:.875rem 1rem .8125rem}
+  .lead-form .f input,.lead-form .f select{margin-top:.1875rem;padding:.375rem .625rem}
   .lead-form .f label,.lead-form .fset legend,.lead-form .fh{font-size:.625rem}
   .lead-form .fgrid{gap:.4375rem}
   .lead-form .fset{margin-top:.375rem;padding-top:.5rem}
   .lead-form .chips{gap:.3125rem}
-  .lead-form .chips label,.lead-form .radios label{padding-block:.3125rem;font-size:.78125rem}
-  .lead-form .btn{margin-top:.375rem;padding:.625rem 1.25rem}
+  .lead-form .chips label,.lead-form .radios label{padding-block:.25rem;font-size:.78125rem}
+  .lead-form .btn{margin-top:.3125rem;padding:.5625rem 1.25rem}
   .lead-form small{margin-top:.375rem;font-size:.625rem}
 }
 @media(max-height:900px){
@@ -1465,6 +1469,15 @@ html.filme #abertura{padding-bottom:7.75rem}
 #diferenciais .hero-art .hero-photo{box-shadow:0 2rem 4.5rem -1.75rem rgba(0,0,0,.85)}
 @media(max-width:1023px){#diferenciais .hero-art{max-width:30rem}}
 @media(max-width:640px){#diferenciais .hero-art{max-width:100%}}
+
+/* modulos: a base e o que cresce, como no original */
+.cresce{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem}
+.cresce .mod{display:flex;flex-direction:column;gap:.125rem;padding:.625rem .75rem;
+  border:1px solid var(--line);border-radius:.25rem;background:var(--glass)}
+.cresce .mod b{font-family:var(--font-d);font-size:.875rem;font-weight:500;color:var(--ink)}
+.cresce .mod i{font-style:normal;font-size:.75rem;font-weight:300;color:var(--ink-3);line-height:1.35}
+@media(max-width:1023px){.cresce{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.cresce{grid-template-columns:1fr}}
 /* piso de 11px em texto funcional */
 .cartao .tag{font-size:.6875rem}
 .trilho a{font-size:.6875rem}
@@ -1706,12 +1719,22 @@ html.filme.compacto .trilho a{font-size:0}
         <h2 class="d2" data-sp="l" data-d="78">Comece completo. Cresça por módulos.</h2>
         <p class="corpo" data-sp="p" data-d="406">Todo CS Barber já nasce com agenda, clientes, equipe e relatórios. O resto entra quando a operação pedir.</p>
       </div>
+      <p class="rotulo b" data-d="480">Já vem com tudo isso</p>
       <ol class="passos">
         <li class="b" data-d="546"><div><h3>Agendamentos</h3><p>Agenda por barbeiro e por serviço, com confirmação e lembrete automático pro cliente.</p></div></li>
         <li class="b" data-d="608"><div><h3>Cadastro de clientes</h3><p>Ficha única com contato, histórico de corte e preferências de cada cliente da casa.</p></div></li>
         <li class="b" data-d="671"><div><h3>Gestão de barbeiros</h3><p>Perfil, agenda individual e acesso próprio pra cada barbeiro da equipe.</p></div></li>
         <li class="b" data-d="733"><div><h3>Relatórios</h3><p>Resumo do dia, top serviços e total de atendimentos, sem fechar planilha na mão.</p></div></li>
       </ol>
+      <p class="rotulo b" data-d="800" style="margin-top:1.75rem">E cresce quando você quiser</p>
+      <div class="cresce b" data-d="860">
+        <span class="mod"><b>Pagamento online</b><i>Pix e cartão dentro do sistema</i></span>
+        <span class="mod"><b>Programa de fidelidade</b><i>Pontos e recorrência</i></span>
+        <span class="mod"><b>Avaliações e reputação</b><i>Pedido no momento certo</i></span>
+        <span class="mod"><b>Cupons e promoções</b><i>Com regra, prazo e limite</i></span>
+        <span class="mod"><b>Programa de indicação</b><i>Cliente que traz cliente</i></span>
+        <span class="mod"><b>Multi-unidade</b><i>Todas no mesmo painel</i></span>
+      </div>
   </div>
 </section>
 
@@ -2257,7 +2280,7 @@ function quadro(agora){
   });
 
   if(progEl && FILME) progEl.style.transform = "scaleX(" + p.toFixed(4) + ")";
-  if(navEl && FILME) navEl.classList.toggle('compact', p > 0.012);
+
 
   if(roleEl){
     const mostra = FILME ? p < 0.035 : scrollY < 40;
