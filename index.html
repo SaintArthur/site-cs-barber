@@ -1387,6 +1387,45 @@ html.filme #abertura{padding-bottom:7.75rem}
 
 
 
+
+/* formulario: gramatica da referencia, altura cortada pela metade */
+.lead-form{background:var(--glass);border:1px solid var(--edge);border-radius:1.25rem;
+  padding:1.375rem 1.375rem 1.25rem;box-shadow:none;
+  backdrop-filter:blur(1rem);-webkit-backdrop-filter:blur(1rem)}
+.lead-form .fh{font-family:var(--font-d);font-size:.625rem;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;margin-bottom:.75rem;color:var(--muted)}
+.lead-form .fgrid{gap:.625rem}
+.lead-form .f label{display:block;font-family:var(--font-d);font-size:.6875rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead-form .f input,.lead-form .f select{margin-top:.3125rem;padding:.5625rem .6875rem;
+  border-radius:.5rem;font-size:16px;line-height:1.2;border:1px solid var(--line);
+  background:rgba(10,13,20,.5);color:var(--ink)}
+.lead-form .fset{margin:.25rem 0 0}
+.lead-form .fset legend{font-family:var(--font-d);font-size:.6875rem;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4375rem;color:var(--muted)}
+
+.lead-form .chips{display:flex;flex-wrap:wrap;gap:.375rem;align-items:flex-start}
+.lead-form .chips label{display:inline-flex;align-items:center;gap:0;min-height:0;
+  padding:.375rem .6875rem;border-radius:2rem;border:1px solid var(--line);
+  background:var(--glass);font-size:.8125rem;line-height:1.25;color:var(--ink-2);
+  justify-content:flex-start;white-space:nowrap;
+  transition:border-color .3s var(--e-io),color .3s var(--e-io),background .3s var(--e-io)}
+.lead-form .chips label i{display:none}
+.lead-form .chips label:has(input:checked){border-color:var(--edge);color:var(--ink);
+  background:rgba(226,202,151,.13)}
+.lead-form .chips label:has(input:focus-visible){outline:2px solid var(--sig-2);outline-offset:2px}
+.lead-form .chips label:active{transform:scale(.97)}
+
+.lead-form .radios{gap:.375rem}
+.lead-form .radios label{padding:.375rem .9375rem;border-radius:2rem;font-size:.8125rem;
+  min-height:0;border:1px solid var(--line);background:var(--glass);color:var(--ink-2)}
+.lead-form .radios label:has(input:checked){border-color:var(--edge);color:var(--ink);
+  background:rgba(226,202,151,.13)}
+
+.lead-form .btn{margin-top:.625rem;padding:.8125rem 1.5rem;font-size:.9375rem}
+.lead-form .escape{margin-top:.4375rem}
+.lead-form small{display:block;margin-top:.5rem;font-size:.6875rem;line-height:1.45}
+.lead-form .f.full{margin-top:.5rem}
 /* piso de 11px em texto funcional */
 .cartao .tag{font-size:.6875rem}
 .trilho a{font-size:.6875rem}
