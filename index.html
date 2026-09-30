@@ -1410,9 +1410,10 @@ html.filme #abertura{padding-bottom:7.75rem}
   background:var(--glass);font-size:.8125rem;line-height:1.25;color:var(--ink-2);
   justify-content:flex-start;white-space:nowrap;
   transition:border-color .3s var(--e-io),color .3s var(--e-io),background .3s var(--e-io)}
-.lead-form .chips{display:grid;grid-template-columns:1fr 1fr;gap:.375rem}
-.lead-form .chips label{justify-content:space-between;white-space:normal;
-  padding:.3125rem .4375rem .3125rem .6875rem}
+.lead-form .chips{display:grid;grid-template-columns:1fr 1fr;gap:.4375rem;
+  align-items:stretch;grid-auto-rows:1fr}
+.lead-form .chips label{justify-content:space-between;white-space:normal;text-align:left;
+  gap:.75rem;min-height:2.625rem;padding:.4375rem .5rem .4375rem .75rem;border-radius:.375rem}
 .lead-form .chips label:last-child{grid-column:1/-1}
 .lead-form .chips label i{display:block;flex:none;order:1;position:relative;
   width:1.875rem;height:1.0625rem;border-radius:999px;border:1px solid var(--line);
@@ -1428,7 +1429,7 @@ html.filme #abertura{padding-bottom:7.75rem}
 .lead-form .chips label:active{transform:scale(.97)}
 
 .lead-form .radios{gap:.375rem}
-.lead-form .radios label{padding:.375rem .9375rem;border-radius:2rem;font-size:.8125rem;
+.lead-form .radios label{padding:.5rem 1.25rem;border-radius:.375rem;font-size:.8125rem;
   min-height:0;border:1px solid var(--line);background:var(--glass);color:var(--ink-2)}
 .lead-form .radios label:has(input:checked){border-color:var(--edge);color:var(--ink);
   background:rgba(226,202,151,.13)}
@@ -1446,7 +1447,8 @@ html.filme #abertura{padding-bottom:7.75rem}
   .lead-form .fgrid{gap:.4375rem}
   .lead-form .fset{margin-top:.375rem;padding-top:.5rem}
   .lead-form .chips{gap:.3125rem}
-  .lead-form .chips label,.lead-form .radios label{padding-block:.25rem;font-size:.78125rem}
+  .lead-form .chips label{min-height:2.375rem;padding-block:.375rem;font-size:.78125rem}
+  .lead-form .radios label{padding-block:.4375rem;font-size:.78125rem}
   .lead-form .btn{margin-top:.3125rem;padding:.5625rem 1.25rem}
   .lead-form small{margin-top:.375rem;font-size:.625rem}
 }
