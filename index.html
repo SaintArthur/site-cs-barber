@@ -1672,7 +1672,7 @@ const ATOS = [...palco.querySelectorAll(':scope > section')].filter(el=>!el.hasA
 const N = ATOS.length;
 const PASSO = 1/N;
 const ABRE = 0.196*PASSO, LARG = 0.385*PASSO;
-const POR_TELA = TOQUE.matches ? 0.95 : 1.15;
+const POR_TELA = TOQUE.matches ? 0.90 : 1.05;
 let PESO = N;
 let TELAS = POR_TELA * N + 0.2;
 let TELA_H = 0, TELA_W = 0, CURSO = 1;
@@ -1741,7 +1741,7 @@ window.CS.wipe = WIPE;
 function repartir(){
   const peso = CENA.map(a=>{
     const cx = a.fx ? Math.max(1, a.fx.clientHeight) : 1;
-    return 1 + Math.min(2.2, (a.excesso||0)/cx);
+    return 1 + Math.min(1.6, (a.excesso||0)/cx);
   });
   const soma = peso.reduce((t,v)=>t+v, 0);
   let acc = 0;
