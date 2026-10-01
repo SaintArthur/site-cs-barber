@@ -1147,6 +1147,17 @@ html.filme #abertura{padding-bottom:7.75rem}
 #testar .saida .ar{flex:none;margin-left:auto;width:.875rem;height:.875rem;color:var(--c);
   opacity:.55;transition:transform .45s var(--mola),opacity .45s var(--e-io)}
 #testar .saida:hover .ar{opacity:1;transform:translateX(.25rem)}
+
+.fita{display:inline-flex;align-items:center;flex:none;
+  padding:.1875rem .4375rem;border-radius:.125rem;
+  font-family:var(--font-d);font-size:.5625rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;line-height:1;
+  background:var(--gold);color:var(--black)}
+.fitado{position:relative;display:block}
+.fitado>.fita{position:absolute;z-index:2;top:-.4375rem;right:1rem;
+  transform:rotate(-3deg);box-shadow:0 .25rem .75rem -.25rem rgba(0,0,0,.5)}
+#testar .saida b .fita{margin-left:.4375rem;vertical-align:.0625rem;font-style:normal;
+  background:var(--gold);color:#0a0d14;letter-spacing:.14em}
 #testar .s-barber{--c:var(--ouro)} #testar .s-bella{--c:var(--rose)} #testar .s-ig{--c:var(--sig-2)}
 #testar .rodape .fim{display:block;text-align:center}
 @media(max-width:1023px){#testar .saidas{grid-template-columns:1fr}
@@ -1763,7 +1774,7 @@ html.filme.compacto .trilho a{font-size:0}
         </a>
         <a class="saida s-bella" href="https://www.csbella.ia.br/" target="_blank" rel="noopener">
           <svg class="mk" aria-hidden="true"><use href="#hex"/></svg>
-          <span><b>CS Bella</b><i>Salões e estética</i></span>
+          <span><b>CS Bella <i class="fita">Em breve</i></b><i>Salões e estética</i></span>
           <svg class="ar" aria-hidden="true"><use href="#arrow"/></svg>
         </a>
         <a class="saida s-ig" href="https://instagram.com/_conectasolucoes" target="_blank" rel="noopener">
