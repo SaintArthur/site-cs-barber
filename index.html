@@ -1286,13 +1286,18 @@ html.doc main#top>section>.wrap>*{max-width:100%}
   .lead-form .fgrid{grid-template-columns:1fr}
 }
 
+html.filme.compacto #abertura .acoes{grid-template-columns:1fr}
+@media(min-width:560px){html.filme.compacto #abertura .acoes{grid-template-columns:1fr 1fr}}
+html.filme.compacto main#top>section#abertura{
+  padding-bottom:calc(6.25rem + env(safe-area-inset-bottom))}
+html.filme.compacto .role{z-index:9;bottom:.75rem;gap:.375rem}
+html.filme.compacto .role i{height:1.75rem}
 .nav.topo .marca{min-height:2.75rem}
 html.doc #abertura .numeros{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.25rem}
 html.doc #abertura .acoes{display:grid;grid-template-columns:1fr 1fr;gap:.625rem}
 html.doc #abertura .acoes .btn{width:100%;justify-content:center;padding:.8125rem .5rem}
 @media(max-width:400px){
   html.doc #abertura .numeros,html.doc #abertura .acoes{grid-template-columns:1fr}
-  html.filme.compacto #abertura .acoes{grid-template-columns:1fr}
   .dock{gap:.5rem;padding-left:.75rem;padding-right:.75rem}
   .dock-txt b{font-size:.8125rem}
   .dock-txt span{font-size:.6875rem}
