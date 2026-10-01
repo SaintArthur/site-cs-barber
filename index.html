@@ -851,6 +851,7 @@ h1,h2,h3{font-family:var(--font-d);font-weight:300;line-height:1.02;letter-spaci
 .lnk:hover::after{transform-origin:left;transform:scaleX(1)}
 .lnk svg{width:.875rem;height:.875rem;transition:transform .45s var(--mola)}
 .lnk:hover svg{transform:translateX(.25rem)}
+.pilulas{display:flex;flex-wrap:wrap;gap:.5rem}
 .pilula{display:inline-flex;align-items:center;justify-content:center;padding:.5rem .875rem;
   border-radius:2rem;background:var(--glass);backdrop-filter:blur(.375rem);-webkit-backdrop-filter:blur(.375rem);
   font-size:.8125rem;color:var(--ink-2);border:1px solid var(--line)}
@@ -899,7 +900,7 @@ html.filme.compacto #faq .texto p{font-size:clamp(14px,3.5vw,17px);line-height:1
 html.filme.compacto #faq .tese-final{font-size:clamp(15px,3.7vw,19px);padding-top:.875rem}
 
 html.filme.compacto #testar .faixa{gap:1.125rem}
-html.filme.compacto #testar .duplo{grid-template-columns:1fr;gap:1.125rem}
+html.filme.compacto #testar .duplo{grid-template-columns:1fr;gap:1.5rem}
 html.filme.compacto .barra{padding:1.125rem;gap:.5rem;border-radius:1rem}
 
 @media(max-height:700px){
@@ -991,7 +992,8 @@ html.filme #abertura{padding-bottom:7.75rem}
 @media(max-width:768px){#dores blockquote{font-size:2rem}}
 
 #modulos .faixa{display:grid;grid-template-columns:1.06fr .94fr;gap:3.5rem;flex:1;min-height:0;align-content:center;align-items:center}
-#modulos .cabeca{display:flex;flex-direction:column;gap:1.25rem;margin-bottom:1.5rem}
+.cabeca{display:flex;flex-direction:column;gap:1.25rem}
+#modulos .cabeca{margin-bottom:1.5rem}
 .passos{list-style:none;counter-reset:s}
 .passos li{counter-increment:s;display:grid;grid-template-columns:auto 1fr;gap:1.25rem;
   padding:1.125rem 0;border-bottom:1px solid var(--line)}
@@ -1025,7 +1027,6 @@ html.filme #abertura{padding-bottom:7.75rem}
 .painel-pe b{color:var(--ink-2);font-weight:500}
 
 #como .faixa{display:flex;flex-direction:column;flex:1;min-height:0;justify-content:center;gap:clamp(2.5rem,8vh,6rem)}
-#como .cabeca{display:flex;flex-direction:column;gap:1.25rem}
 .cartoes{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
 
 .cartao{position:relative;display:flex;flex-direction:column;isolation:isolate;
@@ -1089,7 +1090,6 @@ html.filme #abertura{padding-bottom:7.75rem}
 #faq .tese-final{padding-top:1.25rem;border-top:1px solid var(--line);
   font-size:1.0625rem;color:var(--ink)}
 #faq .tese-final b{color:var(--sig-2);font-weight:500}
-#faq .pilulas{display:flex;flex-wrap:wrap;gap:.5rem}
 
 #testar .faixa{display:flex;flex-direction:column;flex:1;min-height:0;justify-content:center;gap:2rem}
 #testar .duplo{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
@@ -1568,7 +1568,7 @@ html.filme.compacto .trilho a{font-size:0}
   <div class="wrap faixa">
     <div class="cabeca">
       <p class="cap b" data-d="0"><b>04</b><span>Diferenciais</span></p>
-      <h2 class="d2" data-sp="l" data-d="78" style="margin-top:1.25rem">Por que o CS Barber e não um genérico.</h2>
+      <h2 class="d2" data-sp="l" data-d="78">Por que o CS Barber e não um genérico.</h2>
     </div>
     <div class="par">
       <div class="lista">
@@ -1647,7 +1647,7 @@ html.filme.compacto .trilho a{font-size:0}
 <section class="ato" id="testar" aria-label="Testar">
   <div class="wrap faixa">
     <div class="duplo">
-      <div>
+      <div class="cabeca">
         <p class="cap b" data-d="0"><b>06</b><span>Próximo passo</span></p>
         <h2 class="d2" data-sp="l" data-d="78">Teste o CS Barber por 7 dias na sua barbearia.</h2>
         <p class="corpo" data-sp="p" data-d="437">Preencha e a gente monta o seu teste com os módulos que fazem sentido pra sua operação. O contato chega pelo WhatsApp, em horário comercial.</p>
