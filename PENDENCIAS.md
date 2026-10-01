@@ -1,64 +1,55 @@
 # Pendências — landing page do CS Barber
 
-Levantado em 23/09/2026. Números conferidos por contagem no `index.html` desta data.
+Levantado em 23/09/2026 e atualizado no mesmo dia, depois das correções.
 
 ---
 
-## 1. A página afirma "grátis" e o FAQ nega
+## Resolvido
 
-**5 ocorrências** de "grátis": "Testar 7 dias grátis", "Quero testar 7 dias
-grátis", "Começar meu teste grátis". Mas o FAQ responde que as condições do
-período são combinadas na conversa com o comercial, e os comentários do arquivo
-registram que a condição do trial não está fechada — foi por isso que o "Sem
-cartão" saiu dos selos.
+- **Trial de 7 dias** em toda a página, inclusive no link do aviso sem
+  JavaScript (o prazo ia codificado na URL, `15%20dias`, e escapou da primeira
+  troca). Nenhuma ocorrência de "15 dias" nem de `15%20dias`.
+- **WhatsApp**: os 7 links `wa.me` e o montado pelo JavaScript do formulário
+  apontam para `5527999073651`, o comercial da Conecta — o mesmo do site
+  institucional, por decisão do dono. O número pessoal do Matheus
+  (`5527999941710`) saiu.
+- **CNPJ** saiu do rodapé, por decisão do dono. A razão social ficou.
+- **Aviso de privacidade (LGPD)** abaixo do botão do formulário: diz que o envio
+  abre o WhatsApp (serviço da Meta) com a mensagem pronta, que ela só chega à
+  Conecta Soluções quando a pessoa toca em Enviar, que o site não guarda os
+  dados e que o contato serve só para falar do pedido. Se entrar webhook, o
+  aviso tem que mudar junto.
+- **Formulário**, testado ao vivo com saídas interceptadas:
+  - WhatsApp colado ou autopreenchido com +55 ou com 0 na frente chegava como
+    outro número; agora normaliza. Número de fora do Brasil ("+" e código de
+    país) é aceito como digitado, de 8 a 15 dígitos. DDD 55 (RS) com um dígito
+    a mais não vira outro número.
+  - "Recebido!" aparecia antes de qualquer envio; agora a tela diz que falta
+    tocar em Enviar no WhatsApp e oferece o link para reabrir a mensagem.
+  - Selects sem escolha não entram mais na mensagem; "Outro" sai uma vez só e
+    não vai quando desmarcado.
+  - Campos com 16px (o iPhone dava zoom ao focar com 15px).
+  - Sem JavaScript o botão fica desabilitado (antes fazia GET com os dados
+    pessoais na URL); o `<noscript>` mantém o link direto para o WhatsApp.
+  - Foco no primeiro campo inválido na ordem da tela; o erro some ao corrigir.
 
-A página afirma e nega na mesma tela. **Decidir:** é grátis ou não?
+## Decidido pelo dono
 
-## 2. Sem aviso de privacidade (LGPD)
-
-O formulário coleta nome, e-mail, WhatsApp e dados do negócio. Zero ocorrências de
-"LGPD" ou "privacidade" no arquivo. Vale para os três sites.
-
-## 3. WhatsApp pessoal em 8 links
-
-São 8 links para `wa.me/5527999941710`, anotado no próprio arquivo como o número
-pessoal do Matheus, a trocar pelo comercial antes de escalar verba. Contar também
-a ocorrência montada no JavaScript do formulário.
-
----
-
-## Já resolvido aqui, pendente nos outros
-
-**O trial de 7 dias já está corrigido neste repositório** (commit `b848887`, 19
-pontos). O `index.html` tem 24 ocorrências de "7 dias" e nenhuma de "15 dias".
-
-O **site-cs-bella ainda tem 23 ocorrências dizendo 15 dias** — é a pendência mais
-urgente do conjunto, porque muda o que o visitante lê. Ao corrigir lá, valem as
-duas armadilhas que apareceram aqui:
-
-1. Os comentários de briefing dentro do arquivo também afirmam 15 dias; reescreva
-   a regra junto com o número visível, senão o próximo a abrir o arquivo desfaz.
-2. O FAQPage do JSON-LD precisa continuar idêntico palavra por palavra ao FAQ
-   visível, ou o rich result cai.
-
-No **site-conecta-solucoes** há 3 menções a 15 dias, e duas delas são prazo de
-**implantação**, não de teste — exigem decisão antes de mexer. Detalhe no
-`PENDENCIAS.md` de lá.
+- **"Grátis"**: o teste de 7 dias é grátis. Os botões continuam com "grátis" e,
+  por decisão do dono, o FAQ ("As condições do período são combinadas na
+  conversa com o comercial") fica como está.
 
 ## Dois fatos que evitam erro
 
 1. **`csbarber.conectasolucoes.ia.br` é o app de verdade**, com login e agenda. O
    endereço que aparece na barra dos mockups do hero e da dobra das telas está
    **correto** — não troque para `www.csbarber.ia.br`, que é esta landing page.
-2. **O arquivo usa CRLF em todas as linhas.** Ao inserir linha nova com `\n` puro,
-   o arquivo fica com finais de linha misturados. Normalize com
-   `s.replace(/(?<!\r)\n/g,"\r\n")` no fim de cada script que editar.
+2. O FAQPage do JSON-LD precisa continuar idêntico, palavra por palavra, ao FAQ
+   visível, ou o rich result cai. Confira com script depois de mexer no FAQ.
 
 ## Publicação
 
 Este site publica por **AWS** (`./publicar.sh` → S3 + CloudFront). O push para o
-GitHub **não** coloca nada no ar — e hoje a página no ar ainda anuncia 15 dias,
-embora o repositório já diga 7.
-
-A ferramenta de limpeza passou de Python para **Node** — confirme `node --version`
-na máquina que tem o `aws` antes de rodar.
+GitHub **não** coloca nada no ar: tudo acima só chega ao público depois de rodar
+o `./publicar.sh` numa máquina com a credencial `aws` e Node. O script roda os 34
+testes de `ferramentas/testar-limpeza.js` antes de enviar.
