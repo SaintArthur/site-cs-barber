@@ -32,7 +32,7 @@
     height:auto!important;opacity:1!important;visibility:visible!important}
 </style></noscript>
 <script type="importmap">
-{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/","lenis":"https://cdn.jsdelivr.net/npm/lenis@1.3.19/dist/lenis.mjs"}}
+{"imports":{"three":"./assets/vendor/three/build/three.module.js","three/addons/":"./assets/vendor/three/examples/jsm/","lenis":"./assets/vendor/lenis/lenis.mjs"}}
 </script>
 <style>
 @font-face{font-family:'Poppins';font-style:italic;font-weight:300;font-display:swap;src:url(assets/fonts/poppins-300i-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
@@ -919,8 +919,18 @@ html.filme.compacto .fab.ver{transform:none}
 html.filme.compacto .role{display:flex}
 html.filme.compacto .trilho{display:flex;right:.4375rem;gap:.5rem;align-items:center;
   transform:translateY(-50%)}
-html.filme.compacto .trilho a{gap:0;font-size:0}
-html.filme.compacto .trilho a i,html.filme.compacto .trilho a span{display:none}
+html.filme.compacto .trilho a{gap:0;font-size:0;min-width:2.75rem;min-height:2.75rem;
+  justify-content:flex-end;padding-right:.1875rem}
+html.filme.compacto .trilho a span{display:block;max-width:0;opacity:0;margin-right:0;
+  padding:.25rem 0;border-radius:.1875rem;
+  font-family:var(--font-d);font-size:.625rem;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--cream);white-space:nowrap;overflow:hidden;
+  background:rgba(10,13,20,.88);backdrop-filter:blur(.5rem);
+  transition:max-width .42s var(--e-io),opacity .3s var(--e-io),
+    margin-right .42s var(--e-io),padding-inline .42s var(--e-io)}
+html.filme.compacto .trilho.mostra a.on span{max-width:11rem;opacity:1;
+  margin-right:.5rem;padding-inline:.5rem}
+html.filme.compacto .trilho a i{display:none}
 html.filme.compacto .trilho a::after{width:.3125rem;height:.3125rem;border-radius:50%;
   background:var(--ink-3);opacity:.4;
   transition:height .55s var(--mola),opacity .4s var(--e-io),background .4s var(--e-io)}
@@ -1839,7 +1849,7 @@ const ATOS = [...palco.querySelectorAll(':scope > section')].filter(el=>!el.hasA
 const N = ATOS.length;
 const PASSO = 1/N;
 const ABRE = 0.196*PASSO, LARG = 0.385*PASSO;
-const POR_TELA = TOQUE.matches ? 1.02 : 1.05;
+const POR_TELA = TOQUE.matches ? 0.82 : 1.05;
 let PESO = N;
 let TELAS = POR_TELA * N + 0.2;
 let TELA_H = 0, TELA_W = 0, CURSO = 1;
@@ -1862,7 +1872,7 @@ const Pre = (()=>{
   const cx = document.getElementById('pre');
   if(!cx) return {ok:()=>{}};
   const barra = document.getElementById('pre-barra'), num = document.getElementById('pre-n');
-  const GATES = ['dom','fontes','cena'], feito = new Set();
+  const GATES = ['dom','fontes'], feito = new Set();
   const t0 = performance.now(); let saiu = false;
   const pinta = ()=>{
     const v = feito.size / GATES.length;
@@ -1879,12 +1889,12 @@ const Pre = (()=>{
     }, Math.max(0, 600 - (performance.now()-t0)));
   };
   pinta();
-  setTimeout(sai, 7000);
+  setTimeout(sai, 2500);
   return {ok:(n)=>{ if(GATES.includes(n) && !feito.has(n)){ feito.add(n); pinta(); if(feito.size===GATES.length) sai() } }};
 })();
 window.CS.pronto = Pre.ok;
-addEventListener('load', ()=>Pre.ok('dom'), {once:true});
-if(document.readyState === 'complete') Pre.ok('dom');
+if(document.readyState === 'loading') addEventListener('DOMContentLoaded', ()=>Pre.ok('dom'), {once:true});
+else Pre.ok('dom');
 (document.fonts ? document.fonts.ready : Promise.resolve()).then(()=>Pre.ok('fontes')).catch(()=>Pre.ok('fontes'));
 
 const PASSO_TXT = {l:22, p:45};
@@ -1964,7 +1974,7 @@ window.CS.wipe = WIPE;
 function repartir(){
   const peso = CENA.map(a=>{
     const cx = a.fx ? Math.max(1, a.fx.clientHeight) : 1;
-    return 1 + Math.min(1.6, (a.excesso||0)/cx);
+    return 1 + Math.min(TOQUE.matches ? 1.25 : 1.6, (a.excesso||0)/cx);
   });
   const soma = peso.reduce((t,v)=>t+v, 0);
   let acc = 0;
@@ -2075,6 +2085,14 @@ const progEl = document.querySelector('.prog');
 const navEl = document.querySelector('.nav');
 const marcados = [...document.querySelectorAll('.nav ul a, #mnav a, .trilho a')];
 let roleVis = null, dockVis = null, pTrava = -1;
+let ultimoAtivo = null, tAnuncio = 0;
+const trilhoEl = document.querySelector('.trilho');
+const anunciaAto = ()=>{
+  if(!trilhoEl) return;
+  trilhoEl.classList.add('mostra');
+  clearTimeout(tAnuncio);
+  tAnuncio = setTimeout(()=>trilhoEl.classList.remove('mostra'), 1600);
+};
 let girando = false, antes = 0, quieto = 0, paradoDesde = 0, ultDesenho = 0;
 
 function quadro(agora){
@@ -2134,6 +2152,7 @@ function quadro(agora){
   window.CS.banda = -(0.26 * Math.sin(Math.PI*ep)) * 180/Math.PI;
 
   const idAtivo = CENA[ativo].el.id;
+  if(idAtivo !== ultimoAtivo){ ultimoAtivo = idAtivo; anunciaAto() }
   marcados.forEach(a=>{
     const alvo = a.getAttribute('href');
     a.classList.toggle('on', alvo === '#' + idAtivo);
