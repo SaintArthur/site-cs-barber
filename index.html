@@ -1972,10 +1972,8 @@ window.CS.centros = CENTROS;
 window.CS.wipe = WIPE;
 
 function repartir(){
-  const peso = CENA.map(a=>{
-    const cx = a.fx ? Math.max(1, a.fx.clientHeight) : 1;
-    return 1 + Math.min(TOQUE.matches ? 1.25 : 1.6, (a.excesso||0)/cx);
-  });
+  const escala = 0.60 * Math.max(0.2, POR_TELA - 0.8/Math.max(1, PESO)) * Math.max(1, TELA_H);
+  const peso = CENA.map(a=> Math.max(1, (a.excesso||0) / escala));
   const soma = peso.reduce((t,v)=>t+v, 0);
   let acc = 0;
   CENA.forEach((a,i)=>{ a.at0 = acc/soma; acc += peso[i]; a.at1 = acc/soma });
@@ -2128,7 +2126,7 @@ function quadro(agora){
         if(saindo !== a.saindo){ a.saindo = saindo; a.el.classList.toggle("saindo", saindo) }
         if(a.excesso){
           const loc = trava((p - a.at0) / Math.max(1e-6, a.at1 - a.at0), 0, 1);
-          const y = -a.excesso * suave(trava((loc - 0.34) / 0.60, 0, 1));
+          const y = -a.excesso * trava((loc - 0.20) / 0.60, 0, 1);
           if(a.pan === null || Math.abs(y - a.pan) > 0.4){ a.pan = y; a.fx.scrollTop = -y }
         }
       }
@@ -2571,7 +2569,7 @@ if(matchMedia('(prefers-reduced-motion: reduce)').matches){
                       : T==='tablet'? Math.min(Math.max(devicePixelRatio||1,.75),1.25)
                       :               Math.min(Math.max(devicePixelRatio||1,.75),1.5);
 
-    const ORCA   = T==='movel' ? 21.5 : T==='tablet' ? 16.6 : 0;
+    const ORCA   = T==='tablet' ? 16.6 : 0;
 
     const rng = (s)=>()=>{ s=(s+0x6d2b79f5)>>>0; let t=s; t=Math.imul(t^(t>>>15),1|t);
       t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296 };
@@ -3022,7 +3020,7 @@ if(matchMedia('(prefers-reduced-motion: reduce)').matches){
 
     const bloomForca = (T==='movel'?.5:1) * Math.min(1, Math.max(.5, innerHeight/1080));
     const bloom = new UnrealBloomPass(new THREE.Vector2(m0.w,m0.h), 0.70*bloomForca, .28, .80);
-    comp.addPass(bloom);
+    if(T !== 'movel') comp.addPass(bloom);
     const vin = new ShaderPass(VignetteShader);
     vin.uniforms.offset.value = 1; vin.uniforms.darkness.value = 1.25;
     comp.addPass(vin);
