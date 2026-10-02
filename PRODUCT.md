@@ -36,7 +36,7 @@ Technology built in-house by Conecta Soluções, assembled per shop as modules, 
 
 Confirmed functionality named on the page today: appointments by barber and by service with automatic confirmation and reminder; single client record with contact, history and preferences; per-barber profile, individual agenda and own access; daily summary, top services and total appointments. Growth modules activated when the shop wants them: online payment (Pix and card), loyalty programme, Google reviews, coupons and promotions, referral programme, multi-unit in one panel.
 
-Commercial facts: 7-day trial on the real operation, with no feature limits stated; assisted implementation; support Monday to Saturday.
+Commercial facts: the 7-day trial is free, confirmed by the user on 2026-10-02; it runs on the real operation with no feature limits stated; assisted implementation; support Monday to Saturday. What happens after the 7 days is settled with the team, not published.
 
 Technical constraints that future work must respect:
 
@@ -45,7 +45,7 @@ Technical constraints that future work must respect:
 - The WhatsApp number is the Conecta commercial line, 5527999073651. It appears in several links and in the message the form assembles.
 - The submit button ships `disabled` in the HTML and is enabled by script, so that without JavaScript the native submit cannot put name, e-mail and WhatsApp into a URL.
 
-Undecided, must not be invented: price. No pricing is published today and the user has not set one for the page.
+Undecided, must not be invented: price. No pricing is published today and the user has not set one for the page. The trial being free says nothing about what the product costs afterwards.
 
 ## Brand Commitments
 

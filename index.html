@@ -132,19 +132,16 @@ html{scrollbar-color:var(--gold-d) var(--black);scrollbar-width:thin}
 
 #inicio{padding-top:calc(var(--topo) + clamp(40px,7vw,78px));padding-bottom:var(--s);position:relative}
 #inicio .wrap{position:relative}
-.heroi{display:grid;gap:clamp(36px,5vw,58px);align-items:center}
+.heroi{display:grid;gap:clamp(36px,5vw,58px)}
 .heroi h1{font-size:clamp(33px,7.2vw,58px);letter-spacing:-.03em;line-height:1.04}
 .heroi h1 em{font-style:normal;color:var(--gold-l)}
-.heroi .sub{margin-top:20px;font-size:17px;line-height:1.62;color:var(--muted-2);max-width:40ch}
+.heroi .sub{margin-top:20px;font-size:17px;line-height:1.62;color:var(--muted-2);max-width:52ch}
 .heroi .sub b{font-weight:500;color:var(--cream)}
 .acoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .fatos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 28px;
   margin-top:38px;padding-top:28px;border-top:1px solid var(--line);max-width:30rem}
 .fatos div b{display:block;font-size:21px;font-weight:500;color:var(--cream);letter-spacing:-.02em}
 .fatos div span{display:block;margin-top:3px;font-size:13px;line-height:1.4;color:var(--muted)}
-.tela{position:relative;border:1px solid var(--line);border-radius:var(--r-card);overflow:hidden;
-  background:var(--navy-2)}
-.tela img{width:100%;height:auto}
 
 .dupla{display:grid;gap:18px}
 .perfil{padding:clamp(22px,3.4vw,30px);border:1px solid var(--line);border-radius:var(--r-card);
@@ -316,7 +313,6 @@ html{scrollbar-color:var(--gold-d) var(--black);scrollbar-width:thin}
   .fatos{grid-template-columns:repeat(4,1fr);max-width:none}
 }
 @media(min-width:960px){
-  .heroi{grid-template-columns:1fr 1.08fr}
   .par{grid-template-columns:1fr 1fr}
   .duplo{grid-template-columns:.9fr 1.1fr}
   .saidas{grid-template-columns:repeat(3,1fr)}
@@ -402,12 +398,6 @@ html{scrollbar-color:var(--gold-d) var(--black);scrollbar-width:thin}
         <div><b>Assistida</b><span>implantação com a equipe</span></div>
         <div><b>Seg a sáb</b><span>suporte de quem construiu</span></div>
       </div>
-    </div>
-    <div class="tela rv" style="--i:2">
-      <picture>
-        <source type="image/webp" srcset="assets/painel-desktop.webp 520w, assets/painel-desktop@2x.webp 1040w" sizes="(max-width:959px) 92vw, 46vw">
-        <img src="assets/painel-desktop.jpg" srcset="assets/painel-desktop.jpg 520w, assets/painel-desktop@2x.jpg 1040w" sizes="(max-width:959px) 92vw, 46vw" width="1869" height="842" alt="Painel do CS Barber com a agenda do dia, o caixa e os próximos atendimentos" fetchpriority="high">
-      </picture>
     </div>
   </div>
 </section>
@@ -553,7 +543,7 @@ html{scrollbar-color:var(--gold-d) var(--black);scrollbar-width:thin}
       </details>
       <details>
         <summary>O teste de 7 dias tem custo ou compromisso?</summary>
-        <div class="ans"><p>São 7 dias usando o sistema na operação real, com acompanhamento próximo da equipe, pra você decidir com uso e não com promessa. As condições do período são combinadas direto com a equipe, sem pegadinha.</p></div>
+        <div class="ans"><p>O teste é gratuito. São 7 dias usando o sistema na operação real, com acompanhamento próximo da equipe, pra você decidir com uso e não com promessa. O que vem depois dos 7 dias é combinado direto com a equipe.</p></div>
       </details>
       <details>
         <summary>Tenho mais de uma unidade. Funciona?</summary>
@@ -675,7 +665,7 @@ html{scrollbar-color:var(--gold-d) var(--black);scrollbar-width:thin}
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Uso outro sistema hoje. Perco meus dados na migração?","acceptedAnswer":{"@type":"Answer","text":"Não. A migração é assistida pela equipe Conecta: clientes, serviços e histórico são trazidos pro CS Barber. Nos 7 dias de teste você pode rodar os dois em paralelo e virar a chave quando estiver confortável."}},
 {"@type":"Question","name":"Em quanto tempo minha barbearia está rodando no CS Barber?","acceptedAnswer":{"@type":"Answer","text":"A configuração acontece junto com o início do teste: cadastro de serviços, barbeiros e clientes, mais o treinamento da equipe. A barbearia continua atendendo durante todo o processo."}},
-{"@type":"Question","name":"O teste de 7 dias tem custo ou compromisso?","acceptedAnswer":{"@type":"Answer","text":"São 7 dias usando o sistema na operação real, com acompanhamento próximo da equipe, pra você decidir com uso e não com promessa. As condições do período são combinadas direto com a equipe, sem pegadinha."}},
+{"@type":"Question","name":"O teste de 7 dias tem custo ou compromisso?","acceptedAnswer":{"@type":"Answer","text":"O teste é gratuito. São 7 dias usando o sistema na operação real, com acompanhamento próximo da equipe, pra você decidir com uso e não com promessa. O que vem depois dos 7 dias é combinado direto com a equipe."}},
 {"@type":"Question","name":"Tenho mais de uma unidade. Funciona?","acceptedAnswer":{"@type":"Answer","text":"Funciona. O módulo Multi-Unidade reúne todas as unidades no mesmo painel, com visão consolidada e recorte por unidade, mantendo agenda, equipe e resultado separados onde precisa ser."}},
 {"@type":"Question","name":"Funciona no celular?","acceptedAnswer":{"@type":"Answer","text":"Funciona. O acesso é pelo navegador, no celular e no computador, sem instalar nada. Você acompanha a barbearia inteira e cada barbeiro vê a própria agenda."}},
 {"@type":"Question","name":"Minha barbearia tem um jeito próprio de trabalhar. O sistema se adapta?","acceptedAnswer":{"@type":"Answer","text":"Se adapta. O sistema é modular e a tecnologia é da própria Conecta: se a sua operação precisa de algo que ainda não existe, a equipe desenvolve o módulo sob demanda."}},
