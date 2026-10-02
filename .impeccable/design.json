@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T00:00:00Z",
+  "title": "Design System: CS Barber",
+  "extensions": {
+    "colorMeta": {
+      "black": {
+        "role": "neutral",
+        "displayName": "Shop Black",
+        "canonical": "#0a0d14",
+        "tonalRamp": ["#05070b", "#0a0d14", "#121826", "#1c263f", "#2a3348", "#4a5468", "#8992a5", "#c6ccd8"]
+      },
+      "navy": {
+        "role": "neutral",
+        "displayName": "Smoke Navy",
+        "canonical": "#1c263f",
+        "tonalRamp": ["#090c15", "#121a2b", "#1c263f", "#2a3959", "#3c4e76", "#5c6f96", "#8f9db9", "#c8d0de"]
+      },
+      "navy-deep": {
+        "role": "neutral",
+        "displayName": "Back-Room Navy",
+        "canonical": "#141b2e",
+        "tonalRamp": ["#070a11", "#0d1220", "#141b2e", "#1f2a46", "#2d3c63", "#4c5d87", "#8591ad", "#c3cada"]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Field Navy",
+        "canonical": "#121826",
+        "tonalRamp": ["#06080d", "#0c1019", "#121826", "#1b2438", "#273352", "#45537a", "#808ca8", "#c0c8d8"]
+      },
+      "gold": {
+        "role": "primary",
+        "displayName": "Brass Gold",
+        "canonical": "#c9a56a",
+        "tonalRamp": ["#2a1f0f", "#443320", "#5f4930", "#7d6141", "#a27947", "#c9a56a", "#e2ca97", "#f4e9cf"]
+      },
+      "gold-light": {
+        "role": "primary",
+        "displayName": "Lit Brass",
+        "canonical": "#e2ca97",
+        "tonalRamp": ["#30260f", "#4c3b1d", "#6b542c", "#8d713e", "#b29456", "#d2b57d", "#e2ca97", "#f6edd8"]
+      },
+      "gold-deep": {
+        "role": "primary",
+        "displayName": "Deep Brass",
+        "canonical": "#a27947",
+        "tonalRamp": ["#241a0d", "#3b2b16", "#543d20", "#70522c", "#8c6539", "#a27947", "#c39c6f", "#e3cfae"]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Warm Cream",
+        "canonical": "#f1e6cf",
+        "tonalRamp": ["#2b2419", "#463c2a", "#63563e", "#827254", "#a3916e", "#c4b492", "#dcd0b3", "#f1e6cf"]
+      },
+      "muted-bright": {
+        "role": "neutral",
+        "displayName": "Cool Grey",
+        "canonical": "#c3cadb",
+        "tonalRamp": ["#171a22", "#262b38", "#383f51", "#4d566d", "#6a748d", "#8d96ad", "#c3cadb", "#e8ebf2"]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Dim Grey",
+        "canonical": "#9aa3b8",
+        "tonalRamp": ["#13161d", "#202530", "#313846", "#454e60", "#5f697e", "#7c869c", "#9aa3b8", "#d2d7e1"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(226,202,151,.16)",
+        "note": "Brass at 16% alpha over Shop Black. Every default border and every section rule.",
+        "tonalRamp": ["rgba(226,202,151,.04)", "rgba(226,202,151,.08)", "rgba(226,202,151,.12)", "rgba(226,202,151,.16)", "rgba(226,202,151,.22)", "rgba(226,202,151,.30)", "rgba(226,202,151,.45)", "rgba(226,202,151,.70)"]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Hairline Bright",
+        "canonical": "rgba(226,202,151,.30)",
+        "note": "The raised border. Hover states, the secondary button at rest, inset frames."
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff",
+        "note": "Declared in the token block and held in reserve. No element paints with it in the shipped build."
+      },
+      "error": {
+        "role": "tertiary",
+        "displayName": "Alert Coral",
+        "canonical": "#e0616b",
+        "tonalRamp": ["#2d0e11", "#4a171c", "#6b2128", "#8f2d36", "#b43f49", "#d1545e", "#e0616b", "#f0a9ae"]
+      },
+      "whatsapp": {
+        "role": "tertiary",
+        "displayName": "WhatsApp Green",
+        "canonical": "#25D366",
+        "note": "Brand value, glyph only. Never text, never a surface."
+      },
+      "bella-rose": {
+        "role": "tertiary",
+        "displayName": "Bella Rose",
+        "canonical": "#dd9db3",
+        "note": "Identifies the sibling product CS Bella in the footer. Never used for CS Barber content."
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The H1 only. Three lines, left-aligned, one emphasised span in Lit Brass." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2s. One per section, standing alone with no eyebrow above it." },
+      "title": { "displayName": "Title", "purpose": "Item headings inside lists: module rows, steps, differentiators." },
+      "lede": { "displayName": "Lede", "purpose": "The hero's supporting paragraph, capped at 40ch." },
+      "body": { "displayName": "Body", "purpose": "Document default. Light weight carries all reading copy." },
+      "body-small": { "displayName": "Body Small", "purpose": "List and FAQ prose, capped 48-68ch per component." },
+      "label": { "displayName": "Label", "purpose": "Form field labels and fieldset legends, uppercase in Dim Grey." },
+      "tier-label": { "displayName": "Tier Label", "purpose": "The two tier markers inside the module block. Lives below a heading, never above one." },
+      "wordmark": { "displayName": "Wordmark", "purpose": "CS BARBER in the header. The widest tracking in the system." },
+      "action": { "displayName": "Action", "purpose": "Button labels. The only place weight 600 appears outside the wordmark." }
+    },
+    "shadows": [
+      { "name": "button-seat", "value": "0 6px 18px -10px rgba(0,0,0,.7)", "purpose": "On the gold button only, seating bright paint against the dark ground. Removed when disabled." },
+      { "name": "photo-contact", "value": "0 8px 14px -10px rgba(0,0,0,.8)", "purpose": "Under the barbershop photograph in the overlap composition." },
+      { "name": "panel-contact", "value": "0 8px 14px -9px rgba(0,0,0,.85)", "purpose": "Under the desktop panel that overhangs the photograph." },
+      { "name": "phone-contact", "value": "0 7px 12px -8px rgba(0,0,0,.85)", "purpose": "Under the phone panel, the topmost layer of the overlap." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(.16, 1, .3, 1)", "purpose": "The only easing curve in the system. Every transition uses it." },
+      { "name": "reveal-opacity", "value": "opacity .6s", "purpose": "The fade half of the scroll reveal." },
+      { "name": "reveal-transform", "value": "transform .7s", "purpose": "The 14px rise half of the scroll reveal." },
+      { "name": "reveal-stagger", "value": "calc(var(--i, 0) * 70ms)", "purpose": "Per-element delay inside a revealed section, authored inline as --i (typically 0 to 3)." },
+      { "name": "state-fast", "value": ".2s", "purpose": "Colour and border-colour state changes on links, fields and chips." },
+      { "name": "state-button", "value": ".22s", "purpose": "Button background, border and colour transitions." },
+      { "name": "press", "value": "transform .18s", "purpose": "The scale(.985) press on buttons." },
+      { "name": "surface", "value": ".3s", "purpose": "Header border and background shift on scroll; card border on hover." },
+      { "name": "menu", "value": "transform .32s, opacity .22s, visibility .32s", "purpose": "The mobile menu panel sliding down from under the header." },
+      { "name": "accordion", "value": "height .34s", "purpose": "FAQ answer open and close, scripted from measured height." }
+    ],
+    "breakpoints": [
+      { "name": "stack-break", "value": "519px", "note": "max-width. Hero actions, form grid and toggle chips collapse to one column; the overlap composition pulls inside its frame." },
+      { "name": "pair", "value": "720px", "note": "min-width. Profile pair goes two-up, audience cards three-up, fact strip four-up." },
+      { "name": "header-switch", "value": "959px", "note": "max-width. Desktop nav and header CTA hide; the hamburger and slide-down menu take over." },
+      { "name": "wide", "value": "960px", "note": "min-width. Hero, differentiators, trial section, footer links and the module base list all split into columns." }
+    ],
+    "browserChrome": [
+      { "name": "selection", "value": "::selection { background: var(--gold); color: var(--black) }", "purpose": "Selected text is gold on black, not the UA default blue." },
+      { "name": "caret", "value": "caret-color: var(--gold)", "purpose": "The text cursor in every field is brass." },
+      { "name": "focus-ring", "value": ":focus-visible { outline: 2px solid var(--gold-l); outline-offset: 3px; border-radius: 3px }", "purpose": "The one focus treatment, keyboard-only, in Lit Brass." },
+      { "name": "underline-offset", "value": ":where(a, summary):focus-visible { text-underline-offset: 4px }", "purpose": "Focused links and summaries get breathing room under the underline." },
+      { "name": "scrollbar", "value": "scrollbar-color: var(--gold-d) var(--black); scrollbar-width: thin; ::-webkit-scrollbar-thumb { background: #2a3348; border-radius: 99px; border: 2px solid var(--black) }", "purpose": "The scrollbar is part of the page: black track, navy pill thumb that warms to Deep Brass on hover." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single gold action. Appears in the header, the mobile menu, the hero and the form.",
+      "html": "<a class=\"ds-btn ds-btn-gold\" href=\"#\">Testar 7 dias <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:12px 22px;border-radius:6px;border:1px solid transparent;font-family:'Poppins',system-ui,sans-serif;font-size:15px;font-weight:600;letter-spacing:-.005em;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .22s cubic-bezier(.16,1,.3,1),border-color .22s cubic-bezier(.16,1,.3,1),color .22s cubic-bezier(.16,1,.3,1),transform .18s cubic-bezier(.16,1,.3,1)}.ds-btn svg{width:15px;height:15px;flex:none;transition:transform .28s cubic-bezier(.16,1,.3,1)}.ds-btn-gold{background:#c9a56a;color:#0a0d14;box-shadow:0 6px 18px -10px rgba(0,0,0,.7)}.ds-btn-gold:hover{background:#e2ca97}.ds-btn-gold:hover svg{transform:translateX(3px)}.ds-btn-gold:focus-visible{outline:2px solid #e2ca97;outline-offset:3px}.ds-btn-gold:active{transform:scale(.985)}.ds-btn-gold[disabled]{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "The secondary action beside the gold one. Transparent with a brass hairline edge.",
+      "html": "<a class=\"ds-btn ds-btn-line\" href=\"#\">Falar antes no WhatsApp</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:46px;padding:12px 22px;border-radius:6px;border:1px solid transparent;font-family:'Poppins',system-ui,sans-serif;font-size:15px;font-weight:600;letter-spacing:-.005em;cursor:pointer;white-space:nowrap;text-decoration:none;transition:background .22s cubic-bezier(.16,1,.3,1),border-color .22s cubic-bezier(.16,1,.3,1),color .22s cubic-bezier(.16,1,.3,1),transform .18s cubic-bezier(.16,1,.3,1)}.ds-btn-line{border-color:rgba(226,202,151,.30);color:#f1e6cf;background:transparent}.ds-btn-line:hover{border-color:#c9a56a;background:rgba(201,165,106,.07)}.ds-btn-line:focus-visible{outline:2px solid #e2ca97;outline-offset:3px}.ds-btn-line:active{transform:scale(.985)}"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "The qualifying form's text input. Uppercase micro-label over a recessed field; 16px so iOS does not zoom.",
+      "html": "<div class=\"ds-field\"><label for=\"ds-nome\">Seu nome</label><input id=\"ds-nome\" placeholder=\"Nome e sobrenome\"></div>",
+      "css": ".ds-field{display:flex;flex-direction:column;min-width:0;font-family:'Poppins',system-ui,sans-serif}.ds-field label{font-size:11.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#9aa3b8}.ds-field input{width:100%;margin-top:7px;padding:12px 13px;font-family:inherit;font-size:16px;font-weight:300;border:1px solid rgba(226,202,151,.16);border-radius:6px;background:#121826;color:#f1e6cf;caret-color:#c9a56a;transition:border-color .2s cubic-bezier(.16,1,.3,1),background .2s cubic-bezier(.16,1,.3,1)}.ds-field input::placeholder{color:#6f7892}.ds-field input:focus{outline:0;border-color:#c9a56a;background:#161d2e}.ds-field input[aria-invalid=\"true\"]{border-color:#e0616b}"
+    },
+    {
+      "name": "Select",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Native select with its appearance stripped and the caret drawn as two 5px gradient triangles — the only gradient in the system.",
+      "html": "<div class=\"ds-select\"><label for=\"ds-uni\">Quantas unidades</label><select id=\"ds-uni\"><option>1</option><option>2</option><option>3 ou mais</option></select></div>",
+      "css": ".ds-select{display:flex;flex-direction:column;min-width:0;font-family:'Poppins',system-ui,sans-serif}.ds-select label{font-size:11.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#9aa3b8}.ds-select select{width:100%;margin-top:7px;padding:12px 36px 12px 13px;font-family:inherit;font-size:16px;font-weight:300;border:1px solid rgba(226,202,151,.16);border-radius:6px;background-color:#121826;color:#f1e6cf;appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,#c9a56a 50%),linear-gradient(135deg,#c9a56a 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;transition:border-color .2s cubic-bezier(.16,1,.3,1),background-color .2s cubic-bezier(.16,1,.3,1)}.ds-select select:focus{outline:0;border-color:#c9a56a;background-color:#161d2e}"
+    },
+    {
+      "name": "Toggle Chip",
+      "kind": "chip",
+      "refersTo": "chip-toggle",
+      "description": "The interest selector in the form. A hidden checkbox drives border, text and knob via :has().",
+      "html": "<label class=\"ds-chip\"><input type=\"checkbox\" role=\"switch\"><i aria-hidden=\"true\"></i>Agendamento online</label>",
+      "css": ".ds-chip{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:46px;padding:9px 12px;border:1px solid rgba(226,202,151,.16);border-radius:6px;background:rgba(28,38,63,.26);font-family:'Poppins',system-ui,sans-serif;font-size:13.5px;font-weight:300;line-height:1.25;color:#c3cadb;cursor:pointer;transition:border-color .2s cubic-bezier(.16,1,.3,1),color .2s cubic-bezier(.16,1,.3,1)}.ds-chip input{position:absolute;opacity:0;width:0;height:0}.ds-chip i{flex:none;position:relative;order:2;width:30px;height:17px;border-radius:99px;border:1px solid rgba(226,202,151,.30);background:rgba(128,128,128,.14);transition:border-color .25s cubic-bezier(.16,1,.3,1)}.ds-chip i::after{content:\"\";position:absolute;top:1px;left:1px;width:13px;height:13px;border-radius:50%;background:#9aa3b8;transition:transform .26s cubic-bezier(.16,1,.3,1),background .26s cubic-bezier(.16,1,.3,1)}.ds-chip:has(input:checked){border-color:#c9a56a;color:#f1e6cf}.ds-chip:has(input:checked) i{border-color:#c9a56a}.ds-chip:has(input:checked) i::after{transform:translateX(13px);background:#c9a56a}.ds-chip:has(input:focus-visible){outline:2px solid #e2ca97;outline-offset:3px}"
+    },
+    {
+      "name": "Static Chip",
+      "kind": "chip",
+      "refersTo": "chip-static",
+      "description": "A non-interactive pill stating a commercial fact beside the form.",
+      "html": "<span class=\"ds-pill\">Implantação assistida</span>",
+      "css": ".ds-pill{display:inline-flex;align-items:center;height:32px;padding:0 13px;border-radius:99px;border:1px solid rgba(226,202,151,.16);font-family:'Poppins',system-ui,sans-serif;font-size:13px;font-weight:300;color:#c3cadb}"
+    },
+    {
+      "name": "Profile Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "The largest card in the system. Flat, hairline-edged, with a tonal wash; hover raises the border and nothing else.",
+      "html": "<article class=\"ds-card\"><h3>Você abre o caderno pra saber o dia</h3><p>Agenda no papel, cliente no WhatsApp, comissão na calculadora. Funciona — até o dia em que não funciona.</p><span class=\"ds-card-out\">Ver como o CS Barber resolve <svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5 12h14M13 6l6 6-6 6\"/></svg></span></article>",
+      "css": ".ds-card{display:block;padding:clamp(22px,3.4vw,30px);border:1px solid rgba(226,202,151,.16);border-radius:10px;background:rgba(28,38,63,.26);font-family:'Poppins',system-ui,sans-serif;transition:border-color .3s cubic-bezier(.16,1,.3,1)}.ds-card:hover{border-color:rgba(226,202,151,.30)}.ds-card h3{margin:0;font-size:clamp(21px,3vw,26px);font-weight:500;line-height:1.1;letter-spacing:-.022em;color:#f1e6cf}.ds-card p{margin:12px 0 0;font-size:15.5px;font-weight:300;line-height:1.6;color:#c3cadb;max-width:48ch}.ds-card-out{display:inline-flex;align-items:center;gap:8px;margin-top:18px;font-size:14px;font-weight:500;color:#e2ca97}.ds-card-out svg{width:13px;height:13px;flex:none}"
+    },
+    {
+      "name": "Header Bar",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "Fixed 64px bar, translucent over a backdrop blur, gaining a hairline and a deeper ground once scrolled.",
+      "html": "<header class=\"ds-topo ds-scrolled\"><a class=\"ds-marca\" href=\"#\"><span class=\"ds-nome\">CS <b>BARBER</b></span></a><nav><a href=\"#\">Dores</a><a href=\"#\">Módulos</a><a href=\"#\">Como funciona</a><a href=\"#\">Dúvidas</a></nav><a class=\"ds-topo-cta\" href=\"#\">Testar 7 dias</a></header>",
+      "css": ".ds-topo{display:flex;align-items:center;gap:16px;height:64px;padding:0 clamp(20px,5vw,28px);background:rgba(10,13,20,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;font-family:'Poppins',system-ui,sans-serif;transition:border-color .3s cubic-bezier(.16,1,.3,1),background .3s cubic-bezier(.16,1,.3,1)}.ds-topo.ds-scrolled{border-bottom-color:rgba(226,202,151,.16);background:rgba(10,13,20,.94)}.ds-marca{display:flex;align-items:center;min-height:44px;margin-right:auto;text-decoration:none}.ds-nome{font-size:17px;font-weight:600;letter-spacing:.14em;color:#f1e6cf;white-space:nowrap}.ds-nome b{font-weight:600;color:#e2ca97}.ds-topo nav{display:flex;align-items:center;gap:30px}.ds-topo nav a{font-size:14px;font-weight:400;color:#c3cadb;text-decoration:none;transition:color .2s cubic-bezier(.16,1,.3,1)}.ds-topo nav a:hover{color:#f1e6cf}.ds-topo nav a:focus-visible{outline:2px solid #e2ca97;outline-offset:3px;border-radius:3px}.ds-topo-cta{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:10px 18px;border-radius:6px;background:#c9a56a;color:#0a0d14;font-size:14px;font-weight:600;letter-spacing:-.005em;text-decoration:none;box-shadow:0 6px 18px -10px rgba(0,0,0,.7);transition:background .22s cubic-bezier(.16,1,.3,1)}.ds-topo-cta:hover{background:#e2ca97}"
+    },
+    {
+      "name": "Step Ladder",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The implantation sequence. CSS counters render leading-zero ordinals in gold — the only numbers that precede a heading in this system.",
+      "html": "<ol class=\"ds-passos\"><li><h3>Conversa de 20 minutos</h3><p>A gente entende como a sua barbearia trabalha hoje: serviços, horários, equipe e comissão.</p></li><li><h3>Montagem do sistema</h3><p>O painel sai pronto com os seus serviços, os seus barbeiros e as suas regras já dentro.</p></li><li><h3>Virada com a equipe</h3><p>Treinamos quem vai usar, no balcão, com a agenda real do dia.</p></li></ol>",
+      "css": ".ds-passos{counter-reset:p;display:grid;gap:0;margin:0;padding:0;list-style:none;font-family:'Poppins',system-ui,sans-serif}.ds-passos li{counter-increment:p;display:grid;grid-template-columns:auto 1fr;gap:4px 18px;padding:22px 0;border-top:1px solid rgba(226,202,151,.16)}.ds-passos li:first-child{border-top:0;padding-top:0}.ds-passos li::before{content:counter(p,decimal-leading-zero);grid-row:1/3;font-size:13px;font-weight:600;letter-spacing:.04em;color:#c9a56a;font-variant-numeric:tabular-nums;padding-top:5px}.ds-passos h3{margin:0;font-size:18.5px;font-weight:500;line-height:1.1;letter-spacing:-.022em;color:#f1e6cf}.ds-passos p{margin:0;font-size:15.5px;font-weight:300;line-height:1.6;color:#c3cadb;max-width:56ch}"
+    },
+    {
+      "name": "FAQ Accordion",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "Hairline-separated disclosure rows with a CSS-drawn chevron that flips on open. Height is animated by script; the chevron is pure CSS.",
+      "html": "<div class=\"ds-faq\"><details open><summary>O teste de 7 dias tem custo?</summary><div class=\"ds-ans\"><p>Você testa o sistema na operação real da sua barbearia por 7 dias, com a implantação assistida pela nossa equipe.</p></div></details><details><summary>Dá pra migrar do sistema que eu já uso?</summary><div class=\"ds-ans\"><p>Dá. Clientes, serviços e histórico vêm junto, e os dois sistemas podem rodar em paralelo durante o teste.</p></div></details></div>",
+      "css": ".ds-faq{border-top:1px solid rgba(226,202,151,.16);font-family:'Poppins',system-ui,sans-serif}.ds-faq details{border-bottom:1px solid rgba(226,202,151,.16)}.ds-faq summary{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:20px 0;cursor:pointer;list-style:none;font-size:16.5px;font-weight:400;color:#f1e6cf;transition:color .2s cubic-bezier(.16,1,.3,1)}.ds-faq summary::-webkit-details-marker{display:none}.ds-faq summary:hover{color:#e2ca97}.ds-faq summary:focus-visible{outline:2px solid #e2ca97;outline-offset:3px;border-radius:3px}.ds-faq summary::after{content:\"\";flex:none;width:9px;height:9px;margin-right:4px;border-right:1.5px solid #c9a56a;border-bottom:1.5px solid #c9a56a;transform:rotate(45deg) translateY(-3px);transition:transform .3s cubic-bezier(.16,1,.3,1)}.ds-faq details[open] summary::after{transform:rotate(-135deg) translateY(-3px)}.ds-faq .ds-ans{overflow:hidden}.ds-faq .ds-ans p{margin:0;padding:0 0 22px;font-size:15.5px;font-weight:300;line-height:1.6;color:#c3cadb;max-width:68ch}"
+    },
+    {
+      "name": "Footer Exit Link",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "The sibling-site rows. The only transform-based hover in the system, and the only place the gold ribbon stamp appears.",
+      "html": "<a class=\"ds-saida\" href=\"#\"><svg class=\"ds-mk\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" d=\"M12 2.5 20.5 7v10L12 21.5 3.5 17V7Z\"/></svg><span><b>CS Bella <span class=\"ds-fita\">Em breve</span></b><i>Salões e estética</i></span><svg class=\"ds-ar\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M5 12h14M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-saida{display:flex;align-items:center;gap:14px;padding:15px 17px;border:1px solid rgba(226,202,151,.16);border-radius:10px;background:rgba(28,38,63,.2);text-decoration:none;font-family:'Poppins',system-ui,sans-serif;transition:border-color .25s cubic-bezier(.16,1,.3,1),transform .25s cubic-bezier(.16,1,.3,1)}.ds-saida:hover{border-color:rgba(226,202,151,.30);transform:translateY(-2px)}.ds-saida:focus-visible{outline:2px solid #e2ca97;outline-offset:3px}.ds-saida .ds-mk{width:26px;height:26px;flex:none;color:#dd9db3}.ds-saida b{display:block;font-size:15px;font-weight:500;color:#f1e6cf}.ds-saida i{display:block;margin-top:2px;font-style:normal;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9aa3b8}.ds-fita{margin-left:9px;padding:3px 7px;border-radius:2px;background:#c9a56a;color:#0a0d14;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;vertical-align:1px}.ds-saida .ds-ar{margin-left:auto;width:14px;height:14px;flex:none;color:#c9a56a;opacity:.6}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lit Back Bar",
+    "overview": "A barbershop after hours: the room goes nearly black, the mirrors are edged in a thin warm line, and exactly one brass fitting catches the light. Nothing glows, nothing floats, nothing is embossed. The surfaces are flat panels of near-black navy separated by hairlines the colour of brass at sixteen percent — you read the structure by where the light stops, not by shadow or fill.\n\nThis is the category convention taken seriously rather than decorated. The page sits alongside Booksy Biz, AppBarber and Trinks and reads as the same kind of object: a fixed header, a left-aligned hero with a product screenshot beside it, a two-tier module block, a numbered implantation sequence, an accordion, a form. The discipline is not in inventing a form the category does not have; it is in refusing every cheap signal the category reaches for — no gradient fills, no glow, no card lift, no stock iconography, no second accent. One typeface at one light weight carries the body copy; headings step up one notch to medium and never further. Density is generous rather than packed: sections breathe on a clamped rhythm that never falls below 64px, and the eye is given one thing at a time.\n\nThe ground is not pure black and the text is not pure white. Both are warmed — a navy-black and a cream — so the page reads as a lit interior rather than a terminal. That warmth is the entire atmospheric budget; everything else is restraint.",
+    "keyCharacteristics": [
+      "Near-black navy ground with cream text; no pure black, no pure white body copy",
+      "A single gold accent, scarce by rule",
+      "Flat surfaces, one-pixel hairlines, zero gradient fills",
+      "Poppins alone: body at 300, headings at 500, actions at 600",
+      "Hairline-opened sections on a clamped vertical rhythm",
+      "Browser chrome themed to match: selection, caret, scrollbar, focus ring",
+      "Motion is one gesture: a short rise-and-fade on scroll, staggered"
+    ],
+    "rules": [
+      { "name": "The One Brass Rule", "body": "Gold is the only saturated colour on the page and it is spent on the action and the sequence. As a fill it appears at most twice in a viewport: the primary button and the \"Em breve\" ribbon. Everywhere else it is a stroke, a numeral or a marker at icon scale. A third gold fill on a screen means one of them is wrong.", "section": "colors" },
+      { "name": "The Warm Hairline Rule", "body": "Dividers are brass at 16% alpha, never neutral grey and never solid. A new divider inherits the hairline token; raising a border to the bright hairline is a state change (hover, inset), not a decoration.", "section": "colors" },
+      { "name": "The No-Gradient Rule", "body": "No surface in this system carries a gradient fill. The single linear-gradient in the stylesheet draws the select caret's two triangles at 5x5px — a shape, not a fill. Colour arrives as flat paint or not at all.", "section": "colors" },
+      { "name": "The One Face Rule", "body": "Poppins is the only family. There is no display face, no mono, no serif, and no system font stack reached for as a shortcut. A new surface that needs a different voice gets it from weight (300 / 500 / 600) and tracking.", "section": "typography" },
+      { "name": "The Naked Heading Rule", "body": "A section heading stands alone. No eyebrow, no kicker, no ordinal and no coloured rule sits above an H2 — the heading carries its own weight. Ordinals appear only in the four implantation steps, where the sequence is the information. An uppercase tier label is legal inside a block, placed below the heading to divide a list; it is never promoted to sit above one.", "section": "typography" },
+      { "name": "The Light Body Rule", "body": "Body copy is weight 300. Emphasis inside it goes to 500 and Warm Cream, never to 700. Functional text never drops below 11.5px.", "section": "typography" },
+      { "name": "The Hairline Opens Rule", "body": "Every section but the first opens with a one-pixel hairline rule across the column. It is the page's only section separator; do not add a background change, a spacer graphic or a decorative divider to do the same job.", "section": "layout" },
+      { "name": "The One Gesture Rule", "body": "Scroll motion is a 14px rise with a fade, staggered by --i. No parallax, no scale, no lateral slide, and nothing animates more than once.", "section": "layout" },
+      { "name": "The Flat Surface Rule", "body": "Cards, tiles, inputs and list rows have no shadow at any state. If a new surface needs to separate from the ground, it gets a hairline and a tonal wash — not elevation.", "section": "elevation" },
+      { "name": "The Contact-Only Rule", "body": "A shadow is permitted only where something physically overlaps something else, and only as a negative-spread contact darkening. A shadow that reads as a glow, a drop or a hard offset does not belong in this world.", "section": "elevation" },
+      { "name": "The Two Radius Rule", "body": "6px if the user acts on it, 10px if it holds content. Do not introduce a third radius for a new component; decide which side it is on.", "section": "shapes" },
+      { "name": "The Drawn Mark Rule", "body": "Chevrons, carets and arrows are drawn in CSS or as inline SVG in the sprite. No icon font, no glyph character, no emoji, no bitmap, no third-party icon package — the page makes zero external requests and the marks are part of that commitment.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do open every new section with a one-pixel hairline rule and pad it with the section spacing clamp.",
+      "Do keep gold scarce: as a fill it belongs to the primary action; as a stroke or numeral it belongs to sequence markers, carets and footer marks.",
+      "Do separate a surface from the ground with a hairline plus a Smoke Navy wash at 20–26% alpha.",
+      "Do set body copy in Poppins 300 and let emphasis reach only to weight 500 and Warm Cream.",
+      "Do pick a radius by function: control radius for anything the user acts on, card radius for anything that holds content.",
+      "Do keep form inputs at 16px, interactive targets at 44px minimum, and functional text at or above 11.5px.",
+      "Do theme the browser's own surfaces on any new page — gold ::selection on black, gold caret-color, the thin brass scrollbar, the 2px Lit Brass :focus-visible ring at 3px offset, and a 4px underline offset on focused links.",
+      "Do draw chevrons, carets and arrows as CSS shapes or inline sprite SVG, keeping the page at zero third-party requests.",
+      "Do give new scroll-revealed content the reveal class and an explicit --i, and confirm it reads with motion disabled."
+    ],
+    "donts": [
+      "Don't put an eyebrow, kicker, ordinal or coloured rule above a section heading. The heading stands alone; ordinals belong to the four implantation steps only.",
+      "Don't fill any surface with a gradient. The only gradient in the system draws the 5px select caret.",
+      "Don't add a shadow to a card, tile, input or list row, and don't use a shadow as a hover affordance. Shadows exist only as contact darkening under physically overlapping images.",
+      "Don't introduce a second accent colour. Coral is for validation, WhatsApp green is for that one glyph, and Bella Rose identifies the sibling product — none of them are available as design colours.",
+      "Don't add a second typeface, and don't set body copy above weight 300 or headings above 500.",
+      "Don't use icon fonts, glyph characters, emoji or a third-party icon package; extend the inline sprite instead.",
+      "Don't wrap a product screenshot in device chrome, a browser bar, a mockup bezel or a perspective transform. A hairline frame over Back-Room Navy is the treatment.",
+      "Don't invent a third radius, a 2px border or a dashed stroke.",
+      "Don't animate anything twice, and don't add parallax, scale or directional slides — the reveal is a 14px rise with a fade."
+    ]
+  }
+}
