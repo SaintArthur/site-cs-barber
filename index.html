@@ -1820,6 +1820,8 @@ if(RM.matches){
   };
   form.addEventListener('input',revalida);
   form.addEventListener('change',revalida);
+  const WEBHOOK='https://webhook.komplexagrowth.com/webhook/6f7529a7-5191-4820-93d8-af0da11feabb';
+
   form.addEventListener('submit',e=>{
     e.preventDefault();
     if(form.site.value)return;                       /* honeypot */
@@ -1870,7 +1872,32 @@ if(RM.matches){
     /* A confirmação reabre a MESMA mensagem: quem fechou o WhatsApp sem enviar
        não precisa preencher tudo de novo nem cai num texto sem os dados. */
     document.getElementById('wa-denovo').href=url;
-    /* Enquanto nao existe webhook, o WhatsApp e o unico destino do lead.
+    /* O lead vai para o webhook ANTES de abrir o WhatsApp e SEM await: o
+       window.open precisa acontecer dentro do gesto do usuario, senao o
+       bloqueador de pop-up barra a aba. keepalive mantem a requisicao viva
+       mesmo que a pagina navegue em seguida, e o catch vazio garante que
+       webhook fora do ar nunca impeca o contato pelo WhatsApp. */
+    try{
+      fetch(WEBHOOK,{method:'POST',keepalive:true,
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          origem:'cs-barber',
+          enviadoEm:new Date().toISOString(),
+          pagina:location.href,
+          nome:nome,
+          email:email,
+          whatsapp:tel.value,
+          barbearia:barb,
+          unidades:form.unidades.value,
+          barbeiros:form.barbeiros.value,
+          interesses:interesses,
+          sistemaAtual:usa==='Sim'?(qual||'sim, nao informou qual'):usa==='Nao'?'nenhum':'',
+          mensagemWhatsApp:linhas.join(String.fromCharCode(10))
+        })}).catch(()=>{});
+    }catch(e){}
+
+    /* O WhatsApp segue como o caminho que o visitante ve, e agora tambem como
+       redundancia: o lead ja foi registrado acima.
        Se o bloqueador de pop-up barrar a aba nova, ninguem receberia nada e
        o contato se perderia sem sinal nenhum na tela. Entao a aba nova e uma
        tentativa, nao uma certeza: barrada, a propria aba vai para o WhatsApp,
