@@ -1471,10 +1471,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </fieldset>
         </div>
         <button class="btn btn-gold" type="submit" disabled aria-describedby="aviso-dados">Começar meu teste grátis <svg><use href="#arrow"/></svg></button>
-        <!-- Aviso de dados (LGPD): descreve o fluxo que existe de verdade. Nada
-             vai para servidor; a mensagem só sai quando a pessoa envia no
-             WhatsApp. Quando entrar o webhook, este texto tem que mudar junto. -->
-        <small id="aviso-dados">Ao enviar, abrimos o WhatsApp (serviço da Meta) com uma mensagem pronta com estes dados. Ela só chega à Conecta Soluções quando você tocar em Enviar lá. O site não guarda esses dados, e o contato é usado só para falar deste pedido, como prevê a LGPD.</small>
+        <!-- Aviso de dados (LGPD): descreve o fluxo que existe de verdade. Os
+             dados vão para o webhook no mesmo instante do envio, antes de o
+             WhatsApp abrir, e a mensagem só sai quando a pessoa envia lá. Por
+             isso o texto não pode mais dizer que o site não guarda nada. -->
+        <small id="aviso-dados">Ao enviar, estes dados são registrados pela Conecta Soluções e o WhatsApp (serviço da Meta) é aberto com uma mensagem pronta, que você ainda precisa enviar lá. Usamos seu contato só para falar deste pedido, como prevê a LGPD.</small>
         <a class="wa-link escape" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20prefiro%20conversar%20antes%20de%20preencher%20o%20formul%C3%A1rio" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Prefere conversar primeiro? <u>Chama no WhatsApp.</u></span></a>
         <noscript><p class="nojs">Este formulário precisa de JavaScript para montar a sua mensagem. <a href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20quero%20testar%20o%20CS%20Barber%20por%207%20dias." target="_blank" rel="noopener">Fale direto no WhatsApp</a> e a gente monta o seu teste por lá.</p></noscript>
         <small>Atendimento de segunda a sábado.</small>
