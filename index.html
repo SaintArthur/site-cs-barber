@@ -2469,6 +2469,8 @@ if(RM.matches){
     el.setAttribute('aria-invalid',cond?'true':'false');
     return cond;
   };
+  const WEBHOOK='https://webhook.komplexagrowth.com/webhook/6f7529a7-5191-4820-93d8-af0da11feabb';
+
   form.addEventListener('submit',e=>{
     e.preventDefault();
     if(form.site.value)return;
@@ -2505,7 +2507,32 @@ if(RM.matches){
       campo('Interesse',interesses.join(', ')),
       campo('Sistema atual',usa==='Sim'?(qual||'sim, não informou qual'):usa==='Não'?'nenhum':'')
     ].filter(l=>l!==null);
-    const url='https://wa.me/5527999073651?text='+encodeURIComponent(linhas.join('\n'));
+    const texto=linhas.join('\n');
+      const url='https://wa.me/5527999073651?text='+encodeURIComponent(texto);
+
+    /* O lead vai para o webhook ANTES de abrir o WhatsApp e SEM await: o
+       window.open precisa acontecer dentro do gesto do usuario, senao o
+       bloqueador de pop-up barra a aba. keepalive mantem a requisicao viva
+       mesmo que a pagina navegue logo em seguida, e o catch vazio garante
+       que uma falha de rede nunca impeca o contato pelo WhatsApp. */
+    try{
+      fetch(WEBHOOK,{method:'POST',keepalive:true,
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          origem:'cs-barber',
+          enviadoEm:new Date().toISOString(),
+          pagina:location.href,
+          nome:nome,
+          email:email,
+          whatsapp:tel.value,
+          barbearia:barb,
+          unidades:form.unidades.value,
+          barbeiros:form.barbeiros.value,
+          interesses:interesses,
+          sistemaAtual:usa==='Sim'?(qual||'sim, nao informou qual'):usa==='Nao'?'nenhum':'',
+          mensagemWhatsApp:texto
+        })}).catch(()=>{});
+    }catch(e){}
 
     const aba=window.open(url,'_blank');
     if(!aba){location.href=url;return}
