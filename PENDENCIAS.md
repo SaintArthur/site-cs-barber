@@ -38,10 +38,13 @@ Levantado em 23/09/2026 e atualizado no mesmo dia, depois das correções.
   (ao menos um) e o "já usa algum sistema?". Os dois campos condicionais só
   são cobrados quando estão à vista: "Outro" desmarcado ou "Não" escolhido
   fazem a regra passar, senão o envio travaria num campo escondido.
-  O botão **não** fica desabilitado: quem clica vê o que falta e o foco vai
-  para o primeiro campo errado. Botão apagado não diz o que está faltando e
-  não recebe foco — e nada é enviado antes de tudo estar preenchido do mesmo
-  jeito. Um aviso único no topo substitui dez asteriscos.
+  Um aviso único no topo ("Todos os campos são obrigatórios") substitui dez
+  asteriscos. Quem clica no botão vê o que falta e o foco vai para o primeiro
+  campo errado na ordem da tela — os campos não são cobrados apagando o botão,
+  porque botão apagado não diz o que está faltando nem recebe foco.
+  **Exceção, e é de propósito:** o botão nasce desligado e só liga com a caixa
+  dos **termos** marcada. Ali a regra é outra — o envio cria conta e o sistema
+  grava o aceite como prova, então essa falha tem de falhar fechada.
 - **`sistemaAtual` chegava vazio no webhook** quando a pessoa marcava "Não":
   o payload comparava com `'Nao'`, sem o til, e o radio vale `'Não'`. A
   mensagem do WhatsApp usava a comparação certa, então o erro só aparecia no
@@ -60,6 +63,15 @@ Levantado em 23/09/2026 e atualizado no mesmo dia, depois das correções.
   para quem ainda não sabe qual quer. A validação já está pronta para receber
   o campo novo: basta uma entrada a mais na lista `regras`, no mesmo formato
   dos grupos (`campos`, `aviso`, `caixa`, `ok`).
+  **Onde o valor vai parar já existe:** desde 22/10 o envio cria a conta por
+  POST em `/api/tenants/register` e manda um `plan_code`, hoje cravado em
+  `'premium'` com o comentário "é o plano que mostra o sistema inteiro, e o
+  que a pessoa vier a contratar ela escolhe depois". O campo de planos deve
+  alimentar esse `plan_code`, então os nomes a oferecer têm de ser os códigos
+  que o sistema aceita — quem souber a lista é quem mantém o `/api/tenants`.
+  Decidir junto: se escolher o plano no formulário muda o plano do teste de 7
+  dias, ou se o teste continua sendo premium e a escolha serve só de intenção
+  de compra para o comercial.
 
 ## Decidido pelo dono
 
