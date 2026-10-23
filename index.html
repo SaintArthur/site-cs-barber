@@ -638,6 +638,10 @@ section{padding:var(--s) 0;position:relative}
 .cta .seal{border-top-color:rgba(226,202,151,.24)}
 .lead-form{background:var(--navy-2);border:1px solid rgba(226,202,151,.28);border-radius:16px;padding:clamp(24px,3vw,34px);position:relative}
 .lead-form .fh{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:20px}
+/* Com tudo obrigatório, um aviso só no topo diz o que dez asteriscos diriam. O
+   :has deixa a margem do eyebrow intacta se ele voltar a vir sozinho. */
+.lead-form .fh:has(+.fsub){margin-bottom:6px}
+.lead-form .fsub{font-size:12.5px;color:var(--muted);font-weight:300;margin-bottom:20px}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:560px){.fgrid{grid-template-columns:1fr}}
 .f{display:flex;flex-direction:column;gap:7px}
@@ -649,9 +653,19 @@ section{padding:var(--s) 0;position:relative}
 .f select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%23c9a56a' stroke-width='1.6' d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
 .f input::placeholder{color:#767f99}
 .f input:focus,.f select:focus{border-color:var(--gold);outline:none;box-shadow:0 0 0 3px rgba(226,202,151,.14)}
-.f input[aria-invalid="true"]{border-color:#c8323a}
+.f input[aria-invalid="true"],.f select[aria-invalid="true"]{border-color:#c8323a}
 .f .err{font-size:12px;color:#e8737a;display:none}
-.f input[aria-invalid="true"]~.err{display:block}
+.f input[aria-invalid="true"]~.err,.f select[aria-invalid="true"]~.err{display:block}
+/* Nos grupos — os interesses e o "já usa algum sistema?" — não existe um input
+   irmão para o seletor acima encontrar: quem acusa é a <fieldset>, que ganha
+   data-erro, e o aviso dentro dela aparece. Os controles do grupo são
+   invisíveis por CSS (o visual é a pílula), então borda vermelha neles não
+   apareceria.
+   Filho direto, e não descendente: os avisos dos campos "Outro" e "Qual?"
+   também moram dentro desta fieldset, e um seletor de descendente faria os dois
+   aparecerem junto com o erro do grupo, acusando campo que está certo. */
+.fset>.err{font-size:12px;color:#e8737a;display:none;margin-top:10px}
+.fset[data-erro]>.err{display:block}
 .fset{grid-column:1/-1;border:0;margin-top:6px}
 .fset legend{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:12px}
 /* Duas colunas fixas: em pílula solta as larguras diferentes deixavam a grade
@@ -1429,6 +1443,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="lead-form rv" id="leadbox">
       <p class="fh">Comece o seu teste</p>
+      <p class="fsub">Todos os campos são obrigatórios.</p>
       <form id="lead" novalidate>
         <input type="text" name="site" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;font-size:16px" aria-hidden="true">
         <div class="fgrid">
@@ -1437,11 +1452,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="f"><label for="f-wpp">WhatsApp</label><input id="f-wpp" name="wpp" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="(27) 90000-0000"><span class="err" id="e-wpp">Informe um celular ou fixo com DDD. De fora do Brasil, comece com + e o código do país.</span></div>
           <div class="f"><label for="f-barb">Nome da barbearia</label><input id="f-barb" name="barbearia" autocomplete="organization" required placeholder="Ex.: Barbearia do Léo"><span class="err" id="e-barb">Informe o nome da barbearia.</span></div>
           <div class="f"><label for="f-uni">Quantas unidades</label>
-            <select id="f-uni" name="unidades"><option value="" selected>Selecione</option><option>1</option><option>2</option><option>3 ou mais</option></select></div>
+            <select id="f-uni" name="unidades" required><option value="" selected>Selecione</option><option>1</option><option>2</option><option>3 ou mais</option></select><span class="err" id="e-uni">Selecione quantas unidades você tem.</span></div>
           <div class="f"><label for="f-time">Quantos barbeiros</label>
-            <select id="f-time" name="barbeiros"><option value="" selected>Selecione</option><option>Só eu</option><option>2 a 4</option><option>5 a 9</option><option>10 ou mais</option></select></div>
+            <select id="f-time" name="barbeiros" required><option value="" selected>Selecione</option><option>Só eu</option><option>2 a 4</option><option>5 a 9</option><option>10 ou mais</option></select><span class="err" id="e-time">Selecione quantos barbeiros atendem hoje.</span></div>
 
-          <fieldset class="fset">
+          <fieldset class="fset" id="fs-interesse">
             <legend>O que mais te interessa</legend>
             <div class="chips">
               <label><input type="checkbox" role="switch" name="interesse" value="Agendamento online"><i aria-hidden="true"></i>Agendamento online</label>
@@ -1452,21 +1467,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <label><input type="checkbox" role="switch" name="interesse" value="Relatórios e financeiro"><i aria-hidden="true"></i>Relatórios e financeiro</label>
               <label><input type="checkbox" role="switch" name="interesse" value="Outro" id="chk-outro"><i aria-hidden="true"></i>Outro</label>
             </div>
+            <span class="err" id="e-interesse">Escolha ao menos uma opção.</span>
             <div class="f full" id="wrap-outro" hidden style="margin-top:12px">
               <label for="f-outro">O que mais você precisa?</label>
-              <input id="f-outro" name="outro" placeholder="Ex.: controle de comissão">
+              <input id="f-outro" name="outro" placeholder="Ex.: controle de comissão"><span class="err" id="e-outro">Diga o que mais você precisa, ou desmarque Outro.</span>
             </div>
           </fieldset>
 
-          <fieldset class="fset">
+          <fieldset class="fset" id="fs-usa">
             <legend>Já usa algum sistema?</legend>
             <div class="radios">
-              <label><input type="radio" name="usa" value="Sim" id="usa-sim"><span>Sim</span></label>
-              <label><input type="radio" name="usa" value="Não" id="usa-nao"><span>Não</span></label>
+              <label><input type="radio" name="usa" value="Sim" id="usa-sim" required><span>Sim</span></label>
+              <label><input type="radio" name="usa" value="Não" id="usa-nao" required><span>Não</span></label>
             </div>
+            <span class="err" id="e-usa">Escolha Sim ou Não.</span>
             <div class="f full" id="wrap-qual" hidden style="margin-top:12px">
               <label for="f-qual">Qual?</label>
-              <input id="f-qual" name="qual" placeholder="Nome do sistema">
+              <input id="f-qual" name="qual" placeholder="Nome do sistema"><span class="err" id="e-qual">Informe o nome do sistema.</span>
             </div>
           </fieldset>
         </div>
@@ -1798,27 +1815,60 @@ if(RM.matches){
   /* Na ordem da tela, para o foco cair no primeiro campo errado que a pessoa
      vê, e não no primeiro que o código testava. */
   const RE_EMAIL=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const chks=[...form.querySelectorAll('input[name="interesse"]')];
+  const radiosUsa=[...form.querySelectorAll('input[name="usa"]')];
+  const campoOutro=document.getElementById('f-outro'),campoQual=document.getElementById('f-qual');
+  const usaSim=document.getElementById('usa-sim');
+  /* Agora TUDO é obrigatório. Antes os dois selects, os interesses e o "já usa
+     algum sistema?" eram opcionais, e lead chegava com metade em branco: o
+     comercial tinha de perguntar no WhatsApp o que o formulário já devia ter
+     coletado.
+
+     Cada regra diz quais controles acusar, qual aviso mostrar, qual fieldset
+     marcar (só nos grupos, onde não existe input irmão para o CSS achar) e o
+     teste. A ordem é a da tela, para o foco cair no primeiro campo errado que
+     a pessoa vê, e não no primeiro que o código testou.
+
+     Os dois campos condicionais só valem quando estão à vista: "Outro"
+     desmarcado, ou "Não" escolhido, fazem a regra passar. Sem isso o envio
+     travaria num campo escondido, sem a pessoa ter como saber o que faltava. */
   const regras=[
-    [form.nome,()=>form.nome.value.trim().length>=2],
-    [form.email,()=>RE_EMAIL.test(form.email.value.trim())],
-    [tel,()=>{const c=comDDI(tel.value);return c?(c.br?true:intlOk(c.intl)):RE_TEL.test(soDigitos(tel.value))}],
-    [form.barbearia,()=>form.barbearia.value.trim().length>=2]
+    {campos:[form.nome],     aviso:'e-nome',  ok:()=>form.nome.value.trim().length>=2},
+    {campos:[form.email],    aviso:'e-email', ok:()=>RE_EMAIL.test(form.email.value.trim())},
+    {campos:[tel],           aviso:'e-wpp',   ok:()=>{const c=comDDI(tel.value);return c?(c.br?true:intlOk(c.intl)):RE_TEL.test(soDigitos(tel.value))}},
+    {campos:[form.barbearia],aviso:'e-barb',  ok:()=>form.barbearia.value.trim().length>=2},
+    {campos:[form.unidades], aviso:'e-uni',   ok:()=>form.unidades.value!==''},
+    {campos:[form.barbeiros],aviso:'e-time',  ok:()=>form.barbeiros.value!==''},
+    {campos:chks,            aviso:'e-interesse',caixa:document.getElementById('fs-interesse'),
+                             ok:()=>chks.some(c=>c.checked)},
+    {campos:[campoOutro],    aviso:'e-outro', ok:()=>!chkOutro.checked||campoOutro.value.trim().length>=2},
+    {campos:radiosUsa,       aviso:'e-usa',   caixa:document.getElementById('fs-usa'),
+                             ok:()=>radiosUsa.some(r=>r.checked)},
+    {campos:[campoQual],     aviso:'e-qual',  ok:()=>!usaSim.checked||campoQual.value.trim().length>=2}
   ];
   /* O texto de erro só fica ligado ao campo enquanto o erro existe: fixo no
-     HTML, o leitor de tela lia "Informe o seu nome." num campo válido. */
-  const bad=(el,cond)=>{
-    el.setAttribute('aria-invalid',cond?'true':'false');
-    if(cond)el.setAttribute('aria-describedby',el.id.replace('f-','e-'));
-    else el.removeAttribute('aria-describedby');
-    return cond;
+     HTML, o leitor de tela lia "Informe o seu nome." num campo válido. Num
+     grupo a marca vai em cada controle, porque não há um elemento só para
+     acusar, e a fieldset recebe o data-erro que o CSS procura. */
+  const marca=(r,ruim)=>{
+    r.campos.forEach(el=>{
+      el.setAttribute('aria-invalid',ruim?'true':'false');
+      if(ruim)el.setAttribute('aria-describedby',r.aviso);
+      else el.removeAttribute('aria-describedby');
+    });
+    if(r.caixa)r.caixa.toggleAttribute('data-erro',ruim);
+    return ruim;
   };
-  /* Corrigiu, o erro some na hora, sem esperar outro envio. Só olha campo já
-     acusado, para não reclamar enquanto a pessoa ainda digita. O "change"
-     cobre o autopreenchimento que não dispara "input". */
-  const revalida=e=>{
-    const r=regras.find(([el])=>el===e.target);
-    if(r&&r[0].getAttribute('aria-invalid')==='true'&&r[1]())bad(r[0],false);
-  };
+  /* Corrigiu, o erro some na hora, sem esperar outro envio. Só limpa, nunca
+     acusa, para não reclamar enquanto a pessoa ainda digita. O "change" cobre
+     o autopreenchimento, que não dispara "input".
+
+     Varre todas as regras, e não só a do campo que mudou: desmarcar "Outro"
+     conserta o erro do campo de texto que foi embora com ele, e escolher "Não"
+     conserta o do "Qual?" — nos dois casos quem mudou foi outro controle. */
+  const revalida=()=>regras.forEach(r=>{
+    if(r.campos[0].getAttribute('aria-invalid')==='true'&&r.ok())marca(r,false);
+  });
   form.addEventListener('input',revalida);
   form.addEventListener('change',revalida);
   const WEBHOOK='https://webhook.komplexagrowth.com/webhook/6f7529a7-5191-4820-93d8-af0da11feabb';
@@ -1831,8 +1881,8 @@ if(RM.matches){
        há digitação em curso para proteger. */
     {const c=comDDI(tel.value);if(c){digitos=c.br||'';tel.value=c.br?mascara(c.br):'+'+c.intl}else{digitos=soDigitos(tel.value);tel.value=mascara(digitos)}}
     let erro=null;
-    regras.forEach(([el,ok])=>{if(bad(el,!ok())&&!erro)erro=el});
-    if(erro){erro.focus();return}
+    regras.forEach(r=>{if(marca(r,!r.ok())&&!erro)erro=r});
+    if(erro){erro.campos[0].focus();return}
     const nome=form.nome.value.trim(),
           email=form.email.value.trim(),
           barb=form.barbearia.value.trim();
@@ -1892,7 +1942,7 @@ if(RM.matches){
           unidades:form.unidades.value,
           barbeiros:form.barbeiros.value,
           interesses:interesses,
-          sistemaAtual:usa==='Sim'?(qual||'sim, nao informou qual'):usa==='Nao'?'nenhum':'',
+          sistemaAtual:usa==='Sim'?(qual||'sim, não informou qual'):usa==='Não'?'nenhum':'',
           mensagemWhatsApp:linhas.join(String.fromCharCode(10))
         })}).catch(()=>{});
     }catch(e){}
