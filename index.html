@@ -1471,21 +1471,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </fieldset>
         </div>
         <button class="btn btn-gold" type="submit" disabled aria-describedby="aviso-dados">Começar meu teste grátis <svg><use href="#arrow"/></svg></button>
-        <!-- Aviso de dados (LGPD): descreve o fluxo que existe de verdade. Os
-             dados vão para o webhook no mesmo instante do envio, antes de o
-             WhatsApp abrir, e a mensagem só sai quando a pessoa envia lá. Por
-             isso o texto não pode mais dizer que o site não guarda nada. -->
-        <small id="aviso-dados">Ao enviar, estes dados são registrados pela Conecta Soluções e o WhatsApp (serviço da Meta) é aberto com uma mensagem pronta, que você ainda precisa enviar lá. Usamos seu contato só para falar deste pedido, como prevê a LGPD.</small>
+        <!-- Aviso de dados (LGPD): descreve o fluxo que existe de verdade, e ele
+             mudou em 22/10/2026. Agora o envio CRIA a conta da barbearia no
+             sistema, além de registrar o lead no webhook. Dizer que "abre o
+             WhatsApp" seria descrever um caminho que não acontece mais. -->
+        <small id="aviso-dados">Ao enviar, criamos a conta da sua barbearia no CS Barber com estes dados e levamos você direto para ela. Eles também ficam registrados com a Conecta Soluções, que usa seu contato só para falar deste pedido, como prevê a LGPD.</small>
         <a class="wa-link escape" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20prefiro%20conversar%20antes%20de%20preencher%20o%20formul%C3%A1rio" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><span>Prefere conversar primeiro? <u>Chama no WhatsApp.</u></span></a>
         <noscript><p class="nojs">Este formulário precisa de JavaScript para montar a sua mensagem. <a href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20quero%20testar%20o%20CS%20Barber%20por%207%20dias." target="_blank" rel="noopener">Fale direto no WhatsApp</a> e a gente monta o seu teste por lá.</p></noscript>
         <small>Atendimento de segunda a sábado.</small>
       </form>
       <div class="thanks" role="status" aria-live="polite">
         <svg><use href="#check"/></svg>
-        <h3>Falta só enviar!</h3>
-        <p>A mensagem já está pronta no seu WhatsApp. Toque em <b>Enviar</b> lá pra ela chegar ao nosso time, que monta o seu teste em horário comercial, de segunda a sábado.</p>
-        <!-- O href daqui é trocado no envio pela mesma URL que o formulário montou. -->
-        <a class="wa-link" id="wa-denovo" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20acabei%20de%20preencher%20o%20formul%C3%A1rio%20do%20CS%20Barber" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><u>Abrir o WhatsApp de novo</u></a>
+        <h3>Criando a sua barbearia…</h3>
+        <p>Só um instante. Em seguida você escolhe a sua senha e já entra no painel, com os 7 dias de teste rodando.</p>
+        <!-- Continua aqui como saída de emergência: se a criação falhar por algum
+             motivo, a pessoa não fica sem caminho. O href é trocado no envio pela
+             mesma mensagem que o formulário montou, com os dados dela. -->
+        <a class="wa-link" id="wa-denovo" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20acabei%20de%20preencher%20o%20formul%C3%A1rio%20do%20CS%20Barber" target="_blank" rel="noopener"><svg><use href="#wa"/></svg><u>Deu algum problema? Chame no WhatsApp</u></a>
       </div>
     </div>
   </div>
@@ -1897,22 +1899,45 @@ if(RM.matches){
         })}).catch(()=>{});
     }catch(e){}
 
-    /* O WhatsApp segue como o caminho que o visitante ve, e agora tambem como
-       redundancia: o lead ja foi registrado acima.
-       Se o bloqueador de pop-up barrar a aba nova, ninguem receberia nada e
-       o contato se perderia sem sinal nenhum na tela. Entao a aba nova e uma
-       tentativa, nao uma certeza: barrada, a propria aba vai para o WhatsApp,
-       que entrega igual.
-       O noopener saiu das features de proposito. Com ele o window.open
-       devolve null por especificacao, e nao daria para distinguir aba
-       aberta de aba barrada; a protecao volta no opener=null abaixo.
-       A confirmacao entra nos dois casos, porque "falta so enviar" e verdade
-       nos dois: quem volta do WhatsApp sem ter enviado encontra o link. */
-    const aba=window.open(url,'_blank');
-    if(aba){try{aba.opener=null}catch(e){}}
-    else location.href=url;
+    /* ── O TESTE COMECA AGORA, E NAO NO WHATSAPP (22/10/2026) ───────────────────
+       Ate aqui o formulario so montava uma mensagem: a pessoa ainda tinha que
+       enviar no WhatsApp, alguem lia em horario comercial e criava a barbearia
+       a mao. Entre querer testar e conseguir testar havia uma noite inteira.
+
+       Agora o proprio envio cria a barbearia e o teste de 7 dias. O caminho e um
+       POST de <form> montado aqui, e NAO um fetch, por um motivo especifico: o
+       sistema vive em outro dominio e a origem deste site nao esta liberada no
+       CORS dele. Um fetch seria barrado; um <form> NAVEGA o navegador, e
+       navegacao nao passa por CORS. De quebra funciona em qualquer navegador e
+       nao depende de nada alem do HTML.
+
+       O sistema responde com um redirect para a tela de definir senha, ja dentro
+       da barbearia nova. O lead continua indo para o webhook acima — o time
+       quer saber quem entrou, e isso nao mudou.
+
+       O WhatsApp continua na pagina para quem PREFERE conversar antes, que e
+       outro caso; ele deixou de ser a unica porta. */
+    const criar=document.createElement('form');
+    criar.method='POST';
+    criar.action='https://csbarber.conectasolucoes.ia.br/api/tenants/register';
+    const oculto=(name,value)=>{const i=document.createElement('input');
+      i.type='hidden';i.name=name;i.value=value;criar.appendChild(i)};
+    oculto('business_name',barb);
+    oculto('admin_name',nome);
+    oculto('admin_email',email);
+    oculto('admin_phone',tel.value);
+    /* Premium no teste: e o plano que mostra o sistema inteiro, e o que a pessoa
+       vier a contratar ela escolhe depois, com o produto na mao. */
+    oculto('plan_code','premium');
+    /* O aceite e o do checkbox desta pagina, que o submit so alcanca marcado. */
+    oculto('terms_accepted','true');
+    document.body.appendChild(criar);
+    /* A confirmacao entra ANTES do submit, e nao depois: o submit navega, e
+       entre o clique e a tela nova ha um intervalo em que a pessoa ficaria
+       olhando o formulario parado, sem saber se funcionou. */
     box.classList.add('sent');
     box.scrollIntoView({block:'center',behavior:RM.matches?'auto':'smooth'});
+    criar.submit();
   });
   /* O botão nasce disabled no HTML: sem este script, o Enter num campo
      submetia por GET e punha nome, e-mail e telefone na URL. Com o handler
