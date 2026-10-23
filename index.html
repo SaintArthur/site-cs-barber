@@ -676,6 +676,19 @@ section{padding:var(--s) 0;position:relative}
 .chips input:checked+i{background:linear-gradient(135deg,var(--gold-l),var(--gold-d));border-color:transparent}
 .chips input:checked+i::after{transform:translateX(18px)}
 .chips label:has(input:checked){border-color:rgba(226,202,151,.55);background:rgba(226,202,151,.08);color:#fff}
+/* Aceite dos termos: herda o interruptor dos .chips (mesma marcação: input + <i> + texto) e
+   ocupa a linha inteira logo acima do botão, que é onde a decisão acontece. */
+.aceite{grid-column:1/-1;display:flex;align-items:center;gap:12px;margin:14px 0 2px;
+  font-size:13px;line-height:1.4;color:#cfd3de;cursor:pointer}
+.aceite input{position:absolute;opacity:0;width:0;height:0}
+.aceite i{order:-1;width:44px;height:26px;border-radius:999px;flex:none;position:relative;
+  background:rgba(226,202,151,.14);border:1px solid var(--line);
+  transition:background .22s var(--ease),border-color .22s var(--ease)}
+.aceite i::after{content:"";position:absolute;top:1px;left:1px;width:22px;height:22px;border-radius:50%;
+  background:#fff;transition:transform .22s var(--ease)}
+.aceite input:checked+i{background:linear-gradient(135deg,var(--gold-l),var(--gold-d));border-color:transparent}
+.aceite input:checked+i::after{transform:translateX(18px)}
+.aceite a{color:var(--gold-l);text-decoration:underline}
 .chips input:focus-visible+i{outline:2px solid var(--gold-l);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){.chips label i,.chips label i::after{transition:none}}
 .radios{display:flex;gap:9px;flex-wrap:wrap}
@@ -1470,6 +1483,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </fieldset>
         </div>
+        <!-- ACEITE EXPLÍCITO, e não "ao enviar você concorda" (22/10/2026).
+             Este envio passou a CRIAR a conta, e o sistema grava o aceite como prova: data,
+             versão do texto e IP. Deduzir o aceite de um clique em "Começar meu teste" seria
+             registrar como declaração da pessoa algo que ela não declarou. A caixa nasce
+             desmarcada e o botão só liga com ela marcada. -->
+        <label class="aceite"><input type="checkbox" role="switch" id="f-termos" name="termos"><i aria-hidden="true"></i>Li e aceito os <a href="https://csbarber.conectasolucoes.ia.br/termos" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="https://csbarber.conectasolucoes.ia.br/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</label>
         <button class="btn btn-gold" type="submit" disabled aria-describedby="aviso-dados">Começar meu teste grátis <svg><use href="#arrow"/></svg></button>
         <!-- Aviso de dados (LGPD): descreve o fluxo que existe de verdade, e ele
              mudou em 22/10/2026. Agora o envio CRIA a conta da barbearia no
@@ -1929,8 +1948,9 @@ if(RM.matches){
     /* Premium no teste: e o plano que mostra o sistema inteiro, e o que a pessoa
        vier a contratar ela escolhe depois, com o produto na mao. */
     oculto('plan_code','premium');
-    /* O aceite e o do checkbox desta pagina, que o submit so alcanca marcado. */
-    oculto('terms_accepted','true');
+    /* O aceite vem da CAIXA, nunca cravado. O botao so liga com ela marcada (abaixo), entao
+       aqui ela esta marcada — mas quem responde pelo valor e ela, e nao esta linha. */
+    oculto('terms_accepted', termos.checked ? 'true' : 'false');
     document.body.appendChild(criar);
     /* A confirmacao entra ANTES do submit, e nao depois: o submit navega, e
        entre o clique e a tela nova ha um intervalo em que a pessoa ficaria
@@ -1941,8 +1961,15 @@ if(RM.matches){
   });
   /* O botão nasce disabled no HTML: sem este script, o Enter num campo
      submetia por GET e punha nome, e-mail e telefone na URL. Com o handler
-     ligado, o envio passa a ser só o de cima. */
-  form.querySelector('button[type="submit"]').disabled=false;
+     ligado, o envio passa a ser só o de cima.
+     Desde 22/10/2026 ele depende também do ACEITE: o envio cria a conta, e o
+     sistema registra o aceite com data, versão e IP. Botão que envia sem a
+     caixa marcada transformaria "não declarou" em "declarou". */
+  const termos=form.querySelector('#f-termos');
+  const botaoEnviar=form.querySelector('button[type="submit"]');
+  const sincronizarEnvio=()=>{botaoEnviar.disabled=!termos.checked};
+  termos.addEventListener('change',sincronizarEnvio);
+  sincronizarEnvio();
 })();
 
 /* menu mobile */
