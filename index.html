@@ -702,6 +702,12 @@ section{padding:var(--s) 0;position:relative}
   background:#fff;transition:transform .22s var(--ease)}
 .aceite input:checked+i{background:linear-gradient(135deg,var(--gold-l),var(--gold-d));border-color:transparent}
 .aceite input:checked+i::after{transform:translateX(18px)}
+/* O texto vai num <span> em vez de solto. Como .aceite é flex, cada trecho solto
+   virava um item: "Li e aceito os", "Termos de Uso", "e a", "Política de
+   Privacidade" e o ponto final ficavam em colunas lado a lado, cada uma
+   quebrando dentro de si. Num rótulo de consentimento, que a pessoa precisa
+   conseguir ler, isso não é detalhe. Com um item só, o texto volta a fluir. */
+.aceite>span{flex:1 1 auto;min-width:0}
 .aceite a{color:var(--gold-l);text-decoration:underline}
 .chips input:focus-visible+i{outline:2px solid var(--gold-l);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){.chips label i,.chips label i::after{transition:none}}
@@ -729,6 +735,13 @@ section{padding:var(--s) 0;position:relative}
 footer{background:var(--black);border-top:1px solid var(--line);padding:44px 0 36px;font-size:12.5px;color:var(--muted)}
 footer .cols{display:flex;justify-content:space-between;gap:22px;flex-wrap:wrap;align-items:center}
 footer ul{display:flex;gap:20px;list-style:none;flex-wrap:wrap}
+/* O CS Bella ainda não abriu, e o rodapé é o único lugar desta página que leva
+   a ele. Fica dentro do <a> de propósito: assim o leitor de tela anuncia
+   "CS Bella, em breve" como um rótulo só, em vez de um pedaço solto depois do
+   link. */
+footer .embreve{display:inline-block;margin-left:4px;padding:2px 6px;border-radius:999px;
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;vertical-align:1px;
+  background:rgba(226,202,151,.16);color:var(--gold-l)}
 footer a:hover{color:var(--gold-l)}
 footer .cs{display:flex;align-items:center;gap:8px}
 footer .cs svg{width:16px;height:16px;color:#6f7790}
@@ -1505,7 +1518,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
              versão do texto e IP. Deduzir o aceite de um clique em "Começar meu teste" seria
              registrar como declaração da pessoa algo que ela não declarou. A caixa nasce
              desmarcada e o botão só liga com ela marcada. -->
-        <label class="aceite"><input type="checkbox" role="switch" id="f-termos" name="termos"><i aria-hidden="true"></i>Li e aceito os <a href="https://csbarber.conectasolucoes.ia.br/termos" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="https://csbarber.conectasolucoes.ia.br/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</label>
+        <label class="aceite"><input type="checkbox" role="switch" id="f-termos" name="termos"><i aria-hidden="true"></i><span>Li e aceito os <a href="https://csbarber.conectasolucoes.ia.br/termos" target="_blank" rel="noopener">Termos de Uso</a> e a <a href="https://csbarber.conectasolucoes.ia.br/privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</span></label>
         <button class="btn btn-gold" type="submit" disabled aria-describedby="aviso-dados">Começar meu teste grátis <svg><use href="#arrow"/></svg></button>
         <!-- Aviso de dados (LGPD): descreve o fluxo que existe de verdade, e ele
              mudou em 22/10/2026. Agora o envio CRIA a conta da barbearia no
@@ -1538,7 +1551,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <li><a href="#modulos">Módulos</a></li>
       <li><a href="#como">Como funciona</a></li>
       <li><a href="#faq">Dúvidas</a></li>
-      <li><a href="https://www.csbella.ia.br/">CS Bella</a></li>
+      <li><a href="https://www.csbella.ia.br/">CS Bella <span class="embreve">em breve</span></a></li>
       <li><a href="https://www.instagram.com/__csbarber" target="_blank" rel="noopener">Instagram</a></li>
     </ul>
     <a class="cs" href="https://www.conectasolucoes.ia.br/"><svg><use href="#hex"/></svg>Um produto Conecta Soluções</a>
