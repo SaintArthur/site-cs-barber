@@ -51,6 +51,18 @@ Levantado em 23/09/2026 e atualizado no mesmo dia, depois das correções.
   webhook. Corrigido e conferido nos dois casos ("Não" → `nenhum`, "Sim" com
   o nome → o nome).
 
+- **Eventos para os anúncios (05/11/2026).** O formulário empurra
+  `form_submit` (`form_name: lp_cs_barber`) no `dataLayer` e só segue para o
+  cadastro quando o GTM devolve o `eventCallback`, com teto de 2s. O botão
+  flutuante de WhatsApp (canto inferior direito, toda tela) abre uma janelinha
+  com nome, e-mail e telefone, empurra `whatsapp_lead`
+  (`form_name: lp_cs_barber_whatsapp`), manda o lead ao mesmo webhook com
+  `origem: 'cs-barber-whatsapp'` e abre o WhatsApp com a mensagem pronta. O
+  ícone de WhatsApp do dock do celular saiu, porque o flutuante faz o mesmo.
+  Os dois eventos levam nome, e-mail e telefone: no GTM eles devem alimentar só
+  a conversão otimizada (enhanced conversions) do Google Ads, nunca parâmetros
+  do GA4, que proíbe dado pessoal.
+
 ## Em aberto
 
 - **Planos no lugar dos módulos** (pedido em 23/10/2026). O formulário deve
