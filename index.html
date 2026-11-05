@@ -765,6 +765,24 @@ footer .cs svg{width:16px;height:16px;color:#6f7790}
 .dock .btn{padding:13px 18px;font-size:14px;white-space:nowrap;border-radius:6px}
 @media(max-width:920px){.dock{display:flex}body{padding-bottom:74px}}
 
+/* ===== WHATSAPP FLUTUANTE (05/11/2026) =====
+   Fixo no canto inferior direito em toda tela. No celular, quando o dock sobe,
+   o botao sobe junto, para nao ficar por cima do "Quero testar". */
+.wa-fab{position:fixed;right:max(18px,env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:75;
+  width:58px;height:58px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;
+  background:#25d366;color:#fff;box-shadow:0 12px 30px -8px rgba(0,0,0,.7);
+  transition:transform .2s var(--ease),bottom .42s var(--ease)}
+.wa-fab:hover{transform:scale(1.06)}
+.wa-fab:active{transform:scale(.94)}
+.wa-fab:focus-visible{outline:3px solid var(--gold-l);outline-offset:3px}
+.wa-fab svg{width:30px;height:30px}
+@media(max-width:920px){body:has(.dock.show) .wa-fab{bottom:calc(86px + env(safe-area-inset-bottom,0px))}}
+@media print{.wa-fab{display:none}}
+.mdl.wa-mdl{width:min(440px,calc(100% - 28px))}
+.wa-mdl form{display:grid;gap:14px}
+.wa-mdl .btn{width:100%;justify-content:center}
+.wa-mdl small{font-size:12px;color:var(--muted);font-weight:300;line-height:1.5}
+
 /* ===== SISTEMA DE MOVIMENTO =====
    Nenhuma animação decorativa: cada uma guia o olho, revela hierarquia
    ou confirma uma ação. Tudo desliga em prefers-reduced-motion. */
@@ -1561,9 +1579,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="dock" role="complementary" aria-label="Ação rápida">
   <div class="dock-txt"><b>Teste 7 dias</b><span>Implementação assistida</span></div>
-  <a class="dock-wa" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CS%20Barber" target="_blank" rel="noopener" aria-label="Tirar dúvida no WhatsApp"><svg><use href="#wa"/></svg></a>
+  <!-- O WhatsApp do dock saiu em 05/11/2026: o botão flutuante faz o mesmo papel
+       em toda tela, e dois botões de WhatsApp lado a lado só disputavam o dedo. -->
   <a class="btn btn-gold" href="#testar">Quero testar</a>
 </div>
+
+<!-- WhatsApp flutuante (05/11/2026). Sem JavaScript é um link direto para o
+     WhatsApp; com ele, o clique abre a janelinha (o script troca o comportamento). -->
+<a class="wa-fab" id="wa-fab" href="https://wa.me/5527999073651?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20CS%20Barber" target="_blank" rel="noopener" aria-label="Falar no WhatsApp" aria-haspopup="dialog"><svg><use href="#wa"/></svg></a>
+<dialog class="mdl wa-mdl" id="mdl-wa" aria-labelledby="wa-title">
+  <div class="mdl-head">
+    <div>
+      <h3 id="wa-title">Fale com a gente no WhatsApp</h3>
+      <p>Deixe seu contato e a conversa já abre com seus dados.</p>
+    </div>
+    <button class="mdl-x" type="button" id="close-wa" aria-label="Fechar"><svg><use href="#x2"/></svg></button>
+  </div>
+  <div class="mdl-body">
+    <form id="wa-form" novalidate>
+      <div class="f"><label for="w-nome">Nome</label><input id="w-nome" name="nome" autocomplete="name" required placeholder="Nome e sobrenome"><span class="err" id="ew-nome">Informe o seu nome.</span></div>
+      <div class="f"><label for="w-email">E-mail</label><input id="w-email" name="email" type="email" autocomplete="email" required placeholder="voce@suabarbearia.com"><span class="err" id="ew-email">Informe um e-mail válido.</span></div>
+      <div class="f"><label for="w-tel">Telefone (WhatsApp)</label><input id="w-tel" name="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="(27) 90000-0000"><span class="err" id="ew-tel">Informe um celular ou fixo com DDD. De fora do Brasil, comece com + e o código do país.</span></div>
+      <button class="btn btn-gold" type="submit">Abrir o WhatsApp <svg><use href="#arrow"/></svg></button>
+      <small>Ao enviar, abrimos o WhatsApp do CS Barber com a mensagem pronta. Seus dados ficam registrados com a Conecta Soluções, que usa seu contato só para falar com você, como prevê a LGPD.</small>
+    </form>
+  </div>
+</dialog>
 
 <script>
 /* ===== sistema de movimento: um observer para tudo ===== */
@@ -2020,7 +2061,20 @@ if(RM.matches){
        olhando o formulario parado, sem saber se funcionou. */
     box.classList.add('sent');
     box.scrollIntoView({block:'center',behavior:RM.matches?'auto':'smooth'});
-    criar.submit();
+    /* Conversao para os anuncios (05/11/2026). O submit NAVEGA para o sistema, e
+       a navegacao mata as tags que ainda nao terminaram: por isso o cadastro so
+       segue quando o GTM avisa que disparou tudo (eventCallback). Com o GTM fora
+       do ar ou barrado por bloqueador, o callback nunca vem — o setTimeout
+       garante que a pessoa segue em no maximo 2s, e o "seguiu" impede o envio
+       duplo quando os dois chegam. Os dados pessoais aqui servem a conversao
+       otimizada dos anuncios: no GTM vao so para ela, nunca para o GA4. */
+    let seguiu=false;
+    const seguir=()=>{ if(seguiu) return; seguiu=true; criar.submit(); };
+    window.dataLayer=window.dataLayer||[];
+    window.dataLayer.push({event:'form_submit',form_name:'lp_cs_barber',
+      lead_nome:nome,lead_telefone:tel.value,lead_email:email,lead_empresa:barb,
+      eventCallback:seguir,eventTimeout:1500});
+    setTimeout(seguir,2000);
   });
   /* O botão nasce disabled no HTML: sem este script, o Enter num campo
      submetia por GET e punha nome, e-mail e telefone na URL. Com o handler
@@ -2033,6 +2087,70 @@ if(RM.matches){
   const sincronizarEnvio=()=>{botaoEnviar.disabled=!termos.checked};
   termos.addEventListener('change',sincronizarEnvio);
   sincronizarEnvio();
+
+  /* ===== WhatsApp flutuante (05/11/2026) =====
+     Fica neste bloco para usar a MESMA normalização e validação do telefone do
+     formulário principal (+55, 0 de longa distância, DDI de fora) e o mesmo
+     webhook. Pede só nome, e-mail e telefone. */
+  const fab=document.getElementById('wa-fab'),wdlg=document.getElementById('mdl-wa'),
+        wform=document.getElementById('wa-form');
+  if(fab&&wdlg&&wform&&typeof wdlg.showModal==='function'){
+    const wtel=wform.tel;let wdig='';
+    wtel.addEventListener('input',()=>{const c=comDDI(wtel.value);if(c){wdig=c.br||'';wtel.value=c.br?mascara(c.br):'+'+c.intl;return}wdig=soDigitos(wtel.value,wdig);wtel.value=mascara(wdig)});
+    wform.nome.addEventListener('input',()=>{const v=wform.nome.value,l=v.replace(FORA_DO_NOME,'');if(l!==v)wform.nome.value=l});
+    const wregras=[
+      {campos:[wform.nome], aviso:'ew-nome', ok:()=>wform.nome.value.trim().length>=2},
+      {campos:[wform.email],aviso:'ew-email',ok:()=>RE_EMAIL.test(wform.email.value.trim())},
+      {campos:[wtel],       aviso:'ew-tel',  ok:()=>{const c=comDDI(wtel.value);return c?(c.br?true:intlOk(c.intl)):RE_TEL.test(soDigitos(wtel.value))}}
+    ];
+    const wrevalida=()=>wregras.forEach(r=>{if(r.campos[0].getAttribute('aria-invalid')==='true'&&r.ok())marca(r,false)});
+    wform.addEventListener('input',wrevalida);
+    wform.addEventListener('change',wrevalida);
+    fab.addEventListener('click',e=>{e.preventDefault();wdlg.showModal()});
+    document.getElementById('close-wa').addEventListener('click',()=>wdlg.close());
+    wdlg.addEventListener('click',e=>{
+      if(e.target!==wdlg)return;
+      const r=wdlg.getBoundingClientRect();
+      if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)wdlg.close();
+    });
+    wform.addEventListener('submit',e=>{
+      e.preventDefault();
+      {const c=comDDI(wtel.value);if(c){wdig=c.br||'';wtel.value=c.br?mascara(c.br):'+'+c.intl}else{wdig=soDigitos(wtel.value);wtel.value=mascara(wdig)}}
+      let erro=null;
+      wregras.forEach(r=>{if(marca(r,!r.ok())&&!erro)erro=r});
+      if(erro){erro.campos[0].focus();return}
+      const nome=wform.nome.value.trim(),email=wform.email.value.trim(),telefone=wtel.value;
+      const texto=['Olá! Quero saber mais sobre o CS Barber.','',
+        `*Nome:* ${nome}`,`*WhatsApp:* ${telefone}`,`*E-mail:* ${email}`].join('\n');
+      const url='https://wa.me/5527999073651?text='+encodeURIComponent(texto);
+      /* Evento dos anúncios ANTES de abrir o WhatsApp. Aqui não precisa esperar
+         as tags como no formulário: o WhatsApp abre em outra aba, esta página
+         continua viva e as tags terminam sozinhas. Esperar o callback tiraria o
+         window.open do gesto do usuário, e o bloqueador de pop-up barraria. */
+      window.dataLayer=window.dataLayer||[];
+      window.dataLayer.push({event:'whatsapp_lead',form_name:'lp_cs_barber_whatsapp',
+        lead_nome:nome,lead_telefone:telefone,lead_email:email});
+      /* Webhook sem await e com catch vazio, como no formulário: fora do ar, ele
+         nunca impede o contato. */
+      try{
+        fetch(WEBHOOK,{method:'POST',keepalive:true,
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            origem:'cs-barber-whatsapp',
+            enviadoEm:new Date().toISOString(),
+            pagina:location.href,
+            nome:nome,
+            email:email,
+            whatsapp:telefone,
+            mensagemWhatsApp:texto
+          })}).catch(()=>{});
+      }catch(e){}
+      const aba=window.open(url,'_blank');
+      if(aba){aba.opener=null}else{location.href=url}
+      wdlg.close();
+      wform.reset();wdig='';
+    });
+  }
 })();
 
 /* menu mobile */
