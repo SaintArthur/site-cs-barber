@@ -9,6 +9,12 @@ Levantado em 23/09/2026 e atualizado no mesmo dia, depois das correções.
 - **Trial de 7 dias** em toda a página, inclusive no link do aviso sem
   JavaScript (o prazo ia codificado na URL, `15%20dias`, e escapou da primeira
   troca). Nenhuma ocorrência de "15 dias" nem de `15%20dias`.
+- **Imagem de compartilhamento (`assets/og.jpg`)** ainda dizia "15 dias
+  grátis, sem cartão" e escapou das trocas anteriores porque o texto está
+  desenhado na imagem, não no HTML. Corrigida em 24/11/2026 para "7 dias
+  grátis, sem cartão". As meta tags passaram a apontar para
+  `og.jpg?v=20261124`, para o WhatsApp e o Facebook buscarem a nova em vez da
+  prévia guardada. Ao trocar a imagem de novo, mude também esse `?v=`.
 - **WhatsApp**: os 7 links `wa.me` e o montado pelo JavaScript do formulário
   apontam para `5527999073651`, o comercial da Conecta — o mesmo do site
   institucional, por decisão do dono. O número pessoal do Matheus
