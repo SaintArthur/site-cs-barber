@@ -2069,9 +2069,12 @@ if(RM.matches){
     oculto('admin_name',nome);
     oculto('admin_email',email);
     oculto('admin_phone',tel.value);
-    /* Premium no teste: e o plano que mostra o sistema inteiro, e o que a pessoa
-       vier a contratar ela escolhe depois, com o produto na mao. */
-    oculto('plan_code','premium');
+    /* Superior no teste (25/11/2026, decisao do dono): desde que Premium e Total Access
+       viraram "sob consulta", o cadastro publico recusa os dois, e o formulario criado no
+       Premium respondia "Este plano e contratado com a nossa equipe" sem criar a barbearia.
+       O Superior e o maior plano que abre teste gratis; o que a pessoa vier a contratar ela
+       escolhe depois, com o produto na mao. */
+    oculto('plan_code','superior');
     /* Só o código, e só quando há. O desconto sai do banco do sistema (ver o campo acima). */
     if(cupom)oculto('cupom_parceiro',cupom);
     /* O aceite vem da CAIXA, nunca cravado. O botao so liga com ela marcada (abaixo), entao
