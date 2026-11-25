@@ -646,6 +646,8 @@ section{padding:var(--s) 0;position:relative}
 @media(max-width:560px){.fgrid{grid-template-columns:1fr}}
 .f{display:flex;flex-direction:column;gap:7px}
 .f.full{grid-column:1/-1}
+/* "(opcional)" do cupom: fora do rótulo em caixa-alta, para ler como observação e não como nome. */
+.f label .opc{text-transform:none;letter-spacing:0;font-weight:300}
 .f label{font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
 /* 16px e não 15: abaixo disso o Safari do iOS dá zoom ao focar o campo, e o
    dono de barbearia preenche pelo celular. */
@@ -1487,7 +1489,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="lead-form rv" id="leadbox">
       <p class="fh">Comece o seu teste</p>
-      <p class="fsub">Todos os campos são obrigatórios.</p>
+      <p class="fsub">Todos os campos são obrigatórios, menos o cupom.</p>
       <form id="lead" novalidate>
         <input type="text" name="site" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;font-size:16px" aria-hidden="true">
         <div class="fgrid">
@@ -1530,6 +1532,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <input id="f-qual" name="qual" placeholder="Nome do sistema"><span class="err" id="e-qual">Informe o nome do sistema.</span>
             </div>
           </fieldset>
+
+          <!-- CUPOM DE PARCEIRO (25/11/2026). Só o CÓDIGO vai ao sistema, e o sistema decide
+               tudo: se vale, quanto desconta, por quanto tempo. Nada aqui calcula ou promete
+               desconto, porque nada que sai do navegador é confiável para isso. O link do
+               parceiro traz o código em ?cupom= e o campo já vem preenchido. Cupom que não vale
+               NÃO impede a conta de nascer: o sistema cria a barbearia e avisa na tela de
+               definir senha. Conferir o código antes de enviar exigiria liberar este domínio no
+               CORS do sistema, que é mudança de produção e ainda não foi autorizada. -->
+          <div class="f full"><label for="f-cupom">Cupom de parceiro <span class="opc">(opcional)</span></label><input id="f-cupom" name="cupom" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="30" placeholder="Se um parceiro indicou você, digite o código"></div>
         </div>
         <!-- ACEITE EXPLÍCITO, e não "ao enviar você concorda" (22/10/2026).
              Este envio passou a CRIAR a conta, e o sistema grava o aceite como prova: data,
@@ -1815,6 +1826,14 @@ if(RM.matches){
   const box=document.getElementById('leadbox'),form=document.getElementById('lead');
   if(!form)return;
   const tel=document.getElementById('f-wpp');
+  /* O código do link do parceiro (?cupom=). Só entra se tiver a forma de um código (4 a 30
+     letras, números ou hífen): o campo não vira porta para texto arbitrário vindo da URL. */
+  const cupomCampo=document.getElementById('f-cupom');
+  const limparCupom=v=>String(v||'').trim().toUpperCase().replace(/\s+/g,'');
+  try{
+    const daUrl=limparCupom(new URLSearchParams(location.search).get('cupom'));
+    if(cupomCampo&&/^[A-Z0-9-]{4,30}$/.test(daUrl))cupomCampo.value=daUrl;
+  }catch(e){}
   /* DDD de 11 a 99; celular é 9 mais 8 dígitos e fixo começa de 2 a 8. Fica
      aqui em cima porque a normalização logo abaixo também usa. */
   const RE_TEL=/^[1-9]{2}(9\d{8}|[2-8]\d{7})$/;
@@ -1975,6 +1994,7 @@ if(RM.matches){
     const marcado=form.querySelector('input[name="usa"]:checked');
     const usa=marcado?marcado.value:'';
     const qual=form.qual.value.trim();
+    const cupom=cupomCampo?limparCupom(cupomCampo.value):'';
 
     /* O asterisco é a marcação de negrito do WhatsApp: o rótulo fica destacado e
        a mensagem vira uma ficha legível de relance. Campo sem resposta não vira
@@ -1992,7 +2012,8 @@ if(RM.matches){
       campo('Unidades',form.unidades.value),
       campo('Barbeiros',form.barbeiros.value),
       campo('Interesse',interesses.join(', ')),
-      campo('Sistema atual',usa==='Sim'?(qual||'sim, não informou qual'):usa==='Não'?'nenhum':'')
+      campo('Sistema atual',usa==='Sim'?(qual||'sim, não informou qual'):usa==='Não'?'nenhum':''),
+      campo('Cupom de parceiro',cupom)
     ].filter(l=>l!==null);
     const url='https://wa.me/5527999073651?text='+encodeURIComponent(linhas.join('\n'));
     /* A confirmação reabre a MESMA mensagem: quem fechou o WhatsApp sem enviar
@@ -2018,6 +2039,7 @@ if(RM.matches){
           barbeiros:form.barbeiros.value,
           interesses:interesses,
           sistemaAtual:usa==='Sim'?(qual||'sim, não informou qual'):usa==='Não'?'nenhum':'',
+          cupomParceiro:cupom,
           mensagemWhatsApp:linhas.join(String.fromCharCode(10))
         })}).catch(()=>{});
     }catch(e){}
@@ -2052,6 +2074,8 @@ if(RM.matches){
     /* Premium no teste: e o plano que mostra o sistema inteiro, e o que a pessoa
        vier a contratar ela escolhe depois, com o produto na mao. */
     oculto('plan_code','premium');
+    /* Só o código, e só quando há. O desconto sai do banco do sistema (ver o campo acima). */
+    if(cupom)oculto('cupom_parceiro',cupom);
     /* O aceite vem da CAIXA, nunca cravado. O botao so liga com ela marcada (abaixo), entao
        aqui ela esta marcada — mas quem responde pelo valor e ela, e nao esta linha. */
     oculto('terms_accepted', termos.checked ? 'true' : 'false');
